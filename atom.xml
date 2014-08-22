@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-08-22T16:43:52.708Z</updated>
+  <updated>2014-08-22T16:45:03.532Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -13,6 +13,17 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[test2]]></title>
+    <link href="http://yyblog.mocoer.com/2014/08/23/test2/"/>
+    <id>http://yyblog.mocoer.com/2014/08/23/test2/</id>
+    <published>2014-08-22T16:44:45.000Z</published>
+    <updated>2014-08-22T16:44:45.000Z</updated>
+    <content type="html"><![CDATA[]]></content>
+    
+    
+  </entry>
   
   <entry>
     <title><![CDATA[test]]></title>
