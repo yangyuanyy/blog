@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[yy's blog]]></title>
-  
+  <title><![CDATA[YY]]></title>
+  <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-08-22T12:31:39.059Z</updated>
+  <updated>2014-08-22T13:28:45.839Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
-    <name><![CDATA[yy]]></name>
-    
+    <name><![CDATA[YY]]></name>
+    <email><![CDATA[yybuaa2011@163.com]]></email>
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
