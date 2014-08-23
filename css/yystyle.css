@@ -4,6 +4,9 @@
   -o-perspective: 400;
   perspective: 400;
   border-bottom: none;
+  height: 300px;
+  background: #000;
+  overflow: hidden;
 }
 #banner {
   -webkit-transform-style: preserve-3d;
@@ -17,13 +20,30 @@
   width: 130%;
   height: 130%;
   overflow: hidden;
+  opacity: 0.6;
+  -webkit-transition: opacity 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+  -o-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+}
+#header:hover #banner {
+  opacity: 1;
+}
+#header:hover #banner > div {
+  display: block;
+  opacity: 0.02;
 }
 #banner > div {
+  display: none;
+  opacity: 0;
   width: 0;
   height: 0;
   border-top: 750px solid #fff;
   border-right: 390px solid transparent;
-  opacity: 0.1;
+  -webkit-transition: opacity 0.5s ease 0.5s;
+  -moz-transition: opacity 0.5s ease 0.5s;
+  -o-transition: opacity 0.5s ease 0.5s;
+  transition: opacity 0.5s ease 0.5s;
 }
 #header:after {
   display: none;

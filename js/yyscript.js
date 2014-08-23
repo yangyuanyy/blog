@@ -1,25 +1,23 @@
-(function($){
+( function( $ ){
+  var bannerYAngle = 0, 
+      bannerXAngle = 0,
+      disX = 0, 
+      disY = 0,
+      t,
+      d;
 
-  var worldYAngle = 0, worldXAngle = 0, d;
-  var world = document.getElementById( 'banner' ),
-      viewport = document.getElementById( 'header' );
+  var $banner = $( '#banner' ),
+      $shadow = $( '#banner > div' );
 
-  $( window ).bind( 'mousemove', function( e ){      
-
-    worldYAngle = -( .5 - ( e.clientX / window.innerWidth ) ) * 2;
-    worldXAngle = ( .5 - ( e.clientY / window.innerHeight ) ) * 2;
-    var t = 'translateZ( 0px ) rotateX( ' + worldXAngle + 'deg) rotateY( ' + worldYAngle + 'deg)';
-    world.style.webkitTransform = t;
-    world.style.MozTransform = t;
-    world.style.oTransform = t;
-
-    var disX = -( .5 - e.clientX / window.innerWidth ) * 200 - 150;
-    var disY = ( .5 - e.clientY / window.innerHeight ) * 50;
-
-    var d = 'translateX(' + -disX + 'px) translateY('+ disY +'px) scale(3.2)';
-
-    $( '#banner > div' ).css( 'transform', d );
-
-  } );
+  $( window ).bind( 'mousemove', function( e ){  
+      bannerYAngle = -( .5 - ( e.clientX / $( window ).width() ) ) * 2;
+      bannerXAngle = ( .5 - ( e.clientY / $( window ).height() ) ) * 2;
+      t = 'rotateX( ' + bannerXAngle + 'deg) rotateY( ' + bannerYAngle + 'deg)';
+      $banner.css( 'transform', t );
   
-})(jQuery);
+      disX = -( .5 - e.clientX / $( window ).width() ) * 200 - 150;
+      disY = ( .5 - e.clientY / $( window ).height() ) * 50;
+      d = 'translateX(' + -disX + 'px) translateY(' + disY + 'px) scale(3.2)';
+      $shadow.css( 'transform', d );
+  } );
+} )( jQuery );
