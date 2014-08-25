@@ -4,12 +4,12 @@
   <meta name="baidu-site-verification" content="r2KA3ATCfI" />
   <meta charset="utf-8">
   
-  <title>Archives | YY</title>
+  <title>Tag: github | YY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="YY">
-<meta property="og:url" content="http://yyblog.mocoer.com/archives/">
+<meta property="og:url" content="http://yyblog.mocoer.com/tags/github/">
 <meta property="og:site_name" content="YY">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -153,90 +153,6 @@
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-搭建AngularJS开发环境" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/08/22/搭建AngularJS开发环境/" class="article-date">
-  <time datetime="2014-08-22T13:33:12.000Z" itemprop="datePublished">Aug 22 2014</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/08/22/搭建AngularJS开发环境/">搭建 AngularJS 开发环境</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录">目录</h2>
-<ol>
-<li>安装 Node.js</li>
-<li>安装 Node 开发框架 Express</li>
-<li>安装自动化单元测试 Karma</li>
-<li>创建 Express 项目</li>
-<li>创建单元测试</li>
-<li>给 Chrome 安装 AngularJS Batarang 扩展</li>
-</ol>
-<h3 id="1-_安装_Node-js">1. 安装 Node.js</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ apt-get install node.js</div><div class="line">$ node --version</div><div class="line">v0.<span class="number">10.30</span></div></pre></td></tr></table></figure>
-
-<p>了解 <a href="http://nodejs.org/" target="_blank" rel="external"> Node.js </a></p>
-<h3 id="2-_安装Node开发框架_Express">2. 安装Node开发框架 Express</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ npm install -g express</div><div class="line">$ npm install -g express-generator</div><div class="line">$ express --version</div><div class="line"><span class="number">4.2</span>.<span class="number">0</span></div></pre></td></tr></table></figure>
-
-<p>了解 <a href="http://express.jsbin.cn/" target="_blank" rel="external"> Express </a></p>
-<h3 id="3-_安装自动化单元测试_Karma">3. 安装自动化单元测试 Karma</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ npm install -g karma</div><div class="line">$ karma --version</div><div class="line">Karma version: <span class="number">0.12</span>.<span class="number">21</span></div></pre></td></tr></table></figure>
-
-<p>了解 <a href="https://github.com/karma-runner/karma" target="_blank" rel="external"> Karma </a></p>
-<h3 id="4-_创建_Express_项目">4. 创建 Express 项目</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ express demo</div><div class="line">$ <span class="built_in">cd</span> demo</div><div class="line">$ mkdir test // 存放测试用例</div></pre></td></tr></table></figure>
-
-<h3 id="5-_创建单元测试">5. 创建单元测试</h3>
-<p>编写业务脚本。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> test</div><div class="line">$ vi testee.js</div><div class="line">function <span class="function"><span class="title">sayHi</span></span>(){</div><div class="line">	<span class="keyword">return</span> <span class="string">'Hi'</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>编写测试脚本。这里选择使用 <a href="https://github.com/pivotal/jasmine" target="_blank" rel="external"> Jasmine </a> 风格来编写测试代码。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ vi tester.js</div><div class="line">describe( <span class="string">"testee"</span>, <span class="function"><span class="title">function</span></span>(){</div><div class="line">	it(<span class="string">"to work correctly"</span>, <span class="function"><span class="title">function</span></span>(){</div><div class="line">		expect(sayHi()).toEqual(<span class="string">'Hi'</span>);</div><div class="line">	})</div><div class="line">} );</div></pre></td></tr></table></figure>
-
-<p>配置 karma.conf.js 文件并执行测试。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> .. // 回到 demo 根目录</div><div class="line">$ karma init</div><div class="line">$ karma start</div></pre></td></tr></table></figure>
-
-<p>测试通过。</p>
-<h3 id="6-_给_Chrome_安装_AngularJS_Batarang_扩展">6. 给 Chrome 安装 <a href="https://github.com/angular/angularjs-batarang" target="_blank" rel="external"> AngularJS Batarang </a> 扩展</h3>
-<p>安装成功后，会在 Chrome 的 F12 面板中增加一个新标签：AngularJS，通过该插件可以当前运行的应用中每个模型、作用域以及变量值、运行效率、服务依赖关系等信息。<br><img src="http://img01.taobaocdn.com/imgextra/i1/1643172296/TB2LmwkaXXXXXcJXXXXXXXXXXXX-1643172296.png" height="206" style="padding:30px 0;"></p>
-
-      
-
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/08/22/搭建AngularJS开发环境/">http://yyblog.mocoer.com/2014/08/22/搭建AngularJS开发环境/</a></p>
-
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/08/22/搭建AngularJS开发环境/" data-id="aejcriwx0sc17xoj" class="article-share-link">Share</a>
-      
-        <a href="http://yyblog.mocoer.com/2014/08/22/搭建AngularJS开发环境/#comments" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AngularJS/">AngularJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
 
     </footer>
   </div>

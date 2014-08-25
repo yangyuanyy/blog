@@ -4,17 +4,41 @@
   <meta name="baidu-site-verification" content="r2KA3ATCfI" />
   <meta charset="utf-8">
   
-  <title>Archives | YY</title>
+  <title>多个github账号的SSH key切换使用 | YY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="YY">
-<meta property="og:url" content="http://yyblog.mocoer.com/archives/">
+  <meta name="description" content="今天要发布一个公司的静态页面项目，选了使用github pages，于是给公司创建了一个github账号，在设置 SSH key 的时候出现一个问题：如果之前已经设置过 github 账号的 SSH key，如何设置第二个并且切换使用呢？查阅相关文档，整理该过程如下。
+目录
+
+创建第一个 github 账号
+创建第二个 github 账号
+切换账号使用
+
+1. 创建第一个 github 账号
+在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多个github账号的SSH key切换使用">
+<meta property="og:url" content="http://yyblog.mocoer.com/2014/08/25/多github账号SSH key切换使用/">
 <meta property="og:site_name" content="YY">
-<meta property="og:description">
+<meta property="og:description" content="今天要发布一个公司的静态页面项目，选了使用github pages，于是给公司创建了一个github账号，在设置 SSH key 的时候出现一个问题：如果之前已经设置过 github 账号的 SSH key，如何设置第二个并且切换使用呢？查阅相关文档，整理该过程如下。
+目录
+
+创建第一个 github 账号
+创建第二个 github 账号
+切换账号使用
+
+1. 创建第一个 github 账号
+在">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YY">
-<meta name="twitter:description">
+<meta name="twitter:title" content="多个github账号的SSH key切换使用">
+<meta name="twitter:description" content="今天要发布一个公司的静态页面项目，选了使用github pages，于是给公司创建了一个github账号，在设置 SSH key 的时候出现一个问题：如果之前已经设置过 github 账号的 SSH key，如何设置第二个并且切换使用呢？查阅相关文档，整理该过程如下。
+目录
+
+创建第一个 github 账号
+创建第二个 github 账号
+切换账号使用
+
+1. 创建第一个 github 账号
+在">
 
   
     <link rel="alternative" href="/atom.xml" title="YY" type="application/atom+xml">
@@ -66,9 +90,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-多github账号SSH key切换使用" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-多github账号SSH key切换使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/08/25/多github账号SSH key切换使用/" class="article-date">
   <time datetime="2014-08-25T11:42:48.000Z" itemprop="datePublished">Aug 25 2014</time>
@@ -85,8 +107,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/08/25/多github账号SSH key切换使用/">多个github账号的SSH key切换使用</a>
+    <h1 class="article-title" itemprop="name">
+      多个github账号的SSH key切换使用
     </h1>
   
 
@@ -157,95 +179,39 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-搭建AngularJS开发环境" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/08/22/搭建AngularJS开发环境/" class="article-date">
-  <time datetime="2014-08-22T13:33:12.000Z" itemprop="datePublished">Aug 22 2014</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/08/22/搭建AngularJS开发环境/">搭建 AngularJS 开发环境</a>
-    </h1>
+    <a href="/2014/08/22/搭建AngularJS开发环境/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">搭建 AngularJS 开发环境</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录">目录</h2>
-<ol>
-<li>安装 Node.js</li>
-<li>安装 Node 开发框架 Express</li>
-<li>安装自动化单元测试 Karma</li>
-<li>创建 Express 项目</li>
-<li>创建单元测试</li>
-<li>给 Chrome 安装 AngularJS Batarang 扩展</li>
-</ol>
-<h3 id="1-_安装_Node-js">1. 安装 Node.js</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ apt-get install node.js</div><div class="line">$ node --version</div><div class="line">v0.<span class="number">10.30</span></div></pre></td></tr></table></figure>
-
-<p>了解 <a href="http://nodejs.org/" target="_blank" rel="external"> Node.js </a></p>
-<h3 id="2-_安装Node开发框架_Express">2. 安装Node开发框架 Express</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ npm install -g express</div><div class="line">$ npm install -g express-generator</div><div class="line">$ express --version</div><div class="line"><span class="number">4.2</span>.<span class="number">0</span></div></pre></td></tr></table></figure>
-
-<p>了解 <a href="http://express.jsbin.cn/" target="_blank" rel="external"> Express </a></p>
-<h3 id="3-_安装自动化单元测试_Karma">3. 安装自动化单元测试 Karma</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ npm install -g karma</div><div class="line">$ karma --version</div><div class="line">Karma version: <span class="number">0.12</span>.<span class="number">21</span></div></pre></td></tr></table></figure>
-
-<p>了解 <a href="https://github.com/karma-runner/karma" target="_blank" rel="external"> Karma </a></p>
-<h3 id="4-_创建_Express_项目">4. 创建 Express 项目</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ express demo</div><div class="line">$ <span class="built_in">cd</span> demo</div><div class="line">$ mkdir test // 存放测试用例</div></pre></td></tr></table></figure>
-
-<h3 id="5-_创建单元测试">5. 创建单元测试</h3>
-<p>编写业务脚本。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> test</div><div class="line">$ vi testee.js</div><div class="line">function <span class="function"><span class="title">sayHi</span></span>(){</div><div class="line">	<span class="keyword">return</span> <span class="string">'Hi'</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>编写测试脚本。这里选择使用 <a href="https://github.com/pivotal/jasmine" target="_blank" rel="external"> Jasmine </a> 风格来编写测试代码。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ vi tester.js</div><div class="line">describe( <span class="string">"testee"</span>, <span class="function"><span class="title">function</span></span>(){</div><div class="line">	it(<span class="string">"to work correctly"</span>, <span class="function"><span class="title">function</span></span>(){</div><div class="line">		expect(sayHi()).toEqual(<span class="string">'Hi'</span>);</div><div class="line">	})</div><div class="line">} );</div></pre></td></tr></table></figure>
-
-<p>配置 karma.conf.js 文件并执行测试。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> .. // 回到 demo 根目录</div><div class="line">$ karma init</div><div class="line">$ karma start</div></pre></td></tr></table></figure>
-
-<p>测试通过。</p>
-<h3 id="6-_给_Chrome_安装_AngularJS_Batarang_扩展">6. 给 Chrome 安装 <a href="https://github.com/angular/angularjs-batarang" target="_blank" rel="external"> AngularJS Batarang </a> 扩展</h3>
-<p>安装成功后，会在 Chrome 的 F12 面板中增加一个新标签：AngularJS，通过该插件可以当前运行的应用中每个模型、作用域以及变量值、运行效率、服务依赖关系等信息。<br><img src="http://img01.taobaocdn.com/imgextra/i1/1643172296/TB2LmwkaXXXXXcJXXXXXXXXXXXX-1643172296.png" height="206" style="padding:30px 0;"></p>
-
-      
-
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/08/22/搭建AngularJS开发环境/">http://yyblog.mocoer.com/2014/08/22/搭建AngularJS开发环境/</a></p>
-
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/08/22/搭建AngularJS开发环境/" data-id="aejcriwx0sc17xoj" class="article-share-link">Share</a>
-      
-        <a href="http://yyblog.mocoer.com/2014/08/22/搭建AngularJS开发环境/#comments" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AngularJS/">AngularJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
 
-  
-  
+<section id="comments">
+  <div id="disqus_thread">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'yyblogmocoercom'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</section>
 </section>
         
           <aside id="sidebar">
