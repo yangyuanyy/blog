@@ -147,7 +147,7 @@
 
 <p>再到当前用户根目录下找到.ssh文件夹，打开里面的id_rsa_2.pub，复制里面的内容，然后浏览器登录第二个github账号 github &gt; Account Settings &gt; SSH Keys &gt; Add SSH Key &gt; 粘贴key。</p>
 <p>与第一个账号不同，这次要将新建的 SSH key 添加到 SSH agent 中：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>ssh-add ~<span class="regexp">/.ssh/id</span>_rsa_2</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-add ~/.ssh/id_rsa_2</div></pre></td></tr></table></figure>
 
 <p>在 .ssh 目录下创建 config 文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> ~/.ssh</div><div class="line">$ touch config</div></pre></td></tr></table></figure>
@@ -156,7 +156,7 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># <span class="keyword">for</span> 第一个 github 账号</div><div class="line">Host github_1</div><div class="line">HostName github.com</div><div class="line">User git</div><div class="line">IdentityFile <span class="regexp">/Users/</span>apple<span class="regexp">/.ssh/i</span>d_rsa</div><div class="line"></div><div class="line"># <span class="keyword">for</span> 第二个 github 账号</div><div class="line">Host github_2</div><div class="line">HostName github.com</div><div class="line">User git</div><div class="line">IdentityFile <span class="regexp">/Users/</span>apple<span class="regexp">/.ssh/i</span>d_rsa_2</div></pre></td></tr></table></figure>
 
 <p>分别测试两个账号的授权情况：</p>
-<figure class="highlight bach"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>ssh -<span class="constant">T</span> git<span class="variable">@github_1</span></div><div class="line"><span class="variable">$ </span>ssh -<span class="constant">T</span> git<span class="variable">@github_2</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@github_1</div><div class="line">$ ssh -T git@github_2</div></pre></td></tr></table></figure>
 
 <h3 id="3-_切换账号使用">3. 切换账号使用</h3>
 <p>push 一些内容到第二个账号的 test 仓库：</p>
