@@ -68,14 +68,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-多github账号SSH key切换使用" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-写自己的JavaScript工具－常见的字符串匹配" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/08/25/多github账号SSH key切换使用/" class="article-date">
-  <time datetime="2014-08-25T11:42:48.000Z" itemprop="datePublished">Aug 25 2014</time>
+    <a href="/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/" class="article-date">
+  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/github/">github</a>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
   </div>
 
   </div>
@@ -86,7 +86,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/08/25/多github账号SSH key切换使用/">多个github账号的SSH key切换使用</a>
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/">写自己的JavaScript工具－常见的字符串匹配</a>
     </h1>
   
 
@@ -94,66 +94,448 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天要发布一个公司的静态页面项目，选了使用github pages，于是给公司创建了一个github账号，在设置 SSH key 的时候出现一个问题：如果之前已经设置过 github 账号的 SSH key，如何设置第二个并且切换使用呢？查阅相关文档，整理该过程如下。</p>
-<h2 id="目录">目录</h2>
-<ol>
-<li>创建第一个 github 账号</li>
-<li>创建第二个 github 账号</li>
-<li>切换账号使用</li>
-</ol>
-<h3 id="1-_创建第一个_github_账号">1. 创建第一个 github 账号</h3>
-<p>在 <a href="https://github.com/" target="_blank" rel="external"> github.com </a> 创建一个github账号。并新建一个仓库( 名为 test )。</p>
-<p>在本地创建SSH key：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> ~/.ssh</div><div class="line">$ ssh-keygen -t rsa -C <span class="string">"your_email@your_email.com"</span></div></pre></td></tr></table></figure>
-
-<p>随后一直Enter，再到当前用户根目录下找到.ssh文件夹，打开里面的id_rsa.pub，复制里面的内容，然后回到浏览器 github.com &gt; Account Settings &gt; SSH Keys &gt; Add SSH Key &gt; 粘贴key。</p>
-<p>验证是否授权成功：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@github.com</div></pre></td></tr></table></figure>
-
-<p>出现 success 字样则表示没有问题。</p>
-<p>push 一些内容到仓库 test：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ mkdir gitTest</div><div class="line">$ <span class="built_in">cd</span> gitTest</div><div class="line">$ git init</div><div class="line">$ touch README</div><div class="line">$ git add .</div><div class="line">$ git commit -m <span class="string">'A commit'</span></div><div class="line">$ git remote add test1 git@github.com:yangyuanyy/test.git</div><div class="line">$ git push test1 master</div></pre></td></tr></table></figure>
-
-<p>若成功 push 则第一个 github 账号就算创建完成了。</p>
-<h3 id="2-_创建第二个_github_账号">2. 创建第二个 github 账号</h3>
-<p>在 <a href="https://github.com/" target="_blank" rel="external"> github.com </a> 再次创建一个github账号。并新建一个仓库( 也可以名为 test )。</p>
-<p>在本地创建SSH key：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> ~/.ssh</div><div class="line">$ ssh-keygen -t rsa -C <span class="string">"your_email_2@your_email_2.com"</span></div></pre></td></tr></table></figure>
-
-<p><strong><em>这次设置第二个 SSH key 名称</em></strong>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Enter file <span class="keyword">in</span> which to save the key (/Users/apple/.ssh/id_rsa): id_rsa_2</div></pre></td></tr></table></figure>
-
-<p>再到当前用户根目录下找到.ssh文件夹，打开里面的id_rsa_2.pub，复制里面的内容，然后浏览器登录第二个github账号 github &gt; Account Settings &gt; SSH Keys &gt; Add SSH Key &gt; 粘贴key。</p>
-<p>与第一个账号不同，这次要将新建的 SSH key 添加到 SSH agent 中：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-add ~/.ssh/id_rsa_2</div></pre></td></tr></table></figure>
-
-<p>在 .ssh 目录下创建 config 文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> ~/.ssh</div><div class="line">$ touch config</div></pre></td></tr></table></figure>
-
-<p>修改 config 内容如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># <span class="keyword">for</span> 第一个 github 账号</div><div class="line">Host github_1</div><div class="line">HostName github.com</div><div class="line">User git</div><div class="line">IdentityFile <span class="regexp">/Users/</span>apple<span class="regexp">/.ssh/i</span>d_rsa</div><div class="line"></div><div class="line"># <span class="keyword">for</span> 第二个 github 账号</div><div class="line">Host github_2</div><div class="line">HostName github.com</div><div class="line">User git</div><div class="line">IdentityFile <span class="regexp">/Users/</span>apple<span class="regexp">/.ssh/i</span>d_rsa_2</div></pre></td></tr></table></figure>
-
-<p>分别测试两个账号的授权情况：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@github_1</div><div class="line">$ ssh -T git@github_2</div></pre></td></tr></table></figure>
-
-<h3 id="3-_切换账号使用">3. 切换账号使用</h3>
-<p>push 一些内容到第二个账号的 test 仓库：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ mkdir gitTest2</div><div class="line">$ <span class="built_in">cd</span> gitTest2</div><div class="line">$ git init</div><div class="line">$ touch README</div><div class="line">$ git add .</div><div class="line">$ git commit -m <span class="string">'A commit'</span></div><div class="line">$ git remote add test2 git@github_2:beilianec/test.git</div><div class="line">$ git push test2 master</div></pre></td></tr></table></figure>
-
-<p>若成功 push 则完成了账号的切换使用。</p>
+        <p>可直接通过arguments，实现任意个参数的大小比较 P174</p>
 
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/08/25/多github账号SSH key切换使用/">http://yyblog.mocoer.com/2014/08/25/多github账号SSH key切换使用/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/08/25/多github账号SSH key切换使用/" data-id="y9d4ceuvopxk2neg" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/" data-id="r4by66fk3n1gt7ni" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/08/25/多github账号SSH key切换使用/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-写自己的JavaScript工具－鼠标滚轮事件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/" class="article-date">
+  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/">写自己的JavaScript工具－鼠标滚轮事件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/" data-id="zji7m5izfka84s4m" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-写自己的JavaScript工具－键盘事件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/19/写自己的JavaScript工具－键盘事件/" class="article-date">
+  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－键盘事件/">写自己的JavaScript工具－键盘事件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/" data-id="bgckh4tlfz01ljom" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-写自己的JavaScript工具－文档加载事件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/19/写自己的JavaScript工具－文档加载事件/" class="article-date">
+  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－文档加载事件/">写自己的JavaScript工具－文档加载事件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档加载事件/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档加载事件/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档加载事件/" data-id="tgahsf1awvbnwctz" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档加载事件/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-写自己的JavaScript工具－注册合取消注册事件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/19/写自己的JavaScript工具－注册合取消注册事件/" class="article-date">
+  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－注册合取消注册事件/">写自己的JavaScript工具－注册合取消注册事件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>P435</p>
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册合取消注册事件/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册合取消注册事件/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册合取消注册事件/" data-id="ep81g7pcrms3advj" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册合取消注册事件/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-写自己的JavaScript工具－addClass:removeClass:hasClass" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/19/写自己的JavaScript工具－addClass:removeClass:hasClass/" class="article-date">
+  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－addClass:removeClass:hasClass/">写自己的JavaScript工具－addClass/removeClass/hasClass</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>P435</p>
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－addClass:removeClass:hasClass/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－addClass:removeClass:hasClass/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－addClass:removeClass:hasClass/" data-id="x0g597fm5jfb0dkp" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－addClass:removeClass:hasClass/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-写自己的JavaScript工具－元素位置及大小" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/19/写自己的JavaScript工具－元素位置及大小/" class="article-date">
+  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－元素位置及大小/">写自己的JavaScript工具－元素位置及大小</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－元素位置及大小/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－元素位置及大小/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－元素位置及大小/" data-id="rm8axymssoim9q4a" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－元素位置及大小/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-写自己的JavaScript工具－插入删除节点" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/19/写自己的JavaScript工具－插入删除节点/" class="article-date">
+  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－插入删除节点/">写自己的JavaScript工具－插入删除节点</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>parents/child/siblings 等</p>
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－插入删除节点/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－插入删除节点/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－插入删除节点/" data-id="3zj90pnzrdh3y5q0" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－插入删除节点/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-写自己的JavaScript工具－文档遍历" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/19/写自己的JavaScript工具－文档遍历/" class="article-date">
+  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－文档遍历/">写自己的JavaScript工具－文档遍历</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>parents/child/siblings 等</p>
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/" data-id="3h8xf44vle2gy1mt" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-写自己的JavaScript工具－解析浏览器url" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/19/写自己的JavaScript工具－解析浏览器url/" class="article-date">
+  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－解析浏览器url/">写自己的JavaScript工具－解析浏览器url</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>P344</p>
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－解析浏览器url/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－解析浏览器url/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－解析浏览器url/" data-id="arcadp0rirerwfvr" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－解析浏览器url/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
 
     </footer>
   </div>
@@ -163,6 +545,10 @@
 
   
   
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/archives/2014/page/2/">2</a><a class="page-number" href="/archives/2014/page/3/">3</a><a class="extend next" rel="next" href="/archives/2014/page/2/">Next &raquo;</a>
+    </nav>
+  
 </section>
         
           <aside id="sidebar">
@@ -171,7 +557,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -180,7 +566,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -189,7 +575,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/github/" style="font-size: NaNpx;">github</a>
+      <a href="/tags/JavaScript/" style="font-size: 20.00px;">JavaScript</a><a href="/tags/github/" style="font-size: 10.00px;">github</a>
     </div>
   </div>
 
@@ -198,7 +584,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -210,7 +596,23 @@
       <ul>
         
           <li>
-            <a href="/2014/08/25/多github账号SSH key切换使用/">多个github账号的SSH key切换使用</a>
+            <a href="/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/">写自己的JavaScript工具－常见的字符串匹配</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/">写自己的JavaScript工具－鼠标滚轮事件</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/19/写自己的JavaScript工具－键盘事件/">写自己的JavaScript工具－键盘事件</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/19/写自己的JavaScript工具－文档加载事件/">写自己的JavaScript工具－文档加载事件</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/19/写自己的JavaScript工具－注册合取消注册事件/">写自己的JavaScript工具－注册合取消注册事件</a>
           </li>
         
       </ul>
