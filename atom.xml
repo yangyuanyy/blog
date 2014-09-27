@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-09-27T17:47:06.831Z</updated>
+  <updated>2014-09-27T17:47:53.144Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dbind/"/>
     <id>http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－bind/</id>
     <published>2014-09-28T17:46:13.000Z</published>
-    <updated>2014-09-27T17:46:58.000Z</updated>
+    <updated>2014-09-27T17:47:46.000Z</updated>
     <content type="html"><![CDATA[<h2 id="要点">要点</h2>
 <ol>
 <li>扩展 JavaScript 基本类型的功能</li>
@@ -28,7 +28,7 @@
 </ol>
 <p>bind 方法，顾名思义是将一个函数绑定到给一个对象，同时会生成一个新的函数。执行这个新的函数，就像在被绑定的对象上调用这个方法一些样。</p>
 <h3 id="1-_扩展_JavaScript_基本类型的功能">1. 扩展 JavaScript 基本类型的功能</h3>
-<p>再次用到之前为 Function 定义的 method 方法,该方法可以方便的为 Array、Number、Object、RegExp、Boolean 扩展新方法。详见这里[ <a href="http://yyblog.mocoer.com/2014/09/27/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dforeach/" target="_blank" rel="external">http://yyblog.mocoer.com/2014/09/27/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dforeach/</a> ]。</p>
+<p>再次用到之前为 Function 定义的 method 方法,该方法可以方便的为 Array、Number、Object、RegExp、Boolean 扩展新方法。详见这里[<a href="http://yyblog.mocoer.com/2014/09/27/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dforeach/]。" target="_blank" rel="external">http://yyblog.mocoer.com/2014/09/27/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dforeach/]。</a></p>
 <h3 id="2-_实现简单的_bind_方法">2. 实现简单的 bind 方法</h3>
 <p>ECMAScript 5 中已经引入了函数对象的 bind 方法，而在 ECMAScript 3 中需要自己来实现。</p>
 <p>利用上面的 method 方法，尝试给 Function 添加 bind 方法：</p>
