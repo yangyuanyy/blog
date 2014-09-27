@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-09-27T12:37:56.868Z</updated>
+  <updated>2014-09-27T12:39:13.009Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yyblog.mocoer.com/2014/09/27/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dforeach/"/>
     <id>http://yyblog.mocoer.com/2014/09/27/写自己的JavaScript工具－foreach/</id>
     <published>2014-09-27T12:10:09.000Z</published>
-    <updated>2014-09-27T12:37:47.000Z</updated>
+    <updated>2014-09-27T12:39:05.000Z</updated>
     <content type="html"><![CDATA[<h2 id="要点">要点</h2>
 <ol>
 <li>扩展 JavaScript 基本类型的功能</li>
@@ -49,6 +49,8 @@
       <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
     
       <category term="forEach" scheme="http://yyblog.mocoer.com/tags/forEach/"/>
+    
+      <category term="函数式编程" scheme="http://yyblog.mocoer.com/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
     
       <category term="JavaScript" scheme="http://yyblog.mocoer.com/categories/JavaScript/"/>
     
