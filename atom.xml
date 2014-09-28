@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-09-28T20:02:59.853Z</updated>
+  <updated>2014-09-28T20:05:02.091Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8DID%E7%94%9F%E6%88%90%E5%99%A8/"/>
     <id>http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/</id>
     <published>2014-09-28T20:02:36.000Z</published>
-    <updated>2014-09-28T20:02:30.000Z</updated>
+    <updated>2014-09-28T20:04:48.000Z</updated>
     <content type="html"><![CDATA[<h3 id="要点">要点</h3>
 <ol>
 <li>函数也是对象（一种简单实现）</li>
@@ -28,21 +28,21 @@
 <h2 id="1-_函数也是对象（一种简单实现）">1. 函数也是对象（一种简单实现）</h2>
 <p>设置 ID 计数器为全局变量的方式时最简陋的一种实现，而且容易引发一系列程序问题，因为全局变量会搞乱命名空间，同时也容易被篡改，造成安全隐患。</p>
 <p>为了避免使用全局变量，一种简单的实现是将 ID 计数器设置为生成器函数的一个属性。这个思路源于：函数也是对象，也可以拥有属性和方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// JavaScript 中的函数也是对象，它继承自 Object.prototype 类型</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="comment">/* 一些语句 */</span> };</div><div class="line"></div><div class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf( f ); <span class="comment">// =&gt; true </span></div><div class="line"><span class="comment">// 这说明：f 原型继承自 Object.prototype，但不一定是直接继承</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// JavaScript 中的函数也是对象，它继承自 Object.prototype 类型</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="comment">/* 一些语句 */</span> };</div><div class="line"></div><div class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf( f ); <span class="comment">// =&gt; true </span></div><div class="line"><span class="comment">// 这说明：f 原型继承自 Object.prototype，但不一定是直接继承</span></div></pre></td></tr></table></figure>
 
 <p>关于原型和原型继承的理解可以<a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－对象继承/" target="_blank" rel="external">参考这里</a>。</p>
 <p>于是，很容易的我们写出一个简单的 ID 计数器：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId;</div><div class="line">uniqId.idCounter = <span class="number">0</span>;</div><div class="line">uniqId = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="keyword">return</span> uniqId.idCounter+=<span class="number">1</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId;</div><div class="line">uniqId.idCounter = <span class="number">0</span>;</div><div class="line">uniqId = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">return</span> uniqId.idCounter+=<span class="number">1</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <p>这样，就避免 idCounter 成为一个全局变量。</p>
 <h2 id="2-_闭包（一种更好的实现）">2. 闭包（一种更好的实现）</h2>
 <p>然而上面的实现依然存在问题，因为 idCounter 值可以很容易的被篡改：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 有意或无意的设置了 uniqId.idCounter 的值：</span></div><div class="line">uniqId.idCounter = <span class="string">'lalala'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 或者甚至删除了这个属性：</span></div><div class="line"><span class="keyword">delete</span> uniqId.idCounter;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 有意或无意的设置了 uniqId.idCounter 的值：</span></div><div class="line">uniqId.idCounter = <span class="string">'lalala'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 或者甚至删除了这个属性：</span></div><div class="line"><span class="keyword">delete</span> uniqId.idCounter;</div></pre></td></tr></table></figure>
 
 <p>也就是说，idCounter 属性不是私有的，它可以在任何位置被任意代码访问和修改。如何避免这个问题呢？答案是闭包。</p>
 <p>简单来说，JavaScript 函数的执行依赖变量作用域，这个作用域是在函数<strong>定义</strong>时决定的，作用域的好处就是内部函数可以访问包含它的外部函数中的参数和变量（但不包括 this 和 arguments）。其次，函数体内部的变量都可以保存在函数作用域内，即便函数已经结束并返回，这些变量可能依然还在。而这种特性，就称为闭包。</p>
 <p>闭包可以捕捉函数调用的局部变量，利用这种编程技术，我们可以实现一个更好的实现：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId = (<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="keyword">var</span> idCounter = <span class="number">0</span>; <span class="comment">// 局部变量</span></div><div class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">		<span class="keyword">return</span> idCounter+=<span class="number">1</span>;</div><div class="line">	}</div><div class="line">}());</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId = (<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> idCounter = <span class="number">0</span>; <span class="comment">// 局部变量</span></div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> idCounter+=<span class="number">1</span>;</div><div class="line">    }</div><div class="line">}());</div></pre></td></tr></table></figure>
 
 <p>里面的函数可以访问外面函数内定义的变量 idCounter ，当外部函数返回后，其他任何代码都无法访问到 idCounter，除了被返回的内部函数，也就是 uniqId。这就保证了 idCounter 不会被 uniqId 以外的任何代码所修改。</p>
 ]]></content>
