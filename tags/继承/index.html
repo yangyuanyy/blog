@@ -4,17 +4,17 @@
   <meta name="baidu-site-verification" content="r2KA3ATCfI" />
   <meta charset="utf-8">
   
-  <title>写自己的JavaScript工具－文档遍历 | YY</title>
+  <title>Tag: 继承 | YY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="parents/child/siblings 等">
-<meta property="og:type" content="article">
-<meta property="og:title" content="写自己的JavaScript工具－文档遍历">
-<meta property="og:url" content="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YY">
+<meta property="og:url" content="http://yyblog.mocoer.com/tags/继承/">
 <meta property="og:site_name" content="YY">
-<meta property="og:description" content="parents/child/siblings 等">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="写自己的JavaScript工具－文档遍历">
-<meta name="twitter:description" content="parents/child/siblings 等">
+<meta name="twitter:title" content="YY">
+<meta name="twitter:description">
 
   
     <link rel="alternative" href="/atom.xml" title="YY" type="application/atom+xml">
@@ -66,9 +66,11 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-写自己的JavaScript工具－文档遍历" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-写自己的JavaScript工具－对象继承" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－文档遍历/" class="article-date">
+    <a href="/2014/09/19/写自己的JavaScript工具－对象继承/" class="article-date">
   <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
 </a>
     
@@ -83,8 +85,8 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      写自己的JavaScript工具－文档遍历
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－对象继承/">写自己的JavaScript工具－对象继承</a>
     </h1>
   
 
@@ -92,66 +94,44 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>parents/child/siblings 等</p>
+        <p>在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。</p>
+<h3 id="要点">要点</h3>
+<ol>
+<li>关于原型与所谓的原型继承的理解</li>
+<li>几种继承模式</li>
+</ol>
+<p>可以这样理解：</p>
+<p><em>我只给你一个{}，你却用它创造了整个世界…</em></p>
+<p>首先，Object.prototype 是 JavaScript 中最原始的对象，记为 {} 。它的构造器就是 Object 函数。有了 {} 和能创建它的构造器，人们开始想，基于 {} ，我们应该创造一些有用的新的东西出来，比如数组，怎么做呢？那就基于 {} 定义一个名叫数组的对象吧，可以记为 [] 。怎么体现 [] 继承了 {} 呢？毕竟 [] 由 {} 而来，{} 的后代应该继承一些它的特性。于是想到一个办法：引入原型的说法，然后说 [] 的原型就是 {} ，那不就体现了继承关系了吗？最后再让 [] 继承一些它的原型（ {} ）的特性（属性和方法），同时也给 [] 一些自己特有的特性（属性和方法）。</p>
+<p>那要创建不同的具体数组时怎么做呢？提供一个数组构造器吧，就叫 Array，用 Array 创建出来的对象都是数组对象。那怎么体现用 Array 创造出来的数组对象继承了上面定义的 [] 呢？毕竟对于这些数组对象，[] 是它们的直接祖先。有一个办法，就是给 Array 构造器一个叫作 prototype 的属性，凡是通过 Array 构造器创建的对象，其原型都指向这个 prototype 属性值，而这个 prototype 属性值就是 []。最后再让被创建出来的数组继承它的原型（ [] ）的方法，当然，这些数组也可以拥有一些自己的特有的属性和方法。</p>
+<p>这时，人们看到了构造器能帮他们创建某种特定类型的对象，这些对象都有着特殊的意义。于是人们开始想自己来定义满足自身需求的构造器，从而用这些自定义的构造器创建他们想要的各种对象。JavaScript 看到了人们这种需求，于是引入了一个功能：任意一个函数都可以当作构造器来调用，从而创建特定的对象。而且让所有函数都有一个 prototype 属性，其作用就是上面一段所说的：体现继承关系。而有所的函数的 prototype 属性值都是在函数创建之初被赋予的一个新的基本的对象，这个对象的一个特点是它的 contructor 属性值就是这个函数本身。引入这个功能后，人们就可以用自己定义的函数用作构造器使用。后面的事情就和 Array 的情况一样了。这也就是为什么 JavaScript 中的所谓构造函数的一个最重要的特点是：构造函数的 prototype 属性值就被用作由该构造函数 new 出来的对象的原型。</p>
+<p>众所周知的构造器有：Object、Function、Array、String、RegExp等。</p>
+<ol>
+<li>几种继承模式</li>
+</ol>
+<p>To be continue…</p>
 
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－对象继承/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－对象继承/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/" data-id="3h8xf44vle2gy1mt" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－对象继承/" data-id="manzfb3uxvz1jg3z" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－对象继承/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原型/">原型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/继承/">继承</a></li></ul>
 
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2014/09/27/写自己的JavaScript工具－foreach/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          写自己的 JavaScript 工具－forEach
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2014/09/19/写自己的JavaScript工具－本地存储/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">写自己的JavaScript工具－本地存储</div>
-    </a>
-  
-</nav>
-
-  
 </article>
 
 
-<section id="comments">
-  <div id="disqus_thread">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'yyblogmocoercom'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-  </div>
-</section>
+  
+  
 </section>
         
           <aside id="sidebar">
