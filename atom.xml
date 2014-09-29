@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-09-29T10:04:36.722Z</updated>
+  <updated>2014-09-29T10:06:19.426Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/"/>
     <id>http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/</id>
     <published>2014-09-29T10:03:27.000Z</published>
-    <updated>2014-09-29T10:04:19.000Z</updated>
+    <updated>2014-09-29T10:06:02.000Z</updated>
     <content type="html"><![CDATA[<h2 id="要点">要点</h2>
 <ol>
 <li>客户端 Location 对象</li>
@@ -31,7 +31,7 @@
 
 <p>但是客户端提供了 Location 对象的引用：window.location。</p>
 <p>打印它可以看到其中有一些很有用的属性：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 浏览器打开这个页面：http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/?testsearch=lalala#comment</span></div><div class="line"><span class="built_in">window</span>.location;</div><div class="line"><span class="comment">// =&gt; Location { </span></div><div class="line"><span class="comment">// ..</span></div><div class="line"><span class="comment">// hask : '#comment',</span></div><div class="line"><span class="comment">// host: "yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// hostname: "yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// href: "http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/?testsearch=lalala",</span></div><div class="line"><span class="comment">// origin: "http://yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// pathname: "/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/",</span></div><div class="line"><span class="comment">// port: "",</span></div><div class="line"><span class="comment">// protocol: "http:"</span></div><div class="line"><span class="comment">// search: "?testsearch==lalala"</span></div><div class="line"><span class="comment">// ...</span></div><div class="line">}</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 浏览器打开这个页面：http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/?testsearch=lalala#comment</span></div><div class="line"><span class="built_in">window</span>.location;</div><div class="line"><span class="comment">// =&gt; Location { </span></div><div class="line"><span class="comment">// =&gt; ..</span></div><div class="line"><span class="comment">// =&gt; hask : '#comment',</span></div><div class="line"><span class="comment">// =&gt; host: "yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// =&gt; hostname: "yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// =&gt; href: "http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/?testsearch=lalala",</span></div><div class="line"><span class="comment">// =&gt; origin: "http://yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// =&gt; pathname: "/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/",</span></div><div class="line"><span class="comment">// =&gt; port: "",</span></div><div class="line"><span class="comment">// =&gt; protocol: "http:"</span></div><div class="line"><span class="comment">// =&gt; search: "?testsearch==lalala"</span></div><div class="line"><span class="comment">// =&gt; ...</span></div><div class="line"><span class="comment">// =&gt; }</span></div></pre></td></tr></table></figure>
 
 <p>容易看出各个属性的含义。这些属性有很多用处，比如 hash 属性可以判断当前页面的锚点位置，也可以用来做 SPA ( Single Page Application 单页应用 ) 的页面导航系统。再比如 search 属性可以用来获取传入的参数，给不同页面之间传的参数提供了一种方式，就像下面的例子。</p>
 <h3 id="2-_获取_get_参数">2. 获取 get 参数</h3>
