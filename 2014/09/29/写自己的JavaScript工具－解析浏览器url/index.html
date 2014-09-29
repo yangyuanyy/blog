@@ -6,15 +6,42 @@
   
   <title>写自己的JavaScript工具－解析浏览器url | YY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="P344">
+  <meta name="description" content="要点
+
+客户端 Location 对象
+获取 get 参数
+
+客户端 Location 对象
+和 String、Number、Date 等一样，Location 是 Location 对象的构造器，只不过它不允许用户调用这个构造器：
+12var l = new Location();// =&gt; TypeError: Illegal constructor
+
+但是客户端提供了 Location">
 <meta property="og:type" content="article">
 <meta property="og:title" content="写自己的JavaScript工具－解析浏览器url">
-<meta property="og:url" content="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－解析浏览器url/">
+<meta property="og:url" content="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/">
 <meta property="og:site_name" content="YY">
-<meta property="og:description" content="P344">
+<meta property="og:description" content="要点
+
+客户端 Location 对象
+获取 get 参数
+
+客户端 Location 对象
+和 String、Number、Date 等一样，Location 是 Location 对象的构造器，只不过它不允许用户调用这个构造器：
+12var l = new Location();// =&gt; TypeError: Illegal constructor
+
+但是客户端提供了 Location">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="写自己的JavaScript工具－解析浏览器url">
-<meta name="twitter:description" content="P344">
+<meta name="twitter:description" content="要点
+
+客户端 Location 对象
+获取 get 参数
+
+客户端 Location 对象
+和 String、Number、Date 等一样，Location 是 Location 对象的构造器，只不过它不允许用户调用这个构造器：
+12var l = new Location();// =&gt; TypeError: Illegal constructor
+
+但是客户端提供了 Location">
 
   
     <link rel="alternative" href="/atom.xml" title="YY" type="application/atom+xml">
@@ -68,8 +95,8 @@
       <div class="outer">
         <section id="main"><article id="post-写自己的JavaScript工具－解析浏览器url" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－解析浏览器url/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+    <a href="/2014/09/29/写自己的JavaScript工具－解析浏览器url/" class="article-date">
+  <time datetime="2014-09-29T10:03:27.000Z" itemprop="datePublished">Sep 29 2014</time>
 </a>
     
   <div class="article-category">
@@ -92,17 +119,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>P344</p>
+        <h2 id="要点">要点</h2>
+<ol>
+<li>客户端 Location 对象</li>
+<li>获取 get 参数</li>
+</ol>
+<h3 id="客户端_Location_对象">客户端 Location 对象</h3>
+<p>和 String、Number、Date 等一样，Location 是 Location 对象的构造器，只不过它不允许用户调用这个构造器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> l = <span class="keyword">new</span> Location();</div><div class="line"><span class="comment">// =&gt; TypeError: Illegal constructor</span></div></pre></td></tr></table></figure>
+
+<p>但是客户端提供了 Location 对象的引用：window.location。</p>
+<p>打印它可以看到其中有一些很有用的属性：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 浏览器打开这个页面：http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/?testsearch=lalala#comment</span></div><div class="line"><span class="built_in">window</span>.location;</div><div class="line"><span class="comment">// =&gt; Location { </span></div><div class="line"><span class="comment">// ..</span></div><div class="line"><span class="comment">// hask : '#comment',</span></div><div class="line"><span class="comment">// host: "yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// hostname: "yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// href: "http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/?testsearch=lalala",</span></div><div class="line"><span class="comment">// origin: "http://yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// pathname: "/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/",</span></div><div class="line"><span class="comment">// port: "",</span></div><div class="line"><span class="comment">// protocol: "http:"</span></div><div class="line"><span class="comment">// search: "?testsearch==lalala"</span></div><div class="line"><span class="comment">// ...</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>容易看出各个属性的含义。这些属性有很多用处，比如 hash 属性可以判断当前页面的锚点位置，也可以用来做 SPA ( Single Page Application 单页应用 ) 的页面导航系统。再比如 search 属性可以用来获取传入的参数，给不同页面之间传的参数提供了一种方式，就像下面的例子。</p>
+<h3 id="2-_获取_get_参数">2. 获取 get 参数</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> urlArgs = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> result = {}, <span class="comment">// 将被返回的结果</span></div><div class="line">        pairs = [],</div><div class="line">        pos = -<span class="number">1</span>,</div><div class="line">        querys = <span class="built_in">window</span>.location.search.substring(<span class="number">1</span>); <span class="comment">// 获取 url 中的 search 部分并去掉前面的问号</span></div><div class="line">    pairs = querys.split( <span class="string">'&'</span> ); <span class="comment">// 将 key=value 名值对放入数组中</span></div><div class="line">    pairs.forEach( <span class="function"><span class="keyword">function</span><span class="params">( pair )</span></span>{ <span class="comment">// 这里的 forEach 方法是 ECMAScript 5 中新方法，但容易自己来实现，相见相关文章</span></div><div class="line">        pos = pair.indexOf( <span class="string">'='</span> );</div><div class="line">        <span class="keyword">var</span> name = pair.substring( <span class="number">0</span>, pos ),</div><div class="line">            <span class="comment">// 客户端全局函数 decodeURIComponent 提供了解析浏览器地址栏内容的方法</span></div><div class="line">            value = <span class="built_in">decodeURIComponent</span>( pair.substring( pos + <span class="number">1</span> ) );</div><div class="line">        result[ name ] = value;</div><div class="line">    } );</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">};</div><div class="line"></div><div class="line">urlArgs(); <span class="comment">// =&gt; { testsearch: '=lalala' }</span></div></pre></td></tr></table></figure>
+
+<p>现在可以使用 urlArgs 函数方便的获取 url 中的参数了。</p>
 
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－解析浏览器url/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－解析浏览器url/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/">http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－解析浏览器url/" data-id="i8psbs2z2yad6pi9" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/" data-id="i8psbs2z2yad6pi9" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－解析浏览器url/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/#comments" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -113,19 +157,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2014/09/19/写自己的JavaScript工具－跨域请求/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          写自己的JavaScript工具－跨域请求
-        
-      </div>
-    </a>
   
-  
-    <a href="/2014/09/19/写自己的JavaScript工具－自定义事件/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2014/09/29/写自己的JavaScript工具－对象继承/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">写自己的JavaScript工具－自定义事件</div>
+      <div class="article-nav-title">写自己的JavaScript工具－对象继承</div>
     </a>
   
 </nav>
@@ -199,6 +234,10 @@
       <ul>
         
           <li>
+            <a href="/2014/09/29/写自己的JavaScript工具－解析浏览器url/">写自己的JavaScript工具－解析浏览器url</a>
+          </li>
+        
+          <li>
             <a href="/2014/09/29/写自己的JavaScript工具－对象继承/">写自己的JavaScript工具－对象继承</a>
           </li>
         
@@ -212,10 +251,6 @@
         
           <li>
             <a href="/2014/09/27/写自己的JavaScript工具－foreach/">写自己的 JavaScript 工具－forEach</a>
-          </li>
-        
-          <li>
-            <a href="/2014/09/19/写自己的JavaScript工具－Ajax上传/">写自己的JavaScript工具函数－Ajax上传</a>
           </li>
         
       </ul>
