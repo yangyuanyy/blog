@@ -70,8 +70,8 @@
   
     <article id="post-写自己的JavaScript工具－对象继承" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/10/写自己的JavaScript工具－对象继承/" class="article-date">
-  <time datetime="2014-09-10T14:28:00.000Z" itemprop="datePublished">Sep 10 2014</time>
+    <a href="/2014/09/29/写自己的JavaScript工具－对象继承/" class="article-date">
+  <time datetime="2014-09-29T07:25:36.000Z" itemprop="datePublished">Sep 29 2014</time>
 </a>
     
   <div class="article-category">
@@ -86,7 +86,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/10/写自己的JavaScript工具－对象继承/">写自己的JavaScript工具－对象继承</a>
+      <a class="article-title" href="/2014/09/29/写自己的JavaScript工具－对象继承/">写自己的JavaScript工具－对象继承</a>
     </h1>
   
 
@@ -136,20 +136,19 @@
 <p>这样使用 ford，创建一个我的福特车：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myFord = ford( { maxSpeed : <span class="number">280</span>, price : <span class="number">320000</span> } );</div><div class="line">myFord.getMaxSpeed(); <span class="comment">// =&gt; 280</span></div><div class="line">myFord.getPrice(); <span class="comment">// =&gt; 320000</span></div></pre></td></tr></table></figure>
 
-<p>这种模式保护了对象的私有变量和私有方法。同时为子类访问父类方法提供可能（这一又用到了自定义的 method 方法，[详见这里</p>
-<p>](<a href="http://yyblog.mocoer.com/2014/09/27/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dforeach/）：" target="_blank" rel="external">http://yyblog.mocoer.com/2014/09/27/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dforeach/）：</a></p>
+<p>这种模式保护了对象的私有变量和私有方法。同时为子类访问父类方法提供可能（这一又用到了自定义的 method 方法，[详见这里](<a href="http://yyblog.mocoer.com/2014/09/27/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dforeach/）：" target="_blank" rel="external">http://yyblog.mocoer.com/2014/09/27/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dforeach/）：</a></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Object</span>.method( <span class="string">'superior'</span>, <span class="function"><span class="keyword">function</span><span class="params">( methodName )</span></span>{</div><div class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>,</div><div class="line">        method = that[ methodName ];</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> method.apply( that, <span class="built_in">arguments</span> );</div><div class="line">    }</div><div class="line">} );</div><div class="line"></div><div class="line"><span class="keyword">var</span> coolFord = <span class="function"><span class="keyword">function</span><span class="params">( props )</span></span>{</div><div class="line">    <span class="keyword">var</span> that = ford( props ),</div><div class="line">        superGetPrice = that.superior( <span class="string">'getPrice'</span> ); <span class="comment">// 得到了父对象方法</span></div><div class="line">    <span class="keyword">var</span> getPrice = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> <span class="string">'Hi, ford fans. '</span> + superGetPrice();</div><div class="line">    }</div><div class="line">    that.getPrice = getPrice;</div><div class="line">    <span class="keyword">return</span> that;</div><div class="line">}</div></pre></td></tr></table></figure>
 
 
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/10/写自己的JavaScript工具－对象继承/">http://yyblog.mocoer.com/2014/09/10/写自己的JavaScript工具－对象继承/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/">http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/10/写自己的JavaScript工具－对象继承/" data-id="manzfb3uxvz1jg3z" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/" data-id="manzfb3uxvz1jg3z" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/10/写自己的JavaScript工具－对象继承/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/#comments" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原型/">原型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/继承/">继承</a></li></ul>
@@ -209,6 +208,10 @@
       <ul>
         
           <li>
+            <a href="/2014/09/29/写自己的JavaScript工具－对象继承/">写自己的JavaScript工具－对象继承</a>
+          </li>
+        
+          <li>
             <a href="/2014/09/29/写自己的JavaScript工具－ID生成器/">写自己的JavaScript工具函数－ID生成器</a>
           </li>
         
@@ -222,10 +225,6 @@
         
           <li>
             <a href="/2014/09/19/写自己的JavaScript工具－文档遍历/">写自己的JavaScript工具－文档遍历</a>
-          </li>
-        
-          <li>
-            <a href="/2014/09/19/写自己的JavaScript工具－推送/">写自己的JavaScript工具－推送</a>
           </li>
         
       </ul>
