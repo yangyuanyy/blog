@@ -94,12 +94,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="要点">要点</h3>
+        <h2 id="要点">要点</h2>
 <ol>
 <li>函数也是对象（一种简单实现）</li>
 <li>闭包（一种更好的实现）</li>
 </ol>
-<h2 id="1-_函数也是对象（一种简单实现）">1. 函数也是对象（一种简单实现）</h2>
+<h3 id="1-_函数也是对象（一种简单实现）">1. 函数也是对象（一种简单实现）</h3>
 <p>设置 ID 计数器为全局变量的方式时最简陋的一种实现，而且容易引发一系列程序问题，因为全局变量会搞乱命名空间，同时也容易被篡改，造成安全隐患。</p>
 <p>为了避免使用全局变量，一种简单的实现是将 ID 计数器设置为生成器函数的一个属性。这个思路源于：函数也是对象，也可以拥有属性和方法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// JavaScript 中的函数也是对象，它继承自 Object.prototype 类型</span></div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="comment">/* 一些语句 */</span> };</div><div class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf( f ); <span class="comment">// =&gt; true </span></div><div class="line"><span class="comment">// 这说明：f 原型继承自 Object.prototype，但不一定是直接继承</span></div></pre></td></tr></table></figure>
@@ -109,7 +109,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId;</div><div class="line">uniqId.idCounter = <span class="number">0</span>;</div><div class="line">uniqId = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">return</span> uniqId.idCounter+=<span class="number">1</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <p>这样，就避免 idCounter 成为一个全局变量。</p>
-<h2 id="2-_闭包（一种更好的实现）">2. 闭包（一种更好的实现）</h2>
+<h3 id="2-_闭包（一种更好的实现）">2. 闭包（一种更好的实现）</h3>
 <p>然而上面的实现依然存在问题，因为 idCounter 值可以很容易的被篡改：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 有意或无意的设置了 uniqId.idCounter 的值：</span></div><div class="line">uniqId.idCounter = <span class="string">'lalala'</span>;</div><div class="line"><span class="comment">// 或者甚至删除了这个属性：</span></div><div class="line"><span class="keyword">delete</span> uniqId.idCounter;</div></pre></td></tr></table></figure>
 

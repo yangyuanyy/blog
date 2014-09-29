@@ -95,20 +95,19 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。</p>
-<h3 id="要点">要点</h3>
+<h2 id="要点">要点</h2>
 <ol>
 <li>关于原型与所谓的原型继承的理解</li>
 <li>几种继承模式</li>
 </ol>
+<h3 id="1-_关于原型与所谓的原型继承的理解">1. 关于原型与所谓的原型继承的理解</h3>
 <p>可以这样理解：</p>
 <p><em style="color:#999;">我只给你一个{}，你却用它创造了整个世界…</em></p>
 <p>首先，Object.prototype 是 JavaScript 中最原始的对象，记为 {} 。它的构造器就是 Object 函数。有了 {} 和能创建它的构造器，人们开始想，基于 {} ，我们应该创造一些有用的新的东西出来，比如数组，怎么做呢？那就基于 {} 定义一个名叫数组的对象吧，可以记为 [] 。怎么体现 [] 继承了 {} 呢？毕竟 [] 由 {} 而来，{} 的后代应该继承一些它的特性。于是想到一个办法：引入原型的说法，然后说 [] 的原型就是 {} ，那不就体现了继承关系了吗？最后再让 [] 继承一些它的原型（ {} ）的特性（属性和方法），同时也给 [] 一些自己特有的特性（属性和方法）。</p>
 <p>那要创建不同的具体数组时怎么做呢？提供一个数组构造器吧，就叫 Array，用 Array 创建出来的对象都是数组对象。那怎么体现用 Array 创造出来的数组对象继承了上面定义的 [] 呢？毕竟对于这些数组对象，[] 是它们的直接祖先。有一个办法，就是给 Array 构造器一个叫作 prototype 的属性，凡是通过 Array 构造器创建的对象，其原型都指向这个 prototype 属性值，而这个 prototype 属性值就是 []。最后再让被创建出来的数组继承它的原型（ [] ）的方法，当然，这些数组也可以拥有一些自己的特有的属性和方法。</p>
 <p>这时，人们看到了构造器能帮他们创建某种特定类型的对象，这些对象都有着特殊的意义。于是人们开始想自己来定义满足自身需求的构造器，从而用这些自定义的构造器创建他们想要的各种对象。JavaScript 看到了人们这种需求，于是引入了一个功能：任意一个函数都可以当作构造器来调用，从而创建特定的对象。而且让所有函数都有一个 prototype 属性，其作用就是上面一段所说的：体现继承关系。而有所的函数的 prototype 属性值都是在函数创建之初被赋予的一个新的基本的对象，这个对象的一个特点是它的 contructor 属性值就是这个函数本身。引入这个功能后，人们就可以用自己定义的函数用作构造器使用。后面的事情就和 Array 的情况一样了。这也就是为什么 JavaScript 中的所谓构造函数的一个最重要的特点是：构造函数的 prototype 属性值就被用作由该构造函数 new 出来的对象的原型。</p>
 <p>众所周知的构造器有：Object、Function、Array、String、RegExp等。</p>
-<ol>
-<li>几种继承模式</li>
-</ol>
+<h3 id="2-_几种继承模式">2. 几种继承模式</h3>
 <p>a. 伪类模式</p>
 <p>为了模仿传统的基于类的继承，JavaScript 引入了一个特性：允许通过构造函数创建新的对象。可以说，它掩盖了 JavaScript 的基于原型的继承特点。</p>
 <p>如果理解了要点1中关于原型和原型继承的内容，那么应该容易理解下面代码的含义：</p>
@@ -186,12 +185,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="要点">要点</h3>
+        <h2 id="要点">要点</h2>
 <ol>
 <li>函数也是对象（一种简单实现）</li>
 <li>闭包（一种更好的实现）</li>
 </ol>
-<h2 id="1-_函数也是对象（一种简单实现）">1. 函数也是对象（一种简单实现）</h2>
+<h3 id="1-_函数也是对象（一种简单实现）">1. 函数也是对象（一种简单实现）</h3>
 <p>设置 ID 计数器为全局变量的方式时最简陋的一种实现，而且容易引发一系列程序问题，因为全局变量会搞乱命名空间，同时也容易被篡改，造成安全隐患。</p>
 <p>为了避免使用全局变量，一种简单的实现是将 ID 计数器设置为生成器函数的一个属性。这个思路源于：函数也是对象，也可以拥有属性和方法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// JavaScript 中的函数也是对象，它继承自 Object.prototype 类型</span></div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="comment">/* 一些语句 */</span> };</div><div class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf( f ); <span class="comment">// =&gt; true </span></div><div class="line"><span class="comment">// 这说明：f 原型继承自 Object.prototype，但不一定是直接继承</span></div></pre></td></tr></table></figure>
@@ -201,7 +200,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId;</div><div class="line">uniqId.idCounter = <span class="number">0</span>;</div><div class="line">uniqId = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">return</span> uniqId.idCounter+=<span class="number">1</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <p>这样，就避免 idCounter 成为一个全局变量。</p>
-<h2 id="2-_闭包（一种更好的实现）">2. 闭包（一种更好的实现）</h2>
+<h3 id="2-_闭包（一种更好的实现）">2. 闭包（一种更好的实现）</h3>
 <p>然而上面的实现依然存在问题，因为 idCounter 值可以很容易的被篡改：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 有意或无意的设置了 uniqId.idCounter 的值：</span></div><div class="line">uniqId.idCounter = <span class="string">'lalala'</span>;</div><div class="line"><span class="comment">// 或者甚至删除了这个属性：</span></div><div class="line"><span class="keyword">delete</span> uniqId.idCounter;</div></pre></td></tr></table></figure>
 
