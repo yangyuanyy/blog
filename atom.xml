@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-09-30T22:21:19.340Z</updated>
+  <updated>2014-09-30T23:34:03.037Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yyblog.mocoer.com/2014/09/30/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/"/>
     <id>http://yyblog.mocoer.com/2014/09/30/写自己的JavaScript工具－自定义事件/</id>
     <published>2014-09-30T12:57:11.000Z</published>
-    <updated>2014-09-30T21:35:13.000Z</updated>
+    <updated>2014-09-30T23:33:05.000Z</updated>
     <content type="html"><![CDATA[<h2 id="要点">要点</h2>
 <ol>
 <li>传统事件</li>
@@ -54,7 +54,7 @@
 ]]></content>
     
     
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
+      <category term="Javascript" scheme="http://yyblog.mocoer.com/tags/Javascript/"/>
     
       <category term="事件" scheme="http://yyblog.mocoer.com/tags/%E4%BA%8B%E4%BB%B6/"/>
     
@@ -67,7 +67,7 @@
     <link href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/"/>
     <id>http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/</id>
     <published>2014-09-29T10:03:27.000Z</published>
-    <updated>2014-09-29T10:07:37.000Z</updated>
+    <updated>2014-09-30T23:32:40.000Z</updated>
     <content type="html"><![CDATA[<h2 id="要点">要点</h2>
 <ol>
 <li>客户端 Location 对象</li>
@@ -89,7 +89,7 @@
 ]]></content>
     
     
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
+      <category term="Javascript" scheme="http://yyblog.mocoer.com/tags/Javascript/"/>
     
       <category term="JavaScript" scheme="http://yyblog.mocoer.com/categories/JavaScript/"/>
     
@@ -100,7 +100,7 @@
     <link href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E5%AF%B9%E8%B1%A1%E7%BB%A7%E6%89%BF/"/>
     <id>http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/</id>
     <published>2014-09-29T07:25:36.000Z</published>
-    <updated>2014-09-29T07:56:35.000Z</updated>
+    <updated>2014-09-30T23:32:18.000Z</updated>
     <content type="html"><![CDATA[<p>在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。</p>
 <h2 id="要点">要点</h2>
 <ol>
@@ -148,7 +148,7 @@
 ]]></content>
     
     
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
+      <category term="Javascript" scheme="http://yyblog.mocoer.com/tags/Javascript/"/>
     
       <category term="原型" scheme="http://yyblog.mocoer.com/tags/%E5%8E%9F%E5%9E%8B/"/>
     
@@ -163,7 +163,7 @@
     <link href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8DID%E7%94%9F%E6%88%90%E5%99%A8/"/>
     <id>http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/</id>
     <published>2014-09-28T20:02:36.000Z</published>
-    <updated>2014-09-29T07:52:14.000Z</updated>
+    <updated>2014-09-30T23:33:45.000Z</updated>
     <content type="html"><![CDATA[<h2 id="要点">要点</h2>
 <ol>
 <li>函数也是对象（一种简单实现）</li>
@@ -192,7 +192,7 @@
 ]]></content>
     
     
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
+      <category term="Javascript" scheme="http://yyblog.mocoer.com/tags/Javascript/"/>
     
       <category term="闭包" scheme="http://yyblog.mocoer.com/tags/%E9%97%AD%E5%8C%85/"/>
     
@@ -205,7 +205,7 @@
     <link href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dbind/"/>
     <id>http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－bind/</id>
     <published>2014-09-28T17:46:13.000Z</published>
-    <updated>2014-09-27T17:50:58.000Z</updated>
+    <updated>2014-09-30T23:33:24.000Z</updated>
     <content type="html"><![CDATA[<h2 id="要点">要点</h2>
 <ol>
 <li>扩展 JavaScript 基本类型的功能</li>
@@ -236,7 +236,7 @@
 ]]></content>
     
     
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
+      <category term="Javascript" scheme="http://yyblog.mocoer.com/tags/Javascript/"/>
     
       <category term="bind" scheme="http://yyblog.mocoer.com/tags/bind/"/>
     
@@ -249,7 +249,7 @@
     <link href="http://yyblog.mocoer.com/2014/09/27/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dforeach/"/>
     <id>http://yyblog.mocoer.com/2014/09/27/写自己的JavaScript工具－foreach/</id>
     <published>2014-09-27T12:10:09.000Z</published>
-    <updated>2014-09-27T17:46:26.000Z</updated>
+    <updated>2014-09-30T23:33:36.000Z</updated>
     <content type="html"><![CDATA[<h2 id="要点">要点</h2>
 <ol>
 <li>扩展 JavaScript 基本类型的功能</li>
@@ -276,7 +276,7 @@
 ]]></content>
     
     
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
+      <category term="Javascript" scheme="http://yyblog.mocoer.com/tags/Javascript/"/>
     
       <category term="forEach" scheme="http://yyblog.mocoer.com/tags/forEach/"/>
     
