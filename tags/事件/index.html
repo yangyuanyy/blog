@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="baidu-site-verification" content="r2KA3ATCfI" />
+  <meta charset="utf-8">
+  
+  <title>Tag: 事件 | YY</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YY">
+<meta property="og:url" content="http://yyblog.mocoer.com/tags/事件/">
+<meta property="og:site_name" content="YY">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="YY">
+<meta name="twitter:description">
+
+  
+    <link rel="alternative" href="/atom.xml" title="YY" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  <link rel="stylesheet" href="/css/yystyle.css" type="text/css">
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"><div></div></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">YY</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">javascripter</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://yyblog.mocoer.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-写自己的JavaScript工具－自定义事件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/30/写自己的JavaScript工具－自定义事件/" class="article-date">
+  <time datetime="2014-09-30T12:57:11.000Z" itemprop="datePublished">Sep 30 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/30/写自己的JavaScript工具－自定义事件/">写自己的JavaScript工具－自定义事件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="要点">要点</h2>
+<ol>
+<li>传统事件</li>
+<li>自定义事件</li>
+</ol>
+<h3 id="1-_传统事件">1. 传统事件</h3>
+<p>load、click、resize、readystatechange等等，都是 javaScript 客户端常见的事件。Window 对象、Docuement 对象和所有文档元素等都可以绑定事件处理程序。绑定方式可以是：</p>
+<ol>
+<li>设置事件目标的属性，比如设置 window.onload、document.onclick、request.onreadystatechange 的值为事件处理程序；</li>
+<li>设置 HTML 标签属性为事件处理程序；</li>
+<li>通过 addEventListener 方法注册一个或多个事件处理程序。</li>
+</ol>
+<p>通过事件目标属性和 HTML 标签注册的事件处理程序优先于通过 addEventListener 注册的事件处理程序，addEventListener 中注册的时间处理程序按照注册顺序调用。</p>
+<h3 id="2-_自定义事件">2. 自定义事件</h3>
+<p>传统事件已经可以满足我们在客户端很多技术需求。但能够注册传统事件的事件目标类型是有限的。现在假设有这样的需求，我们想给程序中的某个任意对象添加事件机制，这个对象可能只是程序中定义一个普通 JavaScript 对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = someObject, y = someOtherObject, z = anotherObject;</div><div class="line"><span class="keyword">var</span> o = [];</div><div class="line">o.push( <span class="number">1</span> );</div></pre></td></tr></table></figure>
+
+<p>比如我们关心 o 这中推入了新元素这件事，在推入了新元素的时候，对象 x, y, z 执行一些相关程序以响应这件事。在不基于事件的程序中会在push之后堆叠大量互不相干的处理代码以响应这个 push 事件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">o.push( <span class="number">1</span> );</div><div class="line"><span class="comment">// 后面紧跟一些混乱的代码：</span></div><div class="line"><span class="comment">// data was pushed in, x need to do something.</span></div><div class="line"><span class="comment">// data was pushed in, y need to do something.</span></div><div class="line"><span class="comment">// data was pushed in, z need to do something.</span></div></pre></td></tr></table></figure>
+
+<p>即便将这些混乱的代码封装成一个函数还是会有一些麻烦，比如当需要添加一个 w 对象也需要响应 o.push() 的时候，不得不再扩种这些混乱的代码。</p>
+<p>我们希望在push之后，凡是这件事的对象都能自动去响应。也就是说如果这时有一个函数能够让 o 拥有绑定、触发事件的能力，问题就能得到很好的解决。</p>
+<p>我们需要设计一个函数，让传入的对象拥有这种能力，也就是“事件化对象”，然后像这样给它们绑定和触发事件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = someObject, y = someOtherObject, z = anotherObject;</div><div class="line"></div><div class="line"><span class="comment">// SP for Something was Pushed into o</span></div><div class="line">x.on( <span class="string">'SP'</span>, <span class="function"><span class="keyword">function</span><span class="params">( e, data )</span></span>{</div><div class="line">    <span class="comment">// data was pushed in, I need to do something.</span></div><div class="line">} );</div><div class="line">y.on( <span class="string">'SP'</span>, <span class="function"><span class="keyword">function</span><span class="params">( e, data )</span></span>{</div><div class="line">    <span class="comment">// data was pushed in, I need to do something.</span></div><div class="line">} );</div><div class="line">z.on( <span class="string">'SP'</span>, <span class="function"><span class="keyword">function</span><span class="params">( e, data )</span></span>{</div><div class="line">    <span class="comment">// data was pushed in, I need to do something.</span></div><div class="line">} );</div><div class="line"></div><div class="line">o.push( <span class="number">1</span> );</div><div class="line">x.fire( <span class="string">'SP'</span> );</div><div class="line">y.fire( <span class="string">'SP'</span> );</div><div class="line">z.fire( <span class="string">'SP'</span> );</div></pre></td></tr></table></figure>
+
+<p>这样代码优雅多了，最关键的是更加清晰易读。下面我们就实现这种“事件化对象”技术：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> eventuality = <span class="function"><span class="keyword">function</span><span class="params">( that )</span></span>{</div><div class="line">    <span class="comment">// 私有的事件注册对象</span></div><div class="line">    <span class="keyword">var</span> events = {};</div><div class="line">    <span class="comment">// 通过传入的 eventName，在 events 中查找对应的事件列表</span></div><div class="line">    <span class="comment">// 对查找到的列表进行遍历，并调用对应的处理函数</span></div><div class="line">    that.fire = <span class="function"><span class="keyword">function</span><span class="params">( eventName )</span></span>{</div><div class="line">    	<span class="comment">// 调用 fire 时，除了第一个参数必须时事件名称外</span></div><div class="line">    	<span class="comment">// 还可以传入其他参数</span></div><div class="line">    	<span class="comment">// 这些参数将被带回通过 on 注册的事件处理函数中</span></div><div class="line">        <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call( <span class="built_in">arguments</span>, <span class="number">1</span> );</div><div class="line">        <span class="keyword">if</span>( events.hasOwnProperty( eventName ) ){</div><div class="line">            <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = events[ eventName ].length; i &lt; len; i+=<span class="number">1</span> ){</div><div class="line">                <span class="keyword">var</span> method = events[ eventName ][ i ].method,</div><div class="line">                    <span class="comment">// 可以传入参数替换事件处理程序中的上下文（this）</span></div><div class="line">                    <span class="comment">// 否则默认为当前调用fire方法的对象</span></div><div class="line">                    context = events[ eventName ][ i ].context || <span class="keyword">this</span>;</div><div class="line">                <span class="keyword">if</span>( <span class="keyword">typeof</span> method == <span class="string">'string'</span> ){</div><div class="line">                    method = context[method];</div><div class="line">                }</div><div class="line">                <span class="comment">// 规定事件处理函数的第一个参数总为时间名称</span></div><div class="line">                method.apply( context, [ eventName ].concat( args ) ); </div><div class="line">            }</div><div class="line">        }</div><div class="line">    };</div><div class="line"></div><div class="line">    that.on = <span class="function"><span class="keyword">function</span><span class="params">( eventName, method, context )</span></span>{</div><div class="line">        <span class="keyword">var</span> event = {</div><div class="line">            method : method,</div><div class="line">            context : context</div><div class="line">        };</div><div class="line">        <span class="keyword">if</span>( events.hasOwnProperty( eventName ) ){</div><div class="line">            events[ eventName ].push( event );</div><div class="line">        }<span class="keyword">else</span>{</div><div class="line">            events[ eventName ] = [ event ];</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> that;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/30/写自己的JavaScript工具－自定义事件/">http://yyblog.mocoer.com/2014/09/30/写自己的JavaScript工具－自定义事件/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/30/写自己的JavaScript工具－自定义事件/" data-id="ws44ws0rmp4ywjw6" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/30/写自己的JavaScript工具－自定义事件/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事件/">事件</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JavaScript/" style="font-size: 20.00px;">JavaScript</a><a href="/tags/bind/" style="font-size: 10.00px;">bind</a><a href="/tags/forEach/" style="font-size: 10.00px;">forEach</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/原型/" style="font-size: 10.00px;">原型</a><a href="/tags/继承/" style="font-size: 10.00px;">继承</a><a href="/tags/闭包/" style="font-size: 10.00px;">闭包</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2014/09/30/写自己的JavaScript工具－自定义事件/">写自己的JavaScript工具－自定义事件</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/29/写自己的JavaScript工具－解析浏览器url/">写自己的JavaScript工具－解析浏览器url</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/29/写自己的JavaScript工具－对象继承/">写自己的JavaScript工具－对象继承</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/29/写自己的JavaScript工具－ID生成器/">写自己的JavaScript工具函数－ID生成器</a>
+          </li>
+        
+          <li>
+            <a href="/2014/09/29/写自己的JavaScript工具－bind/">写自己的JavaScript工具－bind</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 YY<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+<script src="/js/yyscript.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
