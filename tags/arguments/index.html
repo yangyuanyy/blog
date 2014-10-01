@@ -4,12 +4,12 @@
   <meta name="baidu-site-verification" content="r2KA3ATCfI" />
   <meta charset="utf-8">
   
-  <title>Tag: 闭包 | YY</title>
+  <title>Tag: arguments | YY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="YY">
-<meta property="og:url" content="http://yyblog.mocoer.com/tags/闭包/">
+<meta property="og:url" content="http://yyblog.mocoer.com/tags/arguments/">
 <meta property="og:site_name" content="YY">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -68,10 +68,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-写自己的JavaScript工具－ID生成器" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-写自己的JavaScript工具－max:min" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/29/写自己的JavaScript工具－ID生成器/" class="article-date">
-  <time datetime="2014-09-28T20:02:36.000Z" itemprop="datePublished">Sep 29 2014</time>
+    <a href="/2014/10/01/写自己的JavaScript工具－max:min/" class="article-date">
+  <time datetime="2014-10-01T04:51:34.000Z" itemprop="datePublished">Oct 1 2014</time>
 </a>
     
   <div class="article-category">
@@ -86,7 +86,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/29/写自己的JavaScript工具－ID生成器/">写自己的JavaScript工具函数－ID生成器</a>
+      <a class="article-title" href="/2014/10/01/写自己的JavaScript工具－max:min/">写自己的JavaScript工具－max/min</a>
     </h1>
   
 
@@ -96,42 +96,34 @@
       
         <h2 id="要点">要点</h2>
 <ol>
-<li>函数也是对象（一种简单实现）</li>
-<li>闭包（一种更好的实现）</li>
+<li>arguments 对象</li>
+<li>利用 arguments 实现 max/min 函数 ( 不定实参函数（ varargs function ）)</li>
 </ol>
-<h3 id="1-_函数也是对象（一种简单实现）">1. 函数也是对象（一种简单实现）</h3>
-<p>设置 ID 计数器为全局变量的方式时最简陋的一种实现，而且容易引发一系列程序问题，因为全局变量会搞乱命名空间，同时也容易被篡改，造成安全隐患。</p>
-<p>为了避免使用全局变量，一种简单的实现是将 ID 计数器设置为生成器函数的一个属性。这个思路源于：函数也是对象，也可以拥有属性和方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// JavaScript 中的函数也是对象，它继承自 Object.prototype 类型</span></div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="comment">/* 一些语句 */</span> };</div><div class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf( f ); <span class="comment">// =&gt; true </span></div><div class="line"><span class="comment">// 这说明：f 原型继承自 Object.prototype，但不一定是直接继承</span></div></pre></td></tr></table></figure>
+<h3 id="1-_arguments_对象">1. arguments 对象</h3>
+<p>JavaScript 中的每个函数都“附赠”了两个局部变量：this 和 arguments。</p>
+<p>arguments 是函数的实参对象，它是一个类数组，不是真正的数组，没有数组通常都有的方法，但它有 length 属性和以数字为索引的一组元素：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">( x )</span></span>{</div><div class="line">	<span class="built_in">console</span>.log( x, <span class="built_in">arguments</span>[ <span class="number">0</span> ], <span class="built_in">arguments</span>[ <span class="number">1</span> ], <span class="built_in">arguments</span>[ <span class="number">2</span> ] );</div><div class="line">	<span class="built_in">console</span>.log( <span class="built_in">arguments</span>.length );</div><div class="line">	<span class="built_in">console</span>.log( <span class="built_in">arguments</span>.slice );</div><div class="line">	<span class="built_in">arguments</span>[ <span class="number">0</span> ] = -<span class="number">1</span>;</div><div class="line">	<span class="built_in">console</span>.log( x );</div><div class="line">}</div><div class="line">f( <span class="number">1</span>, <span class="number">2</span> ); </div><div class="line"><span class="comment">// =&gt; 1, 1, 2, undefined</span></div><div class="line"><span class="comment">// =&gt; 2</span></div><div class="line"><span class="comment">// =&gt; undefined 说明 arguments 不是真正的数组</span></div><div class="line"><span class="comment">// =&gt; -1 说明 arguments[ 0 ] 和 x 指代同一个值</span></div></pre></td></tr></table></figure>
 
-<p>关于原型和原型继承的理解可以<a href="http://yyblog.mocoer.com/2014/09/10/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E5%AF%B9%E8%B1%A1%E7%BB%A7%E6%89%BF/" target="_blank" rel="external">参考这里</a>。</p>
-<p>于是，很容易的我们写出一个简单的 ID 计数器：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId;</div><div class="line">uniqId.idCounter = <span class="number">0</span>;</div><div class="line">uniqId = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">return</span> uniqId.idCounter+=<span class="number">1</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>上面的程序基本展示了 arguments 属性的一些特点。</p>
+<p>除此之外，arguments 对象还有两个属性：caller 和 callee，前者指代调用当前函数的函数，后者指代当前正在执行的函数。callee 在某些递归调用中很有用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">( x )</span></span>{</div><div class="line">	<span class="keyword">if</span>( x &gt; <span class="number">1</span> ){</div><div class="line">        <span class="keyword">return</span> x + <span class="built_in">arguments</span>.callee( x - <span class="number">1</span> );</div><div class="line">    }<span class="keyword">else</span>{</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    }</div><div class="line">}</div><div class="line">f(<span class="number">5</span>); <span class="comment">// =&gt; 15</span></div></pre></td></tr></table></figure>
 
-<p>这样，就避免 idCounter 成为一个全局变量。</p>
-<h3 id="2-_闭包（一种更好的实现）">2. 闭包（一种更好的实现）</h3>
-<p>然而上面的实现依然存在问题，因为 idCounter 值可以很容易的被篡改：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 有意或无意的设置了 uniqId.idCounter 的值：</span></div><div class="line">uniqId.idCounter = <span class="string">'lalala'</span>;</div><div class="line"><span class="comment">// 或者甚至删除了这个属性：</span></div><div class="line"><span class="keyword">delete</span> uniqId.idCounter;</div></pre></td></tr></table></figure>
+<h3 id="2-_利用_arguments_实现_max/min_函数_(_不定实参函数（_varargs_function_）)">2. 利用 arguments 实现 max/min 函数 ( 不定实参函数（ varargs function ）)</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> max = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="keyword">var</span> max = -<span class="literal">Infinity</span>; <span class="comment">// 或 Number.NEGATIVE_INFINITY</span></div><div class="line">	<span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="built_in">arguments</span>.length; i &lt; len; i++ ){</div><div class="line">        max = <span class="built_in">arguments</span>[ i ] &gt; max ? <span class="built_in">arguments</span>[ i ] : max;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> max;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">var</span> min = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="keyword">var</span> min = <span class="literal">Infinity</span>; <span class="comment">// 或 Number.POSITIVE_INFINITY</span></div><div class="line">	<span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="built_in">arguments</span>.length; i &lt; len; i++ ){</div><div class="line">        min = <span class="built_in">arguments</span>[ i ] &lt; min ? <span class="built_in">arguments</span>[ i ] : min;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> min;</div><div class="line">}</div><div class="line"></div><div class="line">max(<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">1</span>); <span class="comment">// =&gt; 7</span></div><div class="line">min(<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">1</span>); <span class="comment">// =&gt; 1</span></div></pre></td></tr></table></figure>
 
-<p>也就是说，idCounter 属性不是私有的，它可以在任何位置被任意代码访问和修改。如何避免这个问题呢？答案是闭包。</p>
-<p>简单来说，JavaScript 函数的执行依赖变量作用域，这个作用域是在函数<strong>定义</strong>时决定的，作用域的好处就是内部函数可以访问包含它的外部函数中的参数和变量（但不包括 this 和 arguments）。其次，函数体内部的变量都可以保存在函数作用域内，即便函数已经结束并返回，这些变量可能依然还在。而这种特性，就称为闭包。</p>
-<p>闭包可以捕捉函数调用的局部变量，利用这种编程技术，我们可以实现一个更好的实现：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId = (<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> idCounter = <span class="number">0</span>; <span class="comment">// 局部变量</span></div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> idCounter+=<span class="number">1</span>;</div><div class="line">    }</div><div class="line">}());</div></pre></td></tr></table></figure>
-
-<p>里面的函数可以访问外面函数内定义的变量 idCounter ，当外部函数返回后，其他任何代码都无法访问到 idCounter，除了被返回的内部函数，也就是 uniqId。这就保证了 idCounter 不会被 uniqId 以外的任何代码所修改。</p>
 
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/">http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/10/01/写自己的JavaScript工具－max:min/">http://yyblog.mocoer.com/2014/10/01/写自己的JavaScript工具－max:min/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/" data-id="ptkja29t9pwno2dh" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/10/01/写自己的JavaScript工具－max:min/" data-id="noygevawby5q6kmj" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/10/01/写自己的JavaScript工具－max:min/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/闭包/">闭包</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arguments/">arguments</a></li></ul>
 
     </footer>
   </div>

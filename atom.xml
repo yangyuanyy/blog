@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-09-30T23:34:03.037Z</updated>
+  <updated>2014-10-01T04:52:02.308Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -13,6 +13,40 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[写自己的JavaScript工具－max/min]]></title>
+    <link href="http://yyblog.mocoer.com/2014/10/01/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dmax:min/"/>
+    <id>http://yyblog.mocoer.com/2014/10/01/写自己的JavaScript工具－max:min/</id>
+    <published>2014-10-01T04:51:34.000Z</published>
+    <updated>2014-10-01T04:51:51.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="要点">要点</h2>
+<ol>
+<li>arguments 对象</li>
+<li>利用 arguments 实现 max/min 函数 ( 不定实参函数（ varargs function ）)</li>
+</ol>
+<h3 id="1-_arguments_对象">1. arguments 对象</h3>
+<p>JavaScript 中的每个函数都“附赠”了两个局部变量：this 和 arguments。</p>
+<p>arguments 是函数的实参对象，它是一个类数组，不是真正的数组，没有数组通常都有的方法，但它有 length 属性和以数字为索引的一组元素：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">( x )</span></span>{</div><div class="line">	<span class="built_in">console</span>.log( x, <span class="built_in">arguments</span>[ <span class="number">0</span> ], <span class="built_in">arguments</span>[ <span class="number">1</span> ], <span class="built_in">arguments</span>[ <span class="number">2</span> ] );</div><div class="line">	<span class="built_in">console</span>.log( <span class="built_in">arguments</span>.length );</div><div class="line">	<span class="built_in">console</span>.log( <span class="built_in">arguments</span>.slice );</div><div class="line">	<span class="built_in">arguments</span>[ <span class="number">0</span> ] = -<span class="number">1</span>;</div><div class="line">	<span class="built_in">console</span>.log( x );</div><div class="line">}</div><div class="line">f( <span class="number">1</span>, <span class="number">2</span> ); </div><div class="line"><span class="comment">// =&gt; 1, 1, 2, undefined</span></div><div class="line"><span class="comment">// =&gt; 2</span></div><div class="line"><span class="comment">// =&gt; undefined 说明 arguments 不是真正的数组</span></div><div class="line"><span class="comment">// =&gt; -1 说明 arguments[ 0 ] 和 x 指代同一个值</span></div></pre></td></tr></table></figure>
+
+<p>上面的程序基本展示了 arguments 属性的一些特点。</p>
+<p>除此之外，arguments 对象还有两个属性：caller 和 callee，前者指代调用当前函数的函数，后者指代当前正在执行的函数。callee 在某些递归调用中很有用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">( x )</span></span>{</div><div class="line">	<span class="keyword">if</span>( x &gt; <span class="number">1</span> ){</div><div class="line">        <span class="keyword">return</span> x + <span class="built_in">arguments</span>.callee( x - <span class="number">1</span> );</div><div class="line">    }<span class="keyword">else</span>{</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    }</div><div class="line">}</div><div class="line">f(<span class="number">5</span>); <span class="comment">// =&gt; 15</span></div></pre></td></tr></table></figure>
+
+<h3 id="2-_利用_arguments_实现_max/min_函数_(_不定实参函数（_varargs_function_）)">2. 利用 arguments 实现 max/min 函数 ( 不定实参函数（ varargs function ）)</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> max = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="keyword">var</span> max = -<span class="literal">Infinity</span>; <span class="comment">// 或 Number.NEGATIVE_INFINITY</span></div><div class="line">	<span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="built_in">arguments</span>.length; i &lt; len; i++ ){</div><div class="line">        max = <span class="built_in">arguments</span>[ i ] &gt; max ? <span class="built_in">arguments</span>[ i ] : max;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> max;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">var</span> min = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="keyword">var</span> min = <span class="literal">Infinity</span>; <span class="comment">// 或 Number.POSITIVE_INFINITY</span></div><div class="line">	<span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="built_in">arguments</span>.length; i &lt; len; i++ ){</div><div class="line">        min = <span class="built_in">arguments</span>[ i ] &lt; min ? <span class="built_in">arguments</span>[ i ] : min;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> min;</div><div class="line">}</div><div class="line"></div><div class="line">max(<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">1</span>); <span class="comment">// =&gt; 7</span></div><div class="line">min(<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">1</span>); <span class="comment">// =&gt; 1</span></div></pre></td></tr></table></figure>
+
+]]></content>
+    
+    
+      <category term="Javascript" scheme="http://yyblog.mocoer.com/tags/Javascript/"/>
+    
+      <category term="arguments" scheme="http://yyblog.mocoer.com/tags/arguments/"/>
+    
+      <category term="JavaScript" scheme="http://yyblog.mocoer.com/categories/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[写自己的JavaScript工具－自定义事件]]></title>
@@ -67,7 +101,7 @@
     <link href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/"/>
     <id>http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/</id>
     <published>2014-09-29T10:03:27.000Z</published>
-    <updated>2014-09-30T23:32:40.000Z</updated>
+    <updated>2014-09-30T23:38:51.000Z</updated>
     <content type="html"><![CDATA[<h2 id="要点">要点</h2>
 <ol>
 <li>客户端 Location 对象</li>
@@ -83,7 +117,7 @@
 
 <p>容易看出各个属性的含义。这些属性有很多用处，比如 hash 属性可以判断当前页面的锚点位置，也可以用来做 SPA ( Single Page Application 单页应用 ) 的页面导航系统。再比如 search 属性可以用来获取传入的参数，给不同页面之间传的参数提供了一种方式，就像下面的例子。</p>
 <h3 id="2-_获取_get_参数">2. 获取 get 参数</h3>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> urlArgs = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> result = {}, <span class="comment">// 将被返回的结果</span></div><div class="line">        pairs = [],</div><div class="line">        pos = -<span class="number">1</span>,</div><div class="line">        querys = <span class="built_in">window</span>.location.search.substring(<span class="number">1</span>); <span class="comment">// 获取 url 中的 search 部分并去掉前面的问号</span></div><div class="line">    pairs = querys.split( <span class="string">'&'</span> ); <span class="comment">// 将 key=value 名值对放入数组中</span></div><div class="line">    <span class="comment">// 这里的 forEach 方法是 ECMAScript 5 中新方法，但容易自己来实现，相见相关文章</span></div><div class="line">    pairs.forEach( <span class="function"><span class="keyword">function</span><span class="params">( pair )</span></span>{</div><div class="line">        pos = pair.indexOf( <span class="string">'='</span> );</div><div class="line">        <span class="keyword">var</span> name = pair.substring( <span class="number">0</span>, pos ),</div><div class="line">            <span class="comment">// 客户端全局函数 decodeURIComponent 提供了解析浏览器地址栏内容的方法</span></div><div class="line">            value = <span class="built_in">decodeURIComponent</span>( pair.substring( pos + <span class="number">1</span> ) );</div><div class="line">        result[ name ] = value;</div><div class="line">    } );</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">};</div><div class="line"></div><div class="line">urlArgs(); <span class="comment">// =&gt; { testsearch: '=lalala' }</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> urlArgs = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> result = {}, <span class="comment">// 将被返回的结果</span></div><div class="line">        pairs = [],</div><div class="line">        pos = -<span class="number">1</span>,</div><div class="line">        querys = <span class="built_in">window</span>.location.search.substring(<span class="number">1</span>); <span class="comment">// 获取 url 中的 search 部分并去掉前面的问号</span></div><div class="line">    pairs = querys.split( <span class="string">'&'</span> ); <span class="comment">// 将 key=value 名值对放入数组中</span></div><div class="line">    <span class="comment">// 这里的 forEach 方法是 ECMAScript 5 中新方法，但容易自己来实现，详见相关文章</span></div><div class="line">    pairs.forEach( <span class="function"><span class="keyword">function</span><span class="params">( pair )</span></span>{</div><div class="line">        pos = pair.indexOf( <span class="string">'='</span> );</div><div class="line">        <span class="keyword">var</span> name = pair.substring( <span class="number">0</span>, pos ),</div><div class="line">            <span class="comment">// 客户端全局函数 decodeURIComponent 提供了解析浏览器地址栏内容的方法</span></div><div class="line">            value = <span class="built_in">decodeURIComponent</span>( pair.substring( pos + <span class="number">1</span> ) );</div><div class="line">        result[ name ] = value;</div><div class="line">    } );</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">};</div><div class="line"></div><div class="line">urlArgs(); <span class="comment">// =&gt; { testsearch: '=lalala' }</span></div></pre></td></tr></table></figure>
 
 <p>现在可以使用 urlArgs 函数方便的获取 url 中的参数了。</p>
 ]]></content>
@@ -302,22 +336,6 @@
   </entry>
   
   <entry>
-    <title><![CDATA[写自己的JavaScript工具－跨域请求]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－跨域请求/</id>
-    <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-09-20T06:55:38.000Z</updated>
-    <content type="html"><![CDATA[<p>P507</p>
-]]></content>
-    
-    
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
-    
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/categories/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[写自己的JavaScript工具－注册/取消注册事件]]></title>
     <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%B3%A8%E5%86%8C:%E5%8F%96%E6%B6%88%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6/"/>
     <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/</id>
@@ -397,12 +415,13 @@
   </entry>
   
   <entry>
-    <title><![CDATA[写自己的JavaScript工具－键盘事件]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/</id>
+    <title><![CDATA[写自己的JavaScript工具－跨域请求]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－跨域请求/</id>
     <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-09-19T15:33:02.000Z</updated>
-    <content type="html"><![CDATA[]]></content>
+    <updated>2014-09-20T06:55:38.000Z</updated>
+    <content type="html"><![CDATA[<p>P507</p>
+]]></content>
     
     
       <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
@@ -459,11 +478,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[写自己的JavaScript工具－鼠标滚轮事件]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E9%BC%A0%E6%A0%87%E6%BB%9A%E8%BD%AE%E4%BA%8B%E4%BB%B6/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/</id>
+    <title><![CDATA[写自己的JavaScript工具－键盘事件]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/</id>
     <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-09-19T15:33:35.000Z</updated>
+    <updated>2014-09-19T15:33:02.000Z</updated>
     <content type="html"><![CDATA[]]></content>
     
     

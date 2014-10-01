@@ -68,6 +68,70 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-写自己的JavaScript工具－max:min" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/01/写自己的JavaScript工具－max:min/" class="article-date">
+  <time datetime="2014-10-01T04:51:34.000Z" itemprop="datePublished">Oct 1 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/01/写自己的JavaScript工具－max:min/">写自己的JavaScript工具－max/min</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="要点">要点</h2>
+<ol>
+<li>arguments 对象</li>
+<li>利用 arguments 实现 max/min 函数 ( 不定实参函数（ varargs function ）)</li>
+</ol>
+<h3 id="1-_arguments_对象">1. arguments 对象</h3>
+<p>JavaScript 中的每个函数都“附赠”了两个局部变量：this 和 arguments。</p>
+<p>arguments 是函数的实参对象，它是一个类数组，不是真正的数组，没有数组通常都有的方法，但它有 length 属性和以数字为索引的一组元素：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">( x )</span></span>{</div><div class="line">	<span class="built_in">console</span>.log( x, <span class="built_in">arguments</span>[ <span class="number">0</span> ], <span class="built_in">arguments</span>[ <span class="number">1</span> ], <span class="built_in">arguments</span>[ <span class="number">2</span> ] );</div><div class="line">	<span class="built_in">console</span>.log( <span class="built_in">arguments</span>.length );</div><div class="line">	<span class="built_in">console</span>.log( <span class="built_in">arguments</span>.slice );</div><div class="line">	<span class="built_in">arguments</span>[ <span class="number">0</span> ] = -<span class="number">1</span>;</div><div class="line">	<span class="built_in">console</span>.log( x );</div><div class="line">}</div><div class="line">f( <span class="number">1</span>, <span class="number">2</span> ); </div><div class="line"><span class="comment">// =&gt; 1, 1, 2, undefined</span></div><div class="line"><span class="comment">// =&gt; 2</span></div><div class="line"><span class="comment">// =&gt; undefined 说明 arguments 不是真正的数组</span></div><div class="line"><span class="comment">// =&gt; -1 说明 arguments[ 0 ] 和 x 指代同一个值</span></div></pre></td></tr></table></figure>
+
+<p>上面的程序基本展示了 arguments 属性的一些特点。</p>
+<p>除此之外，arguments 对象还有两个属性：caller 和 callee，前者指代调用当前函数的函数，后者指代当前正在执行的函数。callee 在某些递归调用中很有用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">( x )</span></span>{</div><div class="line">	<span class="keyword">if</span>( x &gt; <span class="number">1</span> ){</div><div class="line">        <span class="keyword">return</span> x + <span class="built_in">arguments</span>.callee( x - <span class="number">1</span> );</div><div class="line">    }<span class="keyword">else</span>{</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    }</div><div class="line">}</div><div class="line">f(<span class="number">5</span>); <span class="comment">// =&gt; 15</span></div></pre></td></tr></table></figure>
+
+<h3 id="2-_利用_arguments_实现_max/min_函数_(_不定实参函数（_varargs_function_）)">2. 利用 arguments 实现 max/min 函数 ( 不定实参函数（ varargs function ）)</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> max = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="keyword">var</span> max = -<span class="literal">Infinity</span>; <span class="comment">// 或 Number.NEGATIVE_INFINITY</span></div><div class="line">	<span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="built_in">arguments</span>.length; i &lt; len; i++ ){</div><div class="line">        max = <span class="built_in">arguments</span>[ i ] &gt; max ? <span class="built_in">arguments</span>[ i ] : max;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> max;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">var</span> min = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="keyword">var</span> min = <span class="literal">Infinity</span>; <span class="comment">// 或 Number.POSITIVE_INFINITY</span></div><div class="line">	<span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="built_in">arguments</span>.length; i &lt; len; i++ ){</div><div class="line">        min = <span class="built_in">arguments</span>[ i ] &lt; min ? <span class="built_in">arguments</span>[ i ] : min;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> min;</div><div class="line">}</div><div class="line"></div><div class="line">max(<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">1</span>); <span class="comment">// =&gt; 7</span></div><div class="line">min(<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">1</span>); <span class="comment">// =&gt; 1</span></div></pre></td></tr></table></figure>
+
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/10/01/写自己的JavaScript工具－max:min/">http://yyblog.mocoer.com/2014/10/01/写自己的JavaScript工具－max:min/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/10/01/写自己的JavaScript工具－max:min/" data-id="noygevawby5q6kmj" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/10/01/写自己的JavaScript工具－max:min/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arguments/">arguments</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-写自己的JavaScript工具－自定义事件" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/09/30/写自己的JavaScript工具－自定义事件/" class="article-date">
@@ -187,7 +251,7 @@
 
 <p>容易看出各个属性的含义。这些属性有很多用处，比如 hash 属性可以判断当前页面的锚点位置，也可以用来做 SPA ( Single Page Application 单页应用 ) 的页面导航系统。再比如 search 属性可以用来获取传入的参数，给不同页面之间传的参数提供了一种方式，就像下面的例子。</p>
 <h3 id="2-_获取_get_参数">2. 获取 get 参数</h3>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> urlArgs = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> result = {}, <span class="comment">// 将被返回的结果</span></div><div class="line">        pairs = [],</div><div class="line">        pos = -<span class="number">1</span>,</div><div class="line">        querys = <span class="built_in">window</span>.location.search.substring(<span class="number">1</span>); <span class="comment">// 获取 url 中的 search 部分并去掉前面的问号</span></div><div class="line">    pairs = querys.split( <span class="string">'&'</span> ); <span class="comment">// 将 key=value 名值对放入数组中</span></div><div class="line">    <span class="comment">// 这里的 forEach 方法是 ECMAScript 5 中新方法，但容易自己来实现，相见相关文章</span></div><div class="line">    pairs.forEach( <span class="function"><span class="keyword">function</span><span class="params">( pair )</span></span>{</div><div class="line">        pos = pair.indexOf( <span class="string">'='</span> );</div><div class="line">        <span class="keyword">var</span> name = pair.substring( <span class="number">0</span>, pos ),</div><div class="line">            <span class="comment">// 客户端全局函数 decodeURIComponent 提供了解析浏览器地址栏内容的方法</span></div><div class="line">            value = <span class="built_in">decodeURIComponent</span>( pair.substring( pos + <span class="number">1</span> ) );</div><div class="line">        result[ name ] = value;</div><div class="line">    } );</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">};</div><div class="line"></div><div class="line">urlArgs(); <span class="comment">// =&gt; { testsearch: '=lalala' }</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> urlArgs = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> result = {}, <span class="comment">// 将被返回的结果</span></div><div class="line">        pairs = [],</div><div class="line">        pos = -<span class="number">1</span>,</div><div class="line">        querys = <span class="built_in">window</span>.location.search.substring(<span class="number">1</span>); <span class="comment">// 获取 url 中的 search 部分并去掉前面的问号</span></div><div class="line">    pairs = querys.split( <span class="string">'&'</span> ); <span class="comment">// 将 key=value 名值对放入数组中</span></div><div class="line">    <span class="comment">// 这里的 forEach 方法是 ECMAScript 5 中新方法，但容易自己来实现，详见相关文章</span></div><div class="line">    pairs.forEach( <span class="function"><span class="keyword">function</span><span class="params">( pair )</span></span>{</div><div class="line">        pos = pair.indexOf( <span class="string">'='</span> );</div><div class="line">        <span class="keyword">var</span> name = pair.substring( <span class="number">0</span>, pos ),</div><div class="line">            <span class="comment">// 客户端全局函数 decodeURIComponent 提供了解析浏览器地址栏内容的方法</span></div><div class="line">            value = <span class="built_in">decodeURIComponent</span>( pair.substring( pos + <span class="number">1</span> ) );</div><div class="line">        result[ name ] = value;</div><div class="line">    } );</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">};</div><div class="line"></div><div class="line">urlArgs(); <span class="comment">// =&gt; { testsearch: '=lalala' }</span></div></pre></td></tr></table></figure>
 
 <p>现在可以使用 urlArgs 函数方便的获取 url 中的参数了。</p>
 
@@ -536,7 +600,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -545,7 +609,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JavaScript/" style="font-size: 20.00px;">JavaScript</a><a href="/tags/Javascript/" style="font-size: 15.00px;">Javascript</a><a href="/tags/bind/" style="font-size: 10.00px;">bind</a><a href="/tags/forEach/" style="font-size: 10.00px;">forEach</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/原型/" style="font-size: 10.00px;">原型</a><a href="/tags/继承/" style="font-size: 10.00px;">继承</a><a href="/tags/闭包/" style="font-size: 10.00px;">闭包</a>
+      <a href="/tags/JavaScript/" style="font-size: 20.00px;">JavaScript</a><a href="/tags/Javascript/" style="font-size: 15.00px;">Javascript</a><a href="/tags/arguments/" style="font-size: 10.00px;">arguments</a><a href="/tags/bind/" style="font-size: 10.00px;">bind</a><a href="/tags/forEach/" style="font-size: 10.00px;">forEach</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/原型/" style="font-size: 10.00px;">原型</a><a href="/tags/继承/" style="font-size: 10.00px;">继承</a><a href="/tags/闭包/" style="font-size: 10.00px;">闭包</a>
     </div>
   </div>
 
@@ -554,7 +618,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -564,6 +628,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/10/01/写自己的JavaScript工具－max:min/">写自己的JavaScript工具－max/min</a>
+          </li>
         
           <li>
             <a href="/2014/09/30/写自己的JavaScript工具－自定义事件/">写自己的JavaScript工具－自定义事件</a>
@@ -579,10 +647,6 @@
         
           <li>
             <a href="/2014/09/29/写自己的JavaScript工具－ID生成器/">写自己的JavaScript工具函数－ID生成器</a>
-          </li>
-        
-          <li>
-            <a href="/2014/09/29/写自己的JavaScript工具－bind/">写自己的JavaScript工具－bind</a>
           </li>
         
       </ul>
