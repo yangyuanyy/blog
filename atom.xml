@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-10-02T05:53:08.260Z</updated>
+  <updated>2014-10-02T05:54:49.298Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yyblog.mocoer.com/2014/10/02/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82(%20JSONP%20)/"/>
     <id>http://yyblog.mocoer.com/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/</id>
     <published>2014-10-02T05:36:47.000Z</published>
-    <updated>2014-10-02T05:53:00.000Z</updated>
+    <updated>2014-10-02T05:54:43.000Z</updated>
     <content type="html"><![CDATA[<h2 id="要点">要点</h2>
 <ol>
 <li>跨域 HTTP 请求</li>
@@ -31,7 +31,7 @@
 
 <p>但为了安全，XMLHttpRequest 对象仅允许发起与文档有相同服务器的 HTTP 请求（所谓同源策略）。</p>
 <p>但有时我们需要这样的合理需求：拿“Apple天猫旗舰店”来举例，在IPhone 5s 的产品页 <a href="http://detail.tmall.com/item.htm?id=36641396665" target="_blank" rel="external">http://detail.tmall.com/item.htm?id=36641396665</a>. 当用户要查看产品评价（点击“累计评价” tab 标签）时，页面需要发送 Ajax 请求来获取当前产品的评价信息，而请求地址是 <a href="http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665" target="_blank" rel="external">http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665</a>. 是一个跨域请求。（发起请求的服务器：detail.tmall.com，被请求的服务器：rate.tmall.com，它们是不同源。）</p>
-<p>我们在做这个测试，浏览器打开 IPhone 5s 产品页：<a href="http://detail.tmall.com/item.htm?id=36641396665，打开浏览器开发者工具，在控制台中输入以下程序（先定义上面的" target="_blank" rel="external">http://detail.tmall.com/item.htm?id=36641396665，打开浏览器开发者工具，在控制台中输入以下程序（先定义上面的</a> get 函数）。</p>
+<p>我们做这个测试，浏览器打开 IPhone 5s 产品页：<a href="http://detail.tmall.com/item.htm?id=36641396665" target="_blank" rel="external">http://detail.tmall.com/item.htm?id=36641396665</a>. 打开浏览器开发者工具，在控制台中输入以下程序（先定义上面的 get 函数）。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get( <span class="string">'http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665'</span> )；</div></pre></td></tr></table></figure>
 
 <p>控制台会返回一个错误提示：<br><em>XMLHttpRequest cannot load <a href="http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665" target="_blank" rel="external">http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="http://detail.tmall.com" target="_blank" rel="external">http://detail.tmall.com</a>‘ is therefore not allowed access.</em></p>
