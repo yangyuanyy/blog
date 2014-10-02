@@ -68,6 +68,84 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-写自己的JavaScript工具－跨域请求( JSONP )" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/" class="article-date">
+  <time datetime="2014-10-02T05:36:47.000Z" itemprop="datePublished">Oct 2 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/">写自己的JavaScript工具－跨域请求( JSONP )</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="要点">要点</h2>
+<ol>
+<li>跨域 HTTP 请求</li>
+<li>JSONP（通过 <script> 发送 HTTP 请求）</li>
+</ol>
+<h3 id="1-_跨域_HTTP_请求">1. 跨域 HTTP 请求</h3>
+<p>提到 XMLHttpRequest，我们都知道它可以发起 http 请求，并异步的执行回调，实现无刷新的用户体验。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 封装一个简单的 get 请求，后面会用它来做测试</span></div><div class="line"><span class="keyword">var</span> get = <span class="function"><span class="keyword">function</span><span class="params">( url, callback )</span></span>{</div><div class="line">    <span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    request.open( <span class="string">'GET'</span>, url );</div><div class="line">    request.onreadystatechange = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">if</span>( request.readyState === <span class="number">4</span> && request.status === <span class="number">200</span> && callback ){</div><div class="line">            callback( request );</div><div class="line">        }</div><div class="line">    }</div><div class="line">    request.send( <span class="literal">null</span> );</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>但为了安全，XMLHttpRequest 对象仅允许发起与文档有相同服务器的 HTTP 请求（所谓同源策略）。</p>
+<p>但有时我们需要这样的合理需求：拿“Apple天猫旗舰店”来举例，在IPhone 5s 的产品页 <a href="http://detail.tmall.com/item.htm?id=36641396665，当用户要查看产品评价（点击“累计评价”">http://detail.tmall.com/item.htm?id=36641396665，当用户要查看产品评价（点击“累计评价”</a> tab 标签）时，页面需要发送 Ajax 请求来获取当前产品的评价信息，而请求地址是 <a href="http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665，是一个跨域请求。（发起请求的服务器：detail.tmall.com，被请求的服务器：rate.tmall.com，它们是不同源。）">http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665，是一个跨域请求。（发起请求的服务器：detail.tmall.com，被请求的服务器：rate.tmall.com，它们是不同源。）</a></p>
+<p>我们在做这个测试，浏览器打开 IPhone 5s 产品页：<a href="http://detail.tmall.com/item.htm?id=36641396665，打开浏览器开发者工具，在控制台中输入以下程序（先定义上面的">http://detail.tmall.com/item.htm?id=36641396665，打开浏览器开发者工具，在控制台中输入以下程序（先定义上面的</a> get 函数）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get( <span class="string">'http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665'</span> )；</div></pre></td></tr></table></figure>
+
+<p>控制台会返回一个错误提示：<br><em>XMLHttpRequest cannot load <a href="http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665">http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="http://detail.tmall.com">http://detail.tmall.com</a>‘ is therefore not allowed access.</em></p>
+<p>即当前页面无权载入请求的文档，这就是同源策略导致的，但这种请求本身是完全合理的。</p>
+<p>对于这种合理的跨域请求，我们需要借助 JSONP 技术。</p>
+<h3 id="2-_JSONP（通过_发送_HTTP_请求）">2. JSONP（通过 <script> 发送 HTTP 请求）</h3>
+<p><script> 标签并未受同源策略的限制，我们可以通过设置它的 src 属性，载入任何服务器上的 JavaScript 脚本：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 比如在自己的服务器上通过 CDN 加速点加载 jquery，当然这要建立在对方服务器可信的情况下 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>也就是说我们需要动态的生成 <script> 标签，并设置 src 属性为要请求的地址，最后将设置好 <script> 标签添加到页面中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 新建一个 script 标签</span></div><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line"><span class="comment">// 设置 script 标签的 src 属性为要请求的地址，同时加一个 callback 参数</span></div><div class="line"><span class="comment">// 这个参数名 callback 非常关键，这个参数需要后台程序的支持才能够识别，当后台程序看到这个参数时</span></div><div class="line"><span class="comment">// 后台程序需要知道这是一个 JSONP 请求</span></div><div class="line"><span class="comment">// 这时，后台程序需要用这个参数的值（ jsonpCallback ）来包装返回的数据并返回 JSON 字符串</span></div><div class="line"><span class="comment">// 这个包装后的字符串看上去就像是将数据结果带入了函数 jsonpCallback 一样</span></div><div class="line"><span class="comment">// 当客户端获取到包装后的字符串时，&lt;script&gt; 标签会立即解析执行这个语句</span></div><div class="line"><span class="comment">// 而程序中我们刚好定义了 jsonpCallback 函数</span></div><div class="line"><span class="comment">// 所以我们可以用 jsonpCallback 函数来处理获取的数据（在这里只是将数据 console.log() 出来）</span></div><div class="line">script.src = <span class="string">"http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665&callback=jsonpCallback"</span>;</div><div class="line"><span class="keyword">var</span> jsonpCallback = <span class="function"><span class="keyword">function</span><span class="params">( response )</span></span>{</div><div class="line">    <span class="built_in">console</span>.log( response );</div><div class="line">}</div><div class="line"><span class="built_in">document</span>.body.appendChild( script );</div></pre></td></tr></table></figure>
+
+<p>在刚才的页面控制台输入上面的程序，我们得到了想要的结果。关于地址中的 callback 参数，不同服务器可能叫法不同，常见的还有 jsonp，当然也可以根据需要自己在后台程序中定义。</p>
+<p>最后做一些封装工作（用到了 uniqId 函数，<a href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8DID%E7%94%9F%E6%88%90%E5%99%A8/">详见这里</a> ）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> getJSONP = <span class="function"><span class="keyword">function</span><span class="params">( url, callbackName, callback )</span></span>{</div><div class="line">    <span class="keyword">var</span> jsonpId = <span class="string">'jsonp'</span> + uniqId(),</div><div class="line">        jsonpName = <span class="string">'getJSONP.'</span> + jsonpId;</div><div class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement( <span class="string">'script'</span> );</div><div class="line">    script.src = url.indexOf( <span class="string">'?'</span> ) === -<span class="number">1</span> ? url + <span class="string">'?'</span> + callbackName + <span class="string">'='</span> + jsonpName : url + <span class="string">'&'</span> + callbackName + <span class="string">'='</span> + jsonpName;</div><div class="line">    getJSONP[ jsonpId ] = <span class="function"><span class="keyword">function</span><span class="params">( response )</span></span>{</div><div class="line">        <span class="keyword">try</span> {</div><div class="line">    	    callback( response );</div><div class="line">        }</div><div class="line">        <span class="keyword">finally</span> {</div><div class="line">            <span class="keyword">delete</span> getJSONP[ jsonpName ];</div><div class="line">            script.parentNode.removeChild( script );</div><div class="line">        }</div><div class="line">    };</div><div class="line">    <span class="built_in">document</span>.body.appendChild( script );</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>现在可以像这样使用 getJSONP：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getJSONP( <span class="string">'http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665'</span>, <span class="string">'callback'</span>, <span class="function"><span class="keyword">function</span><span class="params">( response )</span></span>{ <span class="built_in">console</span>.log( response ); } );</div></pre></td></tr></table></figure>
+
+</script></li></ol>
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/">http://yyblog.mocoer.com/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/" data-id="68oy8654dcumvgr1" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jsonp/">jsonp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跨域/">跨域</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-写自己的JavaScript工具－max:min" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/10/01/写自己的JavaScript工具－max:min/" class="article-date">
@@ -582,53 +660,6 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－Ajax上传" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－Ajax上传/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－Ajax上传/">写自己的JavaScript工具函数－Ajax上传</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－Ajax上传/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－Ajax上传/</a></p>
-
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－Ajax上传/" data-id="qody09j18k563jsl" class="article-share-link">Share</a>
-      
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－Ajax上传/#comments" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-写自己的JavaScript工具－模块" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/09/19/写自己的JavaScript工具－模块/" class="article-date">
@@ -747,7 +778,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -756,7 +787,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JavaScript/" style="font-size: 20.00px;">JavaScript</a><a href="/tags/Javascript/" style="font-size: 15.00px;">Javascript</a><a href="/tags/arguments/" style="font-size: 10.00px;">arguments</a><a href="/tags/bind/" style="font-size: 10.00px;">bind</a><a href="/tags/forEach/" style="font-size: 10.00px;">forEach</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/原型/" style="font-size: 10.00px;">原型</a><a href="/tags/继承/" style="font-size: 10.00px;">继承</a><a href="/tags/闭包/" style="font-size: 10.00px;">闭包</a>
+      <a href="/tags/JavaScript/" style="font-size: 20.00px;">JavaScript</a><a href="/tags/Javascript/" style="font-size: 15.00px;">Javascript</a><a href="/tags/arguments/" style="font-size: 10.00px;">arguments</a><a href="/tags/bind/" style="font-size: 10.00px;">bind</a><a href="/tags/forEach/" style="font-size: 10.00px;">forEach</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/jsonp/" style="font-size: 10.00px;">jsonp</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/原型/" style="font-size: 10.00px;">原型</a><a href="/tags/继承/" style="font-size: 10.00px;">继承</a><a href="/tags/跨域/" style="font-size: 10.00px;">跨域</a><a href="/tags/闭包/" style="font-size: 10.00px;">闭包</a>
     </div>
   </div>
 
@@ -765,7 +796,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">25</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -775,6 +806,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/">写自己的JavaScript工具－跨域请求( JSONP )</a>
+          </li>
         
           <li>
             <a href="/2014/10/01/写自己的JavaScript工具－max:min/">写自己的JavaScript工具－max/min</a>
@@ -790,10 +825,6 @@
         
           <li>
             <a href="/2014/09/29/写自己的JavaScript工具－对象继承/">写自己的JavaScript工具－对象继承</a>
-          </li>
-        
-          <li>
-            <a href="/2014/09/29/写自己的JavaScript工具－ID生成器/">写自己的JavaScript工具函数－ID生成器</a>
           </li>
         
       </ul>
