@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-10-02T06:05:10.710Z</updated>
+  <updated>2014-10-02T06:12:54.905Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[写自己的JavaScript工具－跨域请求( JSONP )]]></title>
+    <title><![CDATA[写自己的JavaScript工具－跨域请求(JSONP)]]></title>
     <link href="http://yyblog.mocoer.com/2014/10/02/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82(%20JSONP%20)/"/>
     <id>http://yyblog.mocoer.com/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/</id>
     <published>2014-10-02T05:36:47.000Z</published>
-    <updated>2014-10-02T06:04:34.000Z</updated>
+    <updated>2014-10-02T06:12:47.000Z</updated>
     <content type="html"><![CDATA[<h2 id="要点">要点</h2>
 <ol>
 <li>跨域 HTTP 请求</li>
