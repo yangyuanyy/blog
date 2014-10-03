@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-10-02T06:13:42.799Z</updated>
+  <updated>2014-10-03T05:42:38.166Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -390,12 +390,33 @@
     <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%A8%A1%E5%9D%97/"/>
     <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－模块/</id>
     <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-09-19T15:33:19.000Z</updated>
-    <content type="html"><![CDATA[<p>在集合类合抽象类的基础上 做一个模块 P250</p>
+    <updated>2014-10-03T05:42:23.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="要点">要点</h2>
+<ol>
+<li>为什么要用模块</li>
+<li>模块的一般写法</li>
+</ol>
+<h3 id="1-_为什么要用模块">1. 为什么要用模块</h3>
+<p>如果用一个词来概括为什么用模块，那就是：独立。</p>
+<p>因为独立，所以它们可以载入到任何需要它们的地方，通过接口发挥它们的作用；因为独立，所以即便程序导入了不需要的模块，模块也不会对整个程序造成任何影响；因为独立，所以模块很多场景中得到重用；因为独立，所以它们都是完成健壮成熟的个体，一个特定功能的体现。</p>
+<p>这些原因都是使用模块的原因，也是在开发任何程序时程序时考虑的。</p>
+<p>模块的概念应该比类的概念更大，类是其中一种模块化的体现。</p>
+<h3 id="2-_模块的一般写法">2. 模块的一般写法</h3>
+<p>一般的模块写法非常简单。为了做到定义最少的全局变量（不污染全局环境），保护私有属性和方法，模块最好以一个有私有命名空间的函数来构造（闭包在这里又起到了至关重要的作用）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="built_in">module</span> = ( <span class="function"><span class="keyword">function</span> <span class="title">namespace</span><span class="params">()</span></span>{</div><div class="line">    <span class="comment">/* </span></div><div class="line">        私有变量和方法 </div><div class="line">    */</div><div class="line">    reutrn {</div><div class="line">        <span class="comment">/*</span></div><div class="line">            暴露接口</div><div class="line">        */</div><div class="line">    }</div><div class="line">}() );</div></pre></td></tr></table></figure>
+
+<p>最外面的括号 () 表示这是一个函数表达式，而不是一个函数定义，里面是一个立即执行的函数，因为不是一个函数定义，所以没有真正定义一个叫 namespace 的函数，namespace 完全可以省略而使用一个匿名函数，这里只是为了让代码容易理解，表示这是一个私有命名空间，因此加上了这个前缀。在这个私有命名空间里，我们可以通过 var 定义变量和方法，不用担心它们污染全局环境，不用担心它们被外界访问修改。最后我们让函数返回一个对象，这个对象的属性是我们要暴露给外界的方法，以发挥模块的作用。当然，用户可能会重新定义或破坏这些暴露出来的方法，但是永远也不会影响到模块内部环境：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId = ( <span class="function"><span class="keyword">function</span> <span class="title">namespace</span><span class="params">()</span></span>{</div><div class="line">    <span class="comment">// 私有变量</span></div><div class="line">    <span class="keyword">var</span> privateVariable = <span class="number">0</span>;</div><div class="line">    <span class="comment">// 私有方法</span></div><div class="line">    <span class="keyword">var</span> getPrivateVariable = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">            _autoIncrease();</div><div class="line">            <span class="keyword">return</span> privateVariable;</div><div class="line">        },</div><div class="line">        resetPrivateVariable = <span class="function"><span class="keyword">function</span><span class="params">( value )</span></span>{</div><div class="line">            privateVariable = <span class="number">0</span>;</div><div class="line">        },</div><div class="line">        _autoIncrease = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">            privateVariable += <span class="number">1</span>;</div><div class="line">        };</div><div class="line">     <span class="comment">// 暴露一些私有方法为接口</span></div><div class="line">    <span class="keyword">return</span> {</div><div class="line">        get : getPrivateVariable,</div><div class="line">        reset : resetPrivateVariable</div><div class="line">    };</div><div class="line">}() );</div></pre></td></tr></table></figure>
+
+<p>可以这样使用刚刚定义的模块：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">uniqId.get(); <span class="comment">// =&gt; 1;</span></div><div class="line">uniqId.get(); <span class="comment">// =&gt; 2;</span></div><div class="line">uniqId.reset();</div><div class="line">uniqId.get(); <span class="comment">// =&gt; 1;</span></div></pre></td></tr></table></figure>
+
+<p>你永远没有办法通过重写 reset 方法或者添加其他方法破坏 privateVariable 的值。</p>
+<p>关于上面这个 uniqId 模块，另外一个实现可以<a href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8DID%E7%94%9F%E6%88%90%E5%99%A8/" target="_blank" rel="external">见这里</a>，里面有关于闭包技术的介绍，它是模块化编程中必须要理解和运用的，那个例子也可以理解为一个模块的实现，只不过功能更加单一化。</p>
 ]]></content>
     
     
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
+      <category term="Javascript" scheme="http://yyblog.mocoer.com/tags/Javascript/"/>
     
       <category term="JavaScript" scheme="http://yyblog.mocoer.com/categories/JavaScript/"/>
     
