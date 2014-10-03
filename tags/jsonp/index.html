@@ -114,7 +114,7 @@
 <p>即当前页面无权载入请求的文档，这就是同源策略导致的，但这种请求本身是完全合理的。</p>
 <p>对于这种合理的跨域请求，我们需要借助 JSONP 技术。</p>
 <h3 id="2-_JSONP（通过_script_标签发送_HTTP_请求）">2. JSONP（通过 script 标签发送 HTTP 请求）</h3>
-<p>script&gt; 标签并未受同源策略的限制，我们可以通过设置它的 src 属性，载入任何服务器上的 JavaScript 脚本：</p>
+<p>script 标签并未受同源策略的限制，我们可以通过设置它的 src 属性，载入任何服务器上的 JavaScript 脚本：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 比如在自己的服务器上通过 CDN 加速点加载 jquery，当然这要建立在对方服务器可信的情况下 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>也就是说我们需要动态的生成 script 标签，并设置 src 属性为要请求的地址，最后将设置好 script 标签添加到页面中：</p>
