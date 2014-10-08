@@ -12,10 +12,8 @@
 关于原型与所谓的原型继承的理解
 几种继承模式
 
-1. 关于原型与所谓的原型继承的理解
-可以这样理解：
-我只给你一个{}，你却用它创造了整个世界…
-首先，Object.prototype">
+1. 关于原型继承与构造函数
+JavaScript 是基于原型的语言，而非基于类，但 JavaScript 依然引入了类（伪类）的概念（">
 <meta property="og:type" content="article">
 <meta property="og:title" content="写自己的JavaScript工具－对象继承">
 <meta property="og:url" content="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/">
@@ -26,10 +24,8 @@
 关于原型与所谓的原型继承的理解
 几种继承模式
 
-1. 关于原型与所谓的原型继承的理解
-可以这样理解：
-我只给你一个{}，你却用它创造了整个世界…
-首先，Object.prototype">
+1. 关于原型继承与构造函数
+JavaScript 是基于原型的语言，而非基于类，但 JavaScript 依然引入了类（伪类）的概念（">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="写自己的JavaScript工具－对象继承">
 <meta name="twitter:description" content="在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。
@@ -38,10 +34,8 @@
 关于原型与所谓的原型继承的理解
 几种继承模式
 
-1. 关于原型与所谓的原型继承的理解
-可以这样理解：
-我只给你一个{}，你却用它创造了整个世界…
-首先，Object.prototype">
+1. 关于原型继承与构造函数
+JavaScript 是基于原型的语言，而非基于类，但 JavaScript 依然引入了类（伪类）的概念（">
 
   
     <link rel="alternative" href="/atom.xml" title="YY" type="application/atom+xml">
@@ -127,17 +121,18 @@
 <li>关于原型与所谓的原型继承的理解</li>
 <li>几种继承模式</li>
 </ol>
-<h3 id="1-_关于原型与所谓的原型继承的理解">1. 关于原型与所谓的原型继承的理解</h3>
-<p>可以这样理解：</p>
+<h3 id="1-_关于原型继承与构造函数">1. 关于原型继承与构造函数</h3>
+<p>JavaScript 是基于原型的语言，而非基于类，但 JavaScript 依然引入了类（伪类）的概念（通过 new 的方式去创建实例对象）。</p>
+<p>可以这样理解 JavaScript 的原型继承与构造函数：</p>
 <p><em style="color:#999;">我只给你一个{}，你却用它创造了整个世界…</em></p>
-<p>首先，Object.prototype 是 JavaScript 中最原始的对象，记为 {} 。它的构造器就是 Object 函数。有了 {} 和能创建它的构造器，人们开始想，基于 {} ，我们应该创造一些有用的新的东西出来，比如数组，怎么做呢？那就基于 {} 定义一个名叫数组的对象吧，可以记为 [] 。怎么体现 [] 继承了 {} 呢？毕竟 [] 由 {} 而来，{} 的后代应该继承一些它的特性。于是想到一个办法：引入原型的说法，然后说 [] 的原型就是 {} ，那不就体现了继承关系了吗？最后再让 [] 继承一些它的原型（ {} ）的特性（属性和方法），同时也给 [] 一些自己特有的特性（属性和方法）。</p>
+<p>通俗的将，首先，Object.prototype 是 JavaScript 中最原始的对象，记为 {} 。它的构造器就是 Object 函数。有了 {} 和能创建它的构造器，人们开始想，基于 {} ，我们应该创造一些有用的新的东西出来，比如数组，怎么做呢？那就基于 {} 定义一个名叫数组的对象吧，可以记为 [] 。怎么体现 [] 继承了 {} 呢？毕竟 [] 由 {} 而来，{} 的后代应该继承一些它的特性。于是想到一个办法：引入原型的说法，然后说 [] 的原型就是 {} ，那不就体现了继承关系了吗？最后再让 [] 继承一些它的原型（ {} ）的特性（属性和方法），同时也给 [] 一些自己特有的特性（属性和方法）。</p>
 <p>那要创建不同的具体数组时怎么做呢？提供一个数组构造器吧，就叫 Array，用 Array 创建出来的对象都是数组对象。那怎么体现用 Array 创造出来的数组对象继承了上面定义的 [] 呢？毕竟对于这些数组对象，[] 是它们的直接祖先。有一个办法，就是给 Array 构造器一个叫作 prototype 的属性，凡是通过 Array 构造器创建的对象，其原型都指向这个 prototype 属性值，而这个 prototype 属性值就是 []。最后再让被创建出来的数组继承它的原型（ [] ）的方法，当然，这些数组也可以拥有一些自己的特有的属性和方法。</p>
-<p>这时，人们看到了构造器能帮他们创建某种特定类型的对象，这些对象都有着特殊的意义。于是人们开始想自己来定义满足自身需求的构造器，从而用这些自定义的构造器创建他们想要的各种对象。JavaScript 看到了人们这种需求，于是引入了一个功能：任意一个函数都可以当作构造器来调用，从而创建特定的对象。而且让所有函数都有一个 prototype 属性，其作用就是上面一段所说的：体现继承关系。而有所的函数的 prototype 属性值都是在函数创建之初被赋予的一个新的基本的对象，这个对象的一个特点是它的 contructor 属性值就是这个函数本身。引入这个功能后，人们就可以用自己定义的函数用作构造器使用。后面的事情就和 Array 的情况一样了。这也就是为什么 JavaScript 中的所谓构造函数的一个最重要的特点是：构造函数的 prototype 属性值就被用作由该构造函数 new 出来的对象的原型。</p>
+<p>这时，人们看到了构造器能帮他们创建某种特定类型的对象，这些对象都有着特殊的意义。于是人们开始想自己来定义满足自身需求的构造器，从而用这些自定义的构造器创建他们想要的各种对象。JavaScript 看到了人们这种需求，于是引入了一个功能：任意一个函数都可以当作构造器来调用，从而创建特定的对象。而且让所有函数都有一个 prototype 属性，其作用就是上面一段所说的：体现继承关系。而所有的函数的 prototype 属性值都是在函数创建之初被赋予的一个新的基本的对象，这个对象的一个特点是它的 contructor 属性值就是这个函数本身。引入这个功能后，人们就可以用自己定义的函数用作构造器使用。后面的事情就和 Array 的情况一样了。这也就是为什么 JavaScript 中的所谓构造函数的一个最重要的特点是：构造函数的 prototype 属性值就被用作由该构造函数 new 出来的对象的原型。</p>
 <p>众所周知的构造器有：Object、Function、Array、String、RegExp等。</p>
 <h3 id="2-_几种继承模式">2. 几种继承模式</h3>
 <p>a. 伪类模式</p>
 <p>为了模仿传统的基于类的继承，JavaScript 引入了一个特性：允许通过构造函数创建新的对象。可以说，它掩盖了 JavaScript 的基于原型的继承特点。</p>
-<p>如果理解了要点1中关于原型和原型继承的内容，那么应该容易理解下面代码的含义：</p>
+<p>如果理解了要点1中关于原型继承与构造函数的内容，那么应该容易理解下面代码的含义：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Car = <span class="function"><span class="keyword">function</span><span class="params">( maxSpeed )</span></span>{</div><div class="line">    <span class="keyword">this</span>.maxSpeed = maxSpeed;</div><div class="line">}</div><div class="line"></div><div class="line">Car.prototype.getMaxSpeed = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.maxSpeed || <span class="string">'unKnown'</span>;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">var</span> Ford = <span class="function"><span class="keyword">function</span><span class="params">( maxSpeed )</span></span>{</div><div class="line">    <span class="keyword">this</span>.maxSpeed = maxSpeed;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// 这里一行是理解伪类模式的关键</span></div><div class="line"><span class="comment">// 这里定义了构造器（构造函数） Ford 的 prototype 属性为一个由构造器 Car 创建的一个实例对象</span></div><div class="line"><span class="comment">// 而这个实例对象的原型就是 Car （Car 或者说这个构造函数，是一个基本的 JavaScript 对象）</span></div><div class="line"><span class="comment">// 这时候，让构造器 Ford 的 prototype 属性赋值为这个实例对象</span></div><div class="line"><span class="comment">// 其作用就是，在通过 Ford 来创建新的 Ford 类实例对象的时候</span></div><div class="line"><span class="comment">// 这个 Ford 类实例对象的原型将是当时在定义 Ford 类时的那个 new Car() 对象</span></div><div class="line">Ford.prototype = <span class="keyword">new</span> Car();</div><div class="line"></div><div class="line"><span class="comment">// 之所以要重写 Ford 的 prototype 对象中的 constructor 属性的值为 Ford</span></div><div class="line"><span class="comment">// 是因为在 JavaScript 中，函数的 prototype 属性对象中的 constructor 属性通常指向函数本身 </span></div><div class="line">Ford.prototype.constructor = Ford;</div><div class="line"></div><div class="line"><span class="keyword">var</span> myFord = <span class="keyword">new</span> Ford( <span class="number">280</span> );</div><div class="line">myFord.getMaxSpeed(); <span class="comment">// =&gt; 280</span></div></pre></td></tr></table></figure>
 
 <p>b. 原型模式（摒弃伪类的概念，纯粹基于原型的继承，关注于对象本身）</p>
