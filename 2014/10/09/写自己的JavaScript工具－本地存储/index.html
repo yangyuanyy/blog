@@ -127,13 +127,13 @@ localStorage 对象是客户端 Window 对象的属性，作为一种本地存�
 <h3 id="1-_了解_localStorage">1. 了解 localStorage</h3>
 <p>HTML5 的关于 Web 存储标准包含了关于 localStorage 对象。（和 sessionStorage 对象，它们的区别主要是在作用域和有效期，但 API 大同小异。）</p>
 <p>localStorage 对象是客户端 Window 对象的属性，作为一种本地存储方案，我们需要关心它的三个方面：有效期，作用域和存取方法。</p>
-<p>a. localStorage 有效期</p>
+<h4 id="a-_localStorage_有效期">a. localStorage 有效期</h4>
 <p>localStorage 的有效期是永久性的，也就是说，除非用户做删除操作，否则通过 localStorage 存储的数据是永久保存在用户电脑上的。</p>
-<p>b. localStorage 作用域</p>
+<h4 id="b-_localStorage_作用域">b. localStorage 作用域</h4>
 <p>localStorage 的作用域是文档原级别的，文档原由协议、主机名、端口共同定义：</p>
 <p><a href="http://www.xxx.com" target="_blank" rel="external">http://www.xxx.com</a><br><a href="https://www.xxx.com" target="_blank" rel="external">https://www.xxx.com</a><br><a href="http://sub.xxx.com" target="_blank" rel="external">http://sub.xxx.com</a><br><a href="http://sub.xxx.com:4000" target="_blank" rel="external">http://sub.xxx.com:4000</a></p>
 <p>上面这些都是不同文档原，相互不能共享 localStorage 的数据，只有同文档原的中的文档可以共享对方的 localStorage 数据。</p>
-<p>c. localStorage 存取方法</p>
+<h4 id="c-_localStorage_存取方法">c. localStorage 存取方法</h4>
 <p>localStorage 存取、删除数据的方法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 保存数据</span></div><div class="line"><span class="comment">// 方式1（直接定义属性值）</span></div><div class="line">localStorage.username = <span class="string">'yy'</span>;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.setItem( <span class="string">'username'</span>, <span class="string">'yy'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 获取数据</span></div><div class="line"><span class="comment">// 方式1（直接读取属性值）</span></div><div class="line">localStorage.username;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.getItem( <span class="string">'username'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 删除指定数据</span></div><div class="line"><span class="comment">// 方式1（通过 delete 操作符）</span></div><div class="line"><span class="keyword">delete</span> localStorage.username;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.removeItem( <span class="string">'username'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 删除全部数据</span></div><div class="line">localStorage.clear();</div></pre></td></tr></table></figure>
 
