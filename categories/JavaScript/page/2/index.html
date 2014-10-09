@@ -70,6 +70,84 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-写自己的JavaScript工具－本地存储" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/19/写自己的JavaScript工具－本地存储/" class="article-date">
+  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－本地存储/">写自己的JavaScript工具－本地存储</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="要点">要点</h2>
+<ol>
+<li>了解 localStorage</li>
+<li>了解 cookie</li>
+<li>实现 memory 模块</li>
+</ol>
+<h3 id="1-_了解_localStorage">1. 了解 localStorage</h3>
+<p>HTML5 的关于 Web 存储标准包含了关于 localStorage 对象。（和 sessionStorage 对象，它们的区别主要是在作用域和有效期，但 API 大同小异。）</p>
+<p>localStorage 对象是客户端 Window 对象的属性，作为一种本地存储方案，我们需要关心它的三个方面：有效期，作用域和存取方法。</p>
+<p>a. localStorage 有效期</p>
+<p>localStorage 的有效期是永久性的，也就是说，除非用户做删除操作，否则通过 localStorage 存储的数据是永久保存在用户电脑上的。</p>
+<p>b. localStorage 作用域</p>
+<p>localStorage 的作用域是文档原级别的，文档原由协议、主机名、端口共同定义：</p>
+<p><a href="http://www.xxx.com" target="_blank" rel="external">http://www.xxx.com</a><br><a href="https://www.xxx.com" target="_blank" rel="external">https://www.xxx.com</a><br><a href="http://sub.xxx.com" target="_blank" rel="external">http://sub.xxx.com</a><br><a href="http://sub.xxx.com:4000" target="_blank" rel="external">http://sub.xxx.com:4000</a></p>
+<p>上面这些都是不同文档原，相互不能共享 localStorage 的数据，只有同文档原的中的文档可以共享对方的 localStorage 数据。</p>
+<p>c. localStorage 存取方法</p>
+<p>localStorage 存取、删除数据的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 保存数据</span></div><div class="line"><span class="comment">// 方式1（直接定义属性值）</span></div><div class="line">localStorage.username = <span class="string">'yy'</span>;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.setItem( <span class="string">'username'</span>, <span class="string">'yy'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 获取数据</span></div><div class="line"><span class="comment">// 方式1（直接读取属性值）</span></div><div class="line">localStorage.username;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.getItem( <span class="string">'username'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 删除指定数据</span></div><div class="line"><span class="comment">// 方式1（通过 delete 操作符）</span></div><div class="line"><span class="keyword">delete</span> localStorage.username;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.removeItem( <span class="string">'username'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 删除全部数据</span></div><div class="line">localStorage.clear();</div></pre></td></tr></table></figure>
+
+<p>但是还是尽量使用 API 的方式，一个原因就是，当我们为了兼容不支持 localStorage 的浏览器时，可能需要通过 cookie 作为替代方案，这时我们只需要再针对 cookie 定义和 localStorage 同样的方法，就可以实现一个统一、兼容的本地存储方案。</p>
+<p>还有需要了解的是 localStorage 目前只能存储字符串类型的数据。如果尝试存储数组或对象，客户端会先调用它们的 toString() 方法，然后再将转换成字符串的数据存储起来:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">localStorage.arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line">localSrorage.arr <span class="comment">// =&gt; "1,2,3"</span></div><div class="line"></div><div class="line">localStorage.obj = { username : <span class="string">'yy'</span> };</div><div class="line">localStorage.obj <span class="comment">// =&gt; "[object Object]"</span></div></pre></td></tr></table></figure>
+
+<p>所以如果要存取对象类型的数据，需要做一些编码、解码工作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = { username : <span class="string">'yy'</span> };</div><div class="line">localStorage.obj = <span class="built_in">JSON</span>.stringify( obj );</div><div class="line">localStorage.obj <span class="comment">// =&gt; "{"username":"yy"}"</span></div><div class="line">obj = <span class="built_in">JSON</span>.parse( localStorage.obj ); <span class="comment">// =&gt; Object {username: "yy"}</span></div></pre></td></tr></table></figure>
+
+<ol>
+<li>了解 cookie</li>
+</ol>
+<p>在 localStorage 真正成为标准之前，cookie 作为本地存储的方案依然使用广泛，因为 cookie 的兼容性非常好。对于 cookie，我们依然是关心它的三个方面：有效期、作用域和存取方法。</p>
+<p>To be continue…</p>
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－本地存储/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－本地存储/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－本地存储/" data-id="b2g66vxbfccm0f9j" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－本地存储/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-写自己的JavaScript工具－文档遍历" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/09/19/写自己的JavaScript工具－文档遍历/" class="article-date">
@@ -165,9 +243,9 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－本地存储" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-写自己的JavaScript工具－注册:取消注册事件" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－本地存储/" class="article-date">
+    <a href="/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/" class="article-date">
   <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
 </a>
     
@@ -183,7 +261,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－本地存储/">写自己的JavaScript工具－本地存储</a>
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/">写自己的JavaScript工具－注册/取消注册事件</a>
     </h1>
   
 
@@ -191,17 +269,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>P584</p>
+        <p>P435</p>
 
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－本地存储/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－本地存储/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－本地存储/" data-id="b2g66vxbfccm0f9j" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/" data-id="b6amtf9ehk9qe3fj" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－本地存储/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/#comments" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -356,9 +434,9 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－注册:取消注册事件" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-写自己的JavaScript工具－键盘事件" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/" class="article-date">
+    <a href="/2014/09/19/写自己的JavaScript工具－键盘事件/" class="article-date">
   <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
 </a>
     
@@ -374,7 +452,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/">写自己的JavaScript工具－注册/取消注册事件</a>
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－键盘事件/">写自己的JavaScript工具－键盘事件</a>
     </h1>
   
 
@@ -382,17 +460,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>P435</p>
-
+        
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/" data-id="b6amtf9ehk9qe3fj" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/" data-id="kx7ooc3u0lw6iln7" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/#comments" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -498,53 +575,6 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－一个集合类" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－一个集合类/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－一个集合类/">写自己的JavaScript工具－一个集合类</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－一个集合类/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－一个集合类/</a></p>
-
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－一个集合类/" data-id="yximbf46rjxfkr0u" class="article-share-link">Share</a>
-      
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－一个集合类/#comments" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/categories/JavaScript/">&laquo; Prev</a><a class="page-number" href="/categories/JavaScript/">1</a><span class="page-number current">2</span><a class="page-number" href="/categories/JavaScript/page/3/">3</a><a class="extend next" rel="next" href="/categories/JavaScript/page/3/">Next &raquo;</a>
@@ -558,7 +588,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">27</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -567,7 +597,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -585,7 +615,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

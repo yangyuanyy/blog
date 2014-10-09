@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-10-08T07:45:02.567Z</updated>
+  <updated>2014-10-09T09:07:44.083Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -223,7 +223,7 @@
     <link href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E5%AF%B9%E8%B1%A1%E7%BB%A7%E6%89%BF/"/>
     <id>http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/</id>
     <published>2014-09-29T07:25:36.000Z</published>
-    <updated>2014-10-08T07:13:02.000Z</updated>
+    <updated>2014-10-08T07:45:49.000Z</updated>
     <content type="html"><![CDATA[<p>在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。</p>
 <h2 id="要点">要点</h2>
 <ol>
@@ -234,7 +234,7 @@
 <p>JavaScript 是基于原型的语言，而非基于类，但 JavaScript 依然引入了类（伪类）的概念（通过 new 的方式去创建实例对象）。</p>
 <p>可以这样理解 JavaScript 的原型继承与构造函数：</p>
 <p><em style="color:#999;">我只给你一个{}，你却用它创造了整个世界…</em></p>
-<p>通俗的将，首先，Object.prototype 是 JavaScript 中最原始的对象，记为 {} 。它的构造器就是 Object 函数。有了 {} 和能创建它的构造器，人们开始想，基于 {} ，我们应该创造一些有用的新的东西出来，比如数组，怎么做呢？那就基于 {} 定义一个名叫数组的对象吧，可以记为 [] 。怎么体现 [] 继承了 {} 呢？毕竟 [] 由 {} 而来，{} 的后代应该继承一些它的特性。于是想到一个办法：引入原型的说法，然后说 [] 的原型就是 {} ，那不就体现了继承关系了吗？最后再让 [] 继承一些它的原型（ {} ）的特性（属性和方法），同时也给 [] 一些自己特有的特性（属性和方法）。</p>
+<p>通俗的讲，首先，Object.prototype 是 JavaScript 中最原始的对象，记为 {} 。它的构造器就是 Object 函数。有了 {} 和能创建它的构造器，人们开始想，基于 {} ，我们应该创造一些有用的新的东西出来，比如数组，怎么做呢？那就基于 {} 定义一个名叫数组的对象吧，可以记为 [] 。怎么体现 [] 继承了 {} 呢？毕竟 [] 由 {} 而来，{} 的后代应该继承一些它的特性。于是想到一个办法：引入原型的说法，然后说 [] 的原型就是 {} ，那不就体现了继承关系了吗？最后再让 [] 继承一些它的原型（ {} ）的特性（属性和方法），同时也给 [] 一些自己特有的特性（属性和方法）。</p>
 <p>那要创建不同的具体数组时怎么做呢？提供一个数组构造器吧，就叫 Array，用 Array 创建出来的对象都是数组对象。那怎么体现用 Array 创造出来的数组对象继承了上面定义的 [] 呢？毕竟对于这些数组对象，[] 是它们的直接祖先。有一个办法，就是给 Array 构造器一个叫作 prototype 的属性，凡是通过 Array 构造器创建的对象，其原型都指向这个 prototype 属性值，而这个 prototype 属性值就是 []。最后再让被创建出来的数组继承它的原型（ [] ）的方法，当然，这些数组也可以拥有一些自己的特有的属性和方法。</p>
 <p>这时，人们看到了构造器能帮他们创建某种特定类型的对象，这些对象都有着特殊的意义。于是人们开始想自己来定义满足自身需求的构造器，从而用这些自定义的构造器创建他们想要的各种对象。JavaScript 看到了人们这种需求，于是引入了一个功能：任意一个函数都可以当作构造器来调用，从而创建特定的对象。而且让所有函数都有一个 prototype 属性，其作用就是上面一段所说的：体现继承关系。而所有的函数的 prototype 属性值都是在函数创建之初被赋予的一个新的基本的对象，这个对象的一个特点是它的 contructor 属性值就是这个函数本身。引入这个功能后，人们就可以用自己定义的函数用作构造器使用。后面的事情就和 Array 的情况一样了。这也就是为什么 JavaScript 中的所谓构造函数的一个最重要的特点是：构造函数的 prototype 属性值就被用作由该构造函数 new 出来的对象的原型。</p>
 <p>众所周知的构造器有：Object、Function、Array、String、RegExp等。</p>
@@ -411,12 +411,29 @@
   </entry>
   
   <entry>
-    <title><![CDATA[写自己的JavaScript工具函数－Ajax上传]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8DAjax%E4%B8%8A%E4%BC%A0/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－Ajax上传/</id>
+    <title><![CDATA[写自己的JavaScript工具－推送]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E7%A6%BB%E7%BA%BF%E5%BA%94%E7%94%A8/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－离线应用/</id>
     <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-09-20T06:56:02.000Z</updated>
-    <content type="html"><![CDATA[]]></content>
+    <updated>2014-10-09T07:54:13.000Z</updated>
+    <content type="html"><![CDATA[<p>P594</p>
+]]></content>
+    
+    
+      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
+    
+      <category term="JavaScript" scheme="http://yyblog.mocoer.com/categories/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[写自己的JavaScript工具－注册/取消注册事件]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%B3%A8%E5%86%8C:%E5%8F%96%E6%B6%88%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/</id>
+    <published>2014-09-19T14:28:00.000Z</published>
+    <updated>2014-09-20T06:56:44.000Z</updated>
+    <content type="html"><![CDATA[<p>P435</p>
+]]></content>
     
     
       <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
@@ -430,8 +447,38 @@
     <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/"/>
     <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－本地存储/</id>
     <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-09-20T10:32:41.000Z</updated>
-    <content type="html"><![CDATA[<p>P584</p>
+    <updated>2014-10-09T09:07:10.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="要点">要点</h2>
+<ol>
+<li>了解 localStorage</li>
+<li>了解 cookie</li>
+<li>实现 memory 模块</li>
+</ol>
+<h3 id="1-_了解_localStorage">1. 了解 localStorage</h3>
+<p>HTML5 的关于 Web 存储标准包含了关于 localStorage 对象。（和 sessionStorage 对象，它们的区别主要是在作用域和有效期，但 API 大同小异。）</p>
+<p>localStorage 对象是客户端 Window 对象的属性，作为一种本地存储方案，我们需要关心它的三个方面：有效期，作用域和存取方法。</p>
+<p>a. localStorage 有效期</p>
+<p>localStorage 的有效期是永久性的，也就是说，除非用户做删除操作，否则通过 localStorage 存储的数据是永久保存在用户电脑上的。</p>
+<p>b. localStorage 作用域</p>
+<p>localStorage 的作用域是文档原级别的，文档原由协议、主机名、端口共同定义：</p>
+<p><a href="http://www.xxx.com" target="_blank" rel="external">http://www.xxx.com</a><br><a href="https://www.xxx.com" target="_blank" rel="external">https://www.xxx.com</a><br><a href="http://sub.xxx.com" target="_blank" rel="external">http://sub.xxx.com</a><br><a href="http://sub.xxx.com:4000" target="_blank" rel="external">http://sub.xxx.com:4000</a></p>
+<p>上面这些都是不同文档原，相互不能共享 localStorage 的数据，只有同文档原的中的文档可以共享对方的 localStorage 数据。</p>
+<p>c. localStorage 存取方法</p>
+<p>localStorage 存取、删除数据的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 保存数据</span></div><div class="line"><span class="comment">// 方式1（直接定义属性值）</span></div><div class="line">localStorage.username = <span class="string">'yy'</span>;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.setItem( <span class="string">'username'</span>, <span class="string">'yy'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 获取数据</span></div><div class="line"><span class="comment">// 方式1（直接读取属性值）</span></div><div class="line">localStorage.username;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.getItem( <span class="string">'username'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 删除指定数据</span></div><div class="line"><span class="comment">// 方式1（通过 delete 操作符）</span></div><div class="line"><span class="keyword">delete</span> localStorage.username;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.removeItem( <span class="string">'username'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 删除全部数据</span></div><div class="line">localStorage.clear();</div></pre></td></tr></table></figure>
+
+<p>但是还是尽量使用 API 的方式，一个原因就是，当我们为了兼容不支持 localStorage 的浏览器时，可能需要通过 cookie 作为替代方案，这时我们只需要再针对 cookie 定义和 localStorage 同样的方法，就可以实现一个统一、兼容的本地存储方案。</p>
+<p>还有需要了解的是 localStorage 目前只能存储字符串类型的数据。如果尝试存储数组或对象，客户端会先调用它们的 toString() 方法，然后再将转换成字符串的数据存储起来:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">localStorage.arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line">localSrorage.arr <span class="comment">// =&gt; "1,2,3"</span></div><div class="line"></div><div class="line">localStorage.obj = { username : <span class="string">'yy'</span> };</div><div class="line">localStorage.obj <span class="comment">// =&gt; "[object Object]"</span></div></pre></td></tr></table></figure>
+
+<p>所以如果要存取对象类型的数据，需要做一些编码、解码工作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = { username : <span class="string">'yy'</span> };</div><div class="line">localStorage.obj = <span class="built_in">JSON</span>.stringify( obj );</div><div class="line">localStorage.obj <span class="comment">// =&gt; "{"username":"yy"}"</span></div><div class="line">obj = <span class="built_in">JSON</span>.parse( localStorage.obj ); <span class="comment">// =&gt; Object {username: "yy"}</span></div></pre></td></tr></table></figure>
+
+<ol>
+<li>了解 cookie</li>
+</ol>
+<p>在 localStorage 真正成为标准之前，cookie 作为本地存储的方案依然使用广泛，因为 cookie 的兼容性非常好。对于 cookie，我们依然是关心它的三个方面：有效期、作用域和存取方法。</p>
+<p>To be continue…</p>
 ]]></content>
     
     
@@ -458,11 +505,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[写自己的JavaScript工具－文档加载事件]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%96%87%E6%A1%A3%E5%8A%A0%E8%BD%BD%E4%BA%8B%E4%BB%B6/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档加载事件/</id>
+    <title><![CDATA[写自己的JavaScript工具－键盘事件]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/</id>
     <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-09-19T15:33:52.000Z</updated>
+    <updated>2014-09-19T15:33:02.000Z</updated>
     <content type="html"><![CDATA[]]></content>
     
     
@@ -473,12 +520,12 @@
   </entry>
   
   <entry>
-    <title><![CDATA[写自己的JavaScript工具－注册/取消注册事件]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%B3%A8%E5%86%8C:%E5%8F%96%E6%B6%88%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/</id>
+    <title><![CDATA[写自己的JavaScript工具－插入删除节点]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%8F%92%E5%85%A5%E5%88%A0%E9%99%A4%E8%8A%82%E7%82%B9/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－插入删除节点/</id>
     <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-09-20T06:56:44.000Z</updated>
-    <content type="html"><![CDATA[<p>P435</p>
+    <updated>2014-09-19T15:32:27.000Z</updated>
+    <content type="html"><![CDATA[<p>parents/child/siblings 等</p>
 ]]></content>
     
     
@@ -536,11 +583,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[写自己的JavaScript工具－键盘事件]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/</id>
+    <title><![CDATA[写自己的JavaScript工具－鼠标滚轮事件]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E9%BC%A0%E6%A0%87%E6%BB%9A%E8%BD%AE%E4%BA%8B%E4%BB%B6/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/</id>
     <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-09-19T15:33:02.000Z</updated>
+    <updated>2014-09-19T15:33:35.000Z</updated>
     <content type="html"><![CDATA[]]></content>
     
     
@@ -556,21 +603,6 @@
     <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－判断对象的类/</id>
     <published>2014-09-19T14:28:00.000Z</published>
     <updated>2014-09-19T15:33:27.000Z</updated>
-    <content type="html"><![CDATA[]]></content>
-    
-    
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
-    
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/categories/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[写自己的JavaScript工具－元素位置及大小]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E5%85%83%E7%B4%A0%E4%BD%8D%E7%BD%AE%E5%8F%8A%E5%A4%A7%E5%B0%8F/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－元素位置及大小/</id>
-    <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-09-19T15:34:09.000Z</updated>
     <content type="html"><![CDATA[]]></content>
     
     
