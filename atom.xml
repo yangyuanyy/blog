@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-10-09T09:10:12.931Z</updated>
+  <updated>2014-10-10T04:08:45.939Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yyblog.mocoer.com/2014/10/09/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/"/>
     <id>http://yyblog.mocoer.com/2014/10/09/写自己的JavaScript工具－本地存储/</id>
     <published>2014-10-09T09:08:07.000Z</published>
-    <updated>2014-10-09T09:10:06.000Z</updated>
+    <updated>2014-10-10T04:00:48.000Z</updated>
     <content type="html"><![CDATA[<h2 id="要点">要点</h2>
 <ol>
 <li>了解 localStorage</li>
@@ -35,6 +35,7 @@
 <p>localStorage 的作用域是文档原级别的，文档原由协议、主机名、端口共同定义：</p>
 <p><a href="http://www.xxx.com" target="_blank" rel="external">http://www.xxx.com</a><br><a href="https://www.xxx.com" target="_blank" rel="external">https://www.xxx.com</a><br><a href="http://sub.xxx.com" target="_blank" rel="external">http://sub.xxx.com</a><br><a href="http://sub.xxx.com:4000" target="_blank" rel="external">http://sub.xxx.com:4000</a></p>
 <p>上面这些都是不同文档原，相互不能共享 localStorage 的数据，只有同文档原的中的文档可以共享对方的 localStorage 数据。</p>
+<p>localStorage 同时制约于浏览器厂商，不同浏览器之间不能共享。</p>
 <h4 id="c-_localStorage_存取方法">c. localStorage 存取方法</h4>
 <p>localStorage 存取、删除数据的方法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 保存数据</span></div><div class="line"><span class="comment">// 方式1（直接定义属性值）</span></div><div class="line">localStorage.username = <span class="string">'yy'</span>;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.setItem( <span class="string">'username'</span>, <span class="string">'yy'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 获取数据</span></div><div class="line"><span class="comment">// 方式1（直接读取属性值）</span></div><div class="line">localStorage.username;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.getItem( <span class="string">'username'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 删除指定数据</span></div><div class="line"><span class="comment">// 方式1（通过 delete 操作符）</span></div><div class="line"><span class="keyword">delete</span> localStorage.username;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.removeItem( <span class="string">'username'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 删除全部数据</span></div><div class="line">localStorage.clear();</div></pre></td></tr></table></figure>
@@ -46,11 +47,23 @@
 <p>所以如果要存取对象类型的数据，需要做一些编码、解码工作：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = { username : <span class="string">'yy'</span> };</div><div class="line">localStorage.obj = <span class="built_in">JSON</span>.stringify( obj );</div><div class="line">localStorage.obj <span class="comment">// =&gt; "{"username":"yy"}"</span></div><div class="line">obj = <span class="built_in">JSON</span>.parse( localStorage.obj ); <span class="comment">// =&gt; Object {username: "yy"}</span></div></pre></td></tr></table></figure>
 
-<ol>
-<li>了解 cookie</li>
-</ol>
+<h3 id="2-_了解_cookie">2. 了解 cookie</h3>
 <p>在 localStorage 真正成为标准之前，cookie 作为本地存储的方案依然使用广泛，因为 cookie 的兼容性非常好。对于 cookie，我们依然是关心它的三个方面：有效期、作用域和存取方法。</p>
-<p>To be continue…</p>
+<h4 id="a-_cookie_有效期">a. cookie 有效期</h4>
+<p>cookie 的有效期是通过设置 max-age 的完成的，以秒为单位。如果没有定义一个 cookie 的 max-age 值，则有效期默认为浏览器关闭时结束。一旦设置了 cookie 的有效期，则浏览器会将 cookie 数据存储在一个本地文件中，直到有效期结束，保存的数据会被删除（或直到用户手动清除了浏览器 cookie ）。</p>
+<h4 id="b-_cookie_作用域">b. cookie 作用域</h4>
+<p>默认情况下，cookie 的作用域是创建它的页面所在目录和子目录。但是可以通过设置 domain 来扩大他的作用域。比如 <a href="http://www.xxx.com/cates/index.html" target="_blank" rel="external">http://www.xxx.com/cates/index.html</a> 页面创建了一个 cookie，那么 <a href="http://www.xxx.com/cates/list.html、http://www.xxx.com/" target="_blank" rel="external">http://www.xxx.com/cates/list.html、http://www.xxx.com/</a></p>
+<p>cookie 同时制约于浏览器厂商，即不同的浏览器有各自独立的 cookie。</p>
+<h4 id="c-_cookie_存取方法">c. cookie 存取方法</h4>
+<p>存储 cookie</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 保存（修改）数据（一次只能设置一个值）</span></div><div class="line"><span class="built_in">document</span>.cookie = <span class="string">'username=yy'</span>; </div><div class="line"><span class="comment">// 保存数据同时设定有效期</span></div><div class="line"><span class="built_in">document</span>.cookie = <span class="string">'username=yy; max-age=3600'</span>; <span class="comment">// 有效期为1小时（3600秒）</span></div><div class="line"><span class="comment">// 保存数据同时设定有效期和作用域</span></div><div class="line"><span class="built_in">document</span>.cookie = <span class="string">'username=yy; max-age=3600; domain=.xxx.com; path=/'</span>; <span class="comment">// 有效期为1小时，可被a.xxx.com 和 b.xxx.com 共享</span></div></pre></td></tr></table></figure>
+
+<p>读取 cookie</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 读取数据</span></div><div class="line"><span class="built_in">document</span>.cookie; <span class="comment">// 将输出类似 data1=value1; data2=value2 名值对形式的字符串</span></div></pre></td></tr></table></figure>
+
+<p>删除 cookie</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 删除数据</span></div><div class="line"><span class="built_in">document</span>.cookie = <span class="string">'username=value;max-age=0'</span>; <span class="comment">// 将要删除的cookie名指定为任意非空值，然后设置 max-age 为 0</span></div></pre></td></tr></table></figure>
+
 ]]></content>
     
     
