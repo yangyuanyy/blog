@@ -130,9 +130,9 @@ localStorage 对象是客户端 Window 对象的属性，作为一种本地存�
 <h4 id="a-_localStorage_有效期">a. localStorage 有效期</h4>
 <p>localStorage 的有效期是永久性的，也就是说，除非用户做删除操作，否则通过 localStorage 存储的数据是永久保存在用户电脑上的。</p>
 <h4 id="b-_localStorage_作用域">b. localStorage 作用域</h4>
-<p>localStorage 的作用域是文档原级别的，文档原由协议、主机名、端口共同定义：</p>
+<p>localStorage 的作用域是文档源级别的，文档原由协议、主机名、端口共同定义：</p>
 <p><a href="http://www.xxx.com" target="_blank" rel="external">http://www.xxx.com</a><br><a href="https://www.xxx.com" target="_blank" rel="external">https://www.xxx.com</a><br><a href="http://sub.xxx.com" target="_blank" rel="external">http://sub.xxx.com</a><br><a href="http://sub.xxx.com:4000" target="_blank" rel="external">http://sub.xxx.com:4000</a></p>
-<p>上面这些都是不同文档原，相互不能共享 localStorage 的数据，只有同文档原的中的文档可以共享对方的 localStorage 数据。</p>
+<p>上面这些都是不同文档源，相互不能共享 localStorage 的数据，只有同文档源的中的文档可以共享对方的 localStorage 数据。</p>
 <p>localStorage 同时制约于浏览器厂商，不同浏览器之间不能共享。</p>
 <h4 id="c-_localStorage_存取方法">c. localStorage 存取方法</h4>
 <p>localStorage 存取、删除数据的方法：</p>
@@ -148,9 +148,9 @@ localStorage 对象是客户端 Window 对象的属性，作为一种本地存�
 <h3 id="2-_了解_cookie">2. 了解 cookie</h3>
 <p>在 localStorage 真正成为标准之前，cookie 作为本地存储的方案依然使用广泛，因为 cookie 的兼容性非常好。对于 cookie，我们依然是关心它的三个方面：有效期、作用域和存取方法。</p>
 <h4 id="a-_cookie_有效期">a. cookie 有效期</h4>
-<p>cookie 的有效期是通过设置 max-age 的完成的，以秒为单位。如果没有定义一个 cookie 的 max-age 值，则有效期默认为浏览器关闭时结束。一旦设置了 cookie 的有效期，则浏览器会将 cookie 数据存储在一个本地文件中，直到有效期结束，保存的数据会被删除（或直到用户手动清除了浏览器 cookie ）。</p>
+<p>cookie 的有效期是通过设置 max-age 完成的，以秒为单位。如果没有定义一个 cookie 的 max-age 值，则有效期默认为浏览器关闭时结束。一旦设置了 cookie 的有效期，则浏览器会将 cookie 数据存储在一个本地文件中，直到有效期结束，保存的数据会被删除（或直到用户手动清除了浏览器 cookie ）。</p>
 <h4 id="b-_cookie_作用域">b. cookie 作用域</h4>
-<p>默认情况下，cookie 的作用域是创建它的页面所在目录和子目录。但是可以通过设置 domain 来扩大他的作用域。比如 <a href="http://www.xxx.com/cates/index.html" target="_blank" rel="external">http://www.xxx.com/cates/index.html</a> 页面创建了一个 cookie，那么 <a href="http://www.xxx.com/cates/list.html、http://www.xxx.com/" target="_blank" rel="external">http://www.xxx.com/cates/list.html、http://www.xxx.com/</a></p>
+<p>默认情况下，cookie 的作用域是创建它的页面所在目录和子目录。但是可以通过设置 domain 来扩大他的作用域。比如 <a href="http://www.xxx.com/cates/index.html" target="_blank" rel="external">http://www.xxx.com/cates/index.html</a> 页面创建了一个 cookie，那么 <a href="http://www.xxx.com/cates/list.html、http://www.xxx.com/cates/items/item.html" target="_blank" rel="external">http://www.xxx.com/cates/list.html、http://www.xxx.com/cates/items/item.html</a> 都可以访问该 cookie。而 <a href="http://www.xxx.com/index.html" target="_blank" rel="external">http://www.xxx.com/index.html</a> 就无法访问该 cookie。但是可以通过设置 cookie 的 domain 值为 ‘/‘ 来让该主机上的所有文件都可以访问该 cookie。</p>
 <p>cookie 同时制约于浏览器厂商，即不同的浏览器有各自独立的 cookie。</p>
 <h4 id="c-_cookie_的操作">c. cookie 的操作</h4>
 <p>存储 cookie</p>
@@ -176,7 +176,7 @@ localStorage 对象是客户端 Window 对象的属性，作为一种本地存�
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/10/09/写自己的JavaScript工具－本地存储/" data-id="b2g66vxbfccm0f9j" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/10/09/写自己的JavaScript工具－本地存储/" data-id="2vgqn7mibqazahws" class="article-share-link">Share</a>
       
         <a href="http://yyblog.mocoer.com/2014/10/09/写自己的JavaScript工具－本地存储/#comments" class="article-comment-link">Comments</a>
       
@@ -227,7 +227,7 @@ localStorage 对象是客户端 Window 对象的属性，作为一种本地存�
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">27</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -236,7 +236,7 @@ localStorage 对象是客户端 Window 对象的属性，作为一种本地存�
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/localStorage/">localStorage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/localStorage/">localStorage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -254,7 +254,7 @@ localStorage 对象是客户端 Window 对象的属性，作为一种本地存�
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
