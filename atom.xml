@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-10-25T16:59:37.877Z</updated>
+  <updated>2014-10-25T17:01:16.630Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yyblog.mocoer.com/2014/10/22/Backbone:AngularJS%20%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94%EF%BC%88TODO%20LIST%E4%B8%BA%E4%BE%8B%EF%BC%89/"/>
     <id>http://yyblog.mocoer.com/2014/10/22/Backbone:AngularJS 框架对比（TODO LIST为例）/</id>
     <published>2014-10-22T12:49:00.000Z</published>
-    <updated>2014-10-25T16:59:26.000Z</updated>
+    <updated>2014-10-25T17:01:10.000Z</updated>
     <content type="html"><![CDATA[<p><a href="http://backbonejs.org/" target="_blank" rel="external">Backbone</a> 和 <a href="http://angularjs.org" target="_blank" rel="external">AngularJS</a> 都是目前非常流行的Web应用开发框架。对于他们的区别，如果简单的理解，可以这样说：如果 Backbone 是你家公寓的钢筋水泥框架，那 AngularJS 就是做了精装修。</p>
 <p>这里通过下面的两个实例，可以大体了解到二者的特点。</p>
 <h2 id="要点">要点</h2>
@@ -34,10 +34,9 @@
 <li>a. 添加一条代办事项</li>
 <li>b. 删去一条待办事项</li>
 <li>c. 完成一条代办事项</li>
-<li>d. 查看所有待办事项</li>
-<li>e. 搜索某条代办事项</li>
+<li>d. 查看待办事项统计</li>
 </ul>
-<p>一个典型的 CURD 类应用（ AngularJS 就是为这类应用而生，在开发这类应用时占有绝对优势 ）。<br>为了简单快捷，这里在 Bootstrap 框架下进行开发。</p>
+<p>一个典型的 CURD 类应用（ AngularJS 在开发这类应用时占有绝对优势 ）。<br>为了简单快捷，这里在 Bootstrap 框架下进行开发。</p>
 <h3 id="2-_基于_Backbone_的_TODO_LIST_应用">2. 基于 Backbone 的 TODO LIST 应用</h3>
 <p>首先是 Backbone 版 TODO LIST，页面中引入 backbone.js 和所有必要文件：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"/styles/bootstrap.css"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"/styles/todolist.css"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- bootstrap 和 backbone 依赖 jquery --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/scripts/jquery.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/scripts/bootstrap.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- backbone 依赖 underscore --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/scripts/underscore.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/scripts/backbone.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/scripts/backboneStorage.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
