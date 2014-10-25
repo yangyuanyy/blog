@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-10-25T17:33:31.668Z</updated>
+  <updated>2014-10-25T17:36:50.846Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yyblog.mocoer.com/2014/10/22/Backbone:AngularJS%20%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94%EF%BC%88TODO%20LIST%E4%B8%BA%E4%BE%8B%EF%BC%89/"/>
     <id>http://yyblog.mocoer.com/2014/10/22/Backbone:AngularJS 框架对比（TODO LIST为例）/</id>
     <published>2014-10-22T12:49:00.000Z</published>
-    <updated>2014-10-25T17:33:23.000Z</updated>
+    <updated>2014-10-25T17:36:44.000Z</updated>
     <content type="html"><![CDATA[<p><a href="http://backbonejs.org/" target="_blank" rel="external">Backbone</a> 和 <a href="http://angularjs.org" target="_blank" rel="external">AngularJS</a> 都是目前非常流行的Web应用开发框架。他们有显著的不同，如果 Backbone 帮你架好了钢筋水泥，那 AngularJS 甚至做完了精装修。但并不说明谁更“好”，选择哪种框架开发，取决于项目的各方面需求和特点。</p>
 <p>因此，这里通过两个实例（同样的应用，不同的框架），来大体了解到二者的特点。</p>
 <h2 id="要点">要点</h2>
@@ -45,8 +45,8 @@
 <p>在我基本完成了程序时，发现 backbone 官方文档中提供了一个非常类似的例子…于是与之做了比较，对两个版本我认为好的点进行了整合，就有了下面看到的版本。</p>
 <p>再来确认一下基本思路（代码注释中还会再次提示这些思路的具体体现）：</p>
 <ul>
-<li>a. 用户交互事件触发视图方法（如果有必要，最好是有两层方法，第一层用来处理用户交互事件，第二层才是真正改变模型，这样就有可能提供接口来脱离用户交互直接操作应用）；</li>
-<li>b. 视图方法改变模型或集合；</li>
+<li>a. 用户交互事件触发视图方法；</li>
+<li>b. 视图方法改变模型或集合（如果有必要，最好是有两层方法，第一层用来处理用户交互事件，第二层才是真正改变模型或集合，这样就有可能提供接口来脱离用户交互直接操作应用）；</li>
 <li>c. 模型或集合的改变再触发视图的改变。</li>
 </ul>
 <p>下面是具体实现：</p>
