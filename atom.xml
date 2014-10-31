@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-10-31T03:13:49.277Z</updated>
+  <updated>2014-10-31T03:17:00.052Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yyblog.mocoer.com/2014/10/22/Backbone:AngularJS%20%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94%EF%BC%88TODO%20LIST%E4%B8%BA%E4%BE%8B%EF%BC%89/"/>
     <id>http://yyblog.mocoer.com/2014/10/22/Backbone:AngularJS 框架对比（TODO LIST为例）/</id>
     <published>2014-10-22T12:49:00.000Z</published>
-    <updated>2014-10-30T23:23:31.000Z</updated>
+    <updated>2014-10-31T03:16:35.000Z</updated>
     <content type="html"><![CDATA[<p><a href="http://backbonejs.org/" target="_blank" rel="external">Backbone</a> 和 <a href="http://angularjs.org" target="_blank" rel="external">AngularJS</a> 都是目前非常流行的Web应用开发框架。他们有显著的不同，如果 Backbone 帮你架好了钢筋水泥，那 AngularJS 甚至做完了精装修。但并不说明谁更“好”，选择哪种框架开发，取决于项目的各方面需求和特点。</p>
 <p>因此，这里通过两个实例（同样的应用，不同的框架），来大体了解到二者的特点。</p>
 <h2 id="要点">要点</h2>
@@ -68,7 +68,7 @@
     
       <category term="Backbone" scheme="http://yyblog.mocoer.com/tags/Backbone/"/>
     
-      <category term="Angularjs" scheme="http://yyblog.mocoer.com/tags/Angularjs/"/>
+      <category term="AngularJS" scheme="http://yyblog.mocoer.com/tags/AngularJS/"/>
     
       <category term="JavaScript" scheme="http://yyblog.mocoer.com/categories/JavaScript/"/>
     
@@ -541,13 +541,12 @@
   </entry>
   
   <entry>
-    <title><![CDATA[写自己的JavaScript工具－注册/取消注册事件]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%B3%A8%E5%86%8C:%E5%8F%96%E6%B6%88%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/</id>
+    <title><![CDATA[写自己的JavaScript工具－Ajax]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8DAjax/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－Ajax/</id>
     <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-10-20T10:05:30.000Z</updated>
-    <content type="html"><![CDATA[<p>P435</p>
-]]></content>
+    <updated>2014-09-19T15:34:35.000Z</updated>
+    <content type="html"><![CDATA[]]></content>
     
     
       <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
@@ -557,12 +556,12 @@
   </entry>
   
   <entry>
-    <title><![CDATA[写自己的JavaScript工具－推送]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E7%A6%BB%E7%BA%BF%E5%BA%94%E7%94%A8/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－离线应用/</id>
+    <title><![CDATA[写自己的JavaScript工具－注册/取消注册事件]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%B3%A8%E5%86%8C:%E5%8F%96%E6%B6%88%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/</id>
     <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-10-09T07:54:13.000Z</updated>
-    <content type="html"><![CDATA[<p>P594</p>
+    <updated>2014-10-20T10:05:30.000Z</updated>
+    <content type="html"><![CDATA[<p>P435</p>
 ]]></content>
     
     
@@ -651,12 +650,13 @@
   </entry>
   
   <entry>
-    <title><![CDATA[写自己的JavaScript工具－键盘事件]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/</id>
+    <title><![CDATA[写自己的JavaScript工具－推送]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E7%A6%BB%E7%BA%BF%E5%BA%94%E7%94%A8/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－离线应用/</id>
     <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-09-19T15:33:02.000Z</updated>
-    <content type="html"><![CDATA[]]></content>
+    <updated>2014-10-09T07:54:13.000Z</updated>
+    <content type="html"><![CDATA[<p>P594</p>
+]]></content>
     
     
       <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
