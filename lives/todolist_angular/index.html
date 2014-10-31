@@ -6,7 +6,15 @@
   
   <title>YY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#App{
+  <meta name="description" content="New Document 
+  
+  
+  
+  
+  
+  
+  
+		#App{
 			width:300px;
 			margin:30px auto;
 		}
@@ -16,13 +24,20 @@
 		.list a .title{
 			cursor: default;
 		}
-		.list a.done .title {
-			text-decoration">
+		.list a.done .title {">
 <meta property="og:type" content="website">
 <meta property="og:title" content="YY">
-<meta property="og:url" content="http://yyblog.mocoer.com/lives/todolist/index.html">
+<meta property="og:url" content="http://yyblog.mocoer.com/lives/todolist_angular/index.html">
 <meta property="og:site_name" content="YY">
-<meta property="og:description" content="#App{
+<meta property="og:description" content="New Document 
+  
+  
+  
+  
+  
+  
+  
+		#App{
 			width:300px;
 			margin:30px auto;
 		}
@@ -32,11 +47,18 @@
 		.list a .title{
 			cursor: default;
 		}
-		.list a.done .title {
-			text-decoration">
+		.list a.done .title {">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="YY">
-<meta name="twitter:description" content="#App{
+<meta name="twitter:description" content="New Document 
+  
+  
+  
+  
+  
+  
+  
+		#App{
 			width:300px;
 			margin:30px auto;
 		}
@@ -46,8 +68,7 @@
 		.list a .title{
 			cursor: default;
 		}
-		.list a.done .title {
-			text-decoration">
+		.list a.done .title {">
 
   
     <link rel="alternative" href="/atom.xml" title="YY" type="application/atom+xml">
@@ -103,8 +124,8 @@
       <div class="outer">
         <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/lives/todolist/index.html" class="article-date">
-  <time datetime="2014-10-31T15:39:35.000Z" itemprop="datePublished">Oct 31 2014</time>
+    <a href="/lives/todolist_angular/index.html" class="article-date">
+  <time datetime="2014-10-31T15:44:41.000Z" itemprop="datePublished">Oct 31 2014</time>
 </a>
     
   </div>
@@ -113,17 +134,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!DOCTYPE html>
+        <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<link href="bootstrap.css" rel="stylesheet">
-		<script src="jquery.js"></script>
-		<script src="underscore.js"></script>
-		<script src="backbone.js"></script>
-		<script src="backboneStorage.js"></script>
-		<script src="bootstrap.js"></script>
-		<style>
+ <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title> New Document </title>
+  <link href="bootstrap.css" rel="stylesheet">
+  <script src="jquery.js"></script>
+  <script src="underscore.js"></script>
+  <script src="angular.js"></script>
+  <script src="cookieStorage.js"></script>
+  <script src="bootstrap.js"></script>
+  <style>
 		#App{
 			width:300px;
 			margin:30px auto;
@@ -165,170 +187,152 @@
 			color:#000;
 		}
 		.itemCounter{
-			float: right;
+			color:#999;
+		}
+
+		.hide{
+			display:none;
 		}
 	
 		</style>
-	</head>
-	<body>
-		<div id="App">
-			<div class="header panel-heading"><div class="itemCounter"></div>TODO LIST</div>
-			<div class="content">
-				<input id="newTodo" class="form-control" type="text" placeholder="Remind me to do...">
-				<div class="list list-group pannel-body"></div>
+ </head>
+
+ <body>
+
+	<div ng-app="todoListModule" ng-controller="TodoListController" id="App">
+		<div class="header panel-heading" style="padding: 10px 12px;">
+			<div ng-class="{hide : items.length == 0}" class="itemCounter">
+				<span>完成 : 0</span>
+				<span>未完成 : 0</span>
 			</div>
 		</div>
-
-		<script id="item-temp" type="text/html">
-			<div class="checkbox">
-			    <label>
-			    	<input type="checkbox" <% if(done){ %> checked <% } %> />
-			    	<span class="title"><%= title %></span>
-			    </label>
-			    <span class="remove glyphicon glyphicon-remove"> </span>
+		<div class="content">
+			<input ng-keydown="handleInput" ng-model="newTitle" id="newTodo" class="form-control" type="text" placeholder="新建事项..." autofocus="autofocus">
+			<div class="list list-group pannel-body">
+				<a ng-repeat="item in items" ng-click="toggle( $index )" ng-class="{done : item.done}" class="list-group-item">
+					<div class="checkbox">
+						<label>
+							<input ng-model="item.done" type="checkbox">
+							<span class="title"></span>
+						</label>
+						<span ng-click="remove( $index, $event )" class="remove glyphicon glyphicon-remove"> </span>
+					</div>
+				</a>
 			</div>
-		</script>
+		</div>
+	</div>
 
-		<script id="itemCounter-temp" type="text/html">
-			<span>Done : <%= done %></span>
-			<span>Undone : <%= undone %></span>
-		</script>
-		
+ <script>
 
+// 定义 todoList 模块
+var todoListModule = angular.module( 'todoListModule', [] );
 
-		<script>
+// 定义一个 Items 服务，用于操作本地数据的 CURD
+todoListModule.factory( 'Items', function(){
+	var memory = ( function(){
+		return localStorage || cookieStorage;
+	}() );
+	// 将作为 Items 服务的实例返回
+	var items = {};
+	// 查询全部事项
+	items.query = function(){
+		var d = memory.getItem( 'todoList' );
+		return ( d && JSON.parse( d ) ) || [];
+	}
+	// 插入新事项
+	items.add = function( data ){
+		var d = memory.getItem( 'todoList' );
+		d = ( d && JSON.parse( d ) ) || [];
+		d.unshift( data );
+		memory.setItem( 'todoList', JSON.stringify( d ) );
+	}
+	// 更新事项
+	items.update = function( index, data ){
+		var d = memory.getItem( 'todoList' );
+		if( d ){
+			d = JSON.parse( d );
+			d[ index ] = data;
+			memory.setItem( 'todoList', JSON.stringify( d ) );
+		}
+	}
+	// 删除事项
+	items.remove = function( index ){
+		var d = memory.getItem( 'todoList' );
+		if( d ){
+			d = JSON.parse( d );
+			d.splice( index, 1 );
+			memory.setItem( 'todoList', JSON.stringify( d ) );
+		}
+	}
+	return items;
+} );
 
-		var App = ( function(){
+// 定义一个 ngKeydown 指令，用于处理用户的键盘按下事件
+todoListModule.directive( 'ngKeydown', function(){
+	return {
+		link : function( scope, element, attrs ){
+			var handler = scope[ attrs.ngKeydown ];
+			element.bind( 'keydown', handler );			
+		}
+	}
+} );
 
-			var Item = Backbone.Model.extend( {
-				defaults : {
-					title : '',
-					done : false
-				},
-				toggle : function(){
-					this.save( { done : !this.get( 'done' ) } );
-				}
-			} );
-
-			var List = Backbone.Collection.extend( {
-				model : Item,
-				localStorage: new Backbone.LocalStorage("TODOLIST"),
-				done : function(){
-					return this.where( { done : true } );
-				},
-				undone : function(){
-					return this.where( { done : false } );
-				}
-			} );
-
-			
-
-			var ItemView = Backbone.View.extend( {
-				tagName : 'a',
-				className : 'list-group-item',
-				template : _.template( $( '#item-temp' ).html() ),
-				events : {
-					'click' : 'toggle',
-					'click .remove' : 'removeItem'
-				},
-				initialize : function(){
-					this.listenTo( this.model, 'change', this.render );
-					this.listenTo( this.model, 'destroy', this.remove );
-				},
-				render : function(){
-					this.$el.html( this.template( this.model.toJSON() ) );
-					this.$el.toggleClass( 'done', this.model.get( 'done' ) );
-					return this;
-				},
-				toggle : function( e ){
-					this.model.toggle();
-				},
-				removeItem : function( e ){
-					this.model.destroy();
-					e.stopPropagation();
-				}
-			} );
-
-			var AppView = Backbone.View.extend( {
-				el : $( '#App' ),
-				events : {
-					'keydown #newTodo' : 'addItemByInput'
-				},
-				itemCounterTemp : _.template( $( '#itemCounter-temp' ).html() ),
-				initialize : function(){
-					this.$input = this.$( '#newTodo' );
-					this.$list = this.$( '.list' );
-					this.$itemCounter = this.$( '.itemCounter' );
-
-					this.listenTo( list, 'add', this.addItemView );
-					this.listenTo( list, 'reset', this.addItemByLocalStorage );
-					this.listenTo( list, 'all', this.render );
-
-					list.fetch();
-				},
-				render : function(){
-					var done = list.done().length,
-						undone = list.undone().length;
-					if ( ! list.length ) {
-						this.$itemCounter.hide();
-					}
-					else {
-						this.$itemCounter.show();
-						this.$itemCounter.html( this.itemCounterTemp( { done : done, undone : undone } ) );
-					}
-				},
-				addItemView : function( model ){
-					var view = new ItemView( { model : model } );
-					this.$list.prepend( view.render().el );
-				},
-				addItemByLocalStorage : function(){
-					list.each( this.addItem, this );
-				},
-				addItemByInput : function( e ){
-					if( this.$input.val() === '' || e.keyCode !== 13 ) return;
-					this.addItem( { title : this.$input.val() } );
-					this.$input.val( '' );
-				},
-				// 对外提供的接口
-				addItem : function( props ){
-					props && props.title && list.create( props );
-				},
-				// 对外提供的接口
-				removeItem : function( id ){
-					list.get( id ) && list.get( id ).destroy();
-				},
-				// 对外提供接口
-				toggleItem : function( id ){
-					list.get( id ) && list.get( id ).toggle();
-				}
-			} );
-			
-			var list = new List;
-			var App = new AppView();
-
-			return {
-				addItem    : App.addItem,
-				removeItem : App.removeItem,
-				toggleItem  : App.toggleItem
+// TodoList 控制器
+function TodoListController( $scope, Items ){
+	// 通过 Items 服务读取本地数据
+	$scope.items = Items.query();
+	// 完成的事项集
+	$scope.done = function(){
+		return _.where( $scope.items, { done : true } );
+	}
+	// 未完成的事项集
+	$scope.undone = function(){
+		return _.where( $scope.items, { done : false } );
+	}
+	// 切换事项状态
+	$scope.toggle = function( index ){
+		$scope.items[ index ].done = ! $scope.items[ index ].done;
+		Items.update( index, $scope.items[ index ] );
+	}
+	// 删除事项
+	$scope.remove = function( index, event ){
+		event.preventDefault();
+		$scope.items.splice( index, 1 );
+		Items.remove( index );
+	}
+	// 新事项名称
+	$scope.newTitle = '';
+	// 用户输入事件处理方法
+	$scope.handleInput = function( event ){
+		// 这里需要显式的调用 $scope.$apply 服务，以让 Angular 立即刷新模型和视图
+		$scope.$apply( function(){
+			var el = angular.element( event.target );
+			if( event.keyCode === 13 && $scope.newTitle.trim() != '' ){
+				var newItem = { title : $scope.newTitle , done : false };
+				$scope.items.unshift( newItem );
+				Items.add( newItem );
+				$scope.newTitle ='';
 			}
+		} );
+	}
+ }
 
-		}() );
-			
 
-			
-		</script>
 
-	</body>
+ </script>
+  
+ </body>
 </html>
+
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/lives/todolist/index.html">http://yyblog.mocoer.com/lives/todolist/index.html</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/lives/todolist_angular/index.html">http://yyblog.mocoer.com/lives/todolist_angular/index.html</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/lives/todolist/index.html" data-id="20av7gjtpq6ey6qy" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/lives/todolist_angular/index.html" data-id="bg2rofick839jf1j" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/lives/todolist/index.html#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/lives/todolist_angular/index.html#comments" class="article-comment-link">Comments</a>
       
       
     </footer>
