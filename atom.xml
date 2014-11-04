@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-10-31T15:52:33.617Z</updated>
+  <updated>2014-11-04T03:43:13.590Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -423,7 +423,7 @@
     <link href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8DID%E7%94%9F%E6%88%90%E5%99%A8/"/>
     <id>http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/</id>
     <published>2014-09-28T20:02:36.000Z</published>
-    <updated>2014-10-08T07:01:08.000Z</updated>
+    <updated>2014-11-04T03:42:53.000Z</updated>
     <content type="html"><![CDATA[<h2 id="要点">要点</h2>
 <ol>
 <li>函数也是对象（一种简单实现）</li>
@@ -434,7 +434,7 @@
 <p>为了避免使用全局变量，一种简单的实现是将 ID 计数器设置为生成器函数的一个属性。这个思路源于：函数也是对象，也可以拥有属性和方法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// JavaScript 中的函数也是对象，它继承自 Object.prototype</span></div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="comment">/* 一些语句 */</span> };</div><div class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf( f ); <span class="comment">// =&gt; true </span></div><div class="line"><span class="comment">// 这说明：f 原型继承自 Object.prototype，但不一定是直接继承，因为 isPrototypeOf 会识别整个原型链</span></div></pre></td></tr></table></figure>
 
-<p>关于原型和原型继承的理解可以<a href="http://yyblog.mocoer.com/2014/09/10/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E5%AF%B9%E8%B1%A1%E7%BB%A7%E6%89%BF/" target="_blank" rel="external">参考这里</a>。</p>
+<p>关于原型和原型继承的理解可以<a href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E5%AF%B9%E8%B1%A1%E7%BB%A7%E6%89%BF/" target="_blank" rel="external">参考这里</a>。</p>
 <p>于是，很容易的我们写出一个简单的 ID 计数器：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId;</div><div class="line">uniqId.idCounter = <span class="number">0</span>;</div><div class="line">uniqId = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">return</span> uniqId.idCounter+=<span class="number">1</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
 
