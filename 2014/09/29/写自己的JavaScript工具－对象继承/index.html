@@ -6,36 +6,36 @@
   
   <title>写自己的JavaScript工具－对象继承 | YY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。
+  <meta name="description" content="在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承（因此本篇叫做对象继承）。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。
 要点
 
 关于原型与所谓的原型继承的理解
 几种继承模式
 
 1. 关于原型继承与构造函数
-JavaScript 是基于原型的语言，而非基于类，但 JavaScript 依然引入了类（伪类）的概念（">
+JavaScript 是基于原型的语言，而非基于类，但 JavaScript 依然">
 <meta property="og:type" content="article">
 <meta property="og:title" content="写自己的JavaScript工具－对象继承">
 <meta property="og:url" content="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/">
 <meta property="og:site_name" content="YY">
-<meta property="og:description" content="在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。
+<meta property="og:description" content="在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承（因此本篇叫做对象继承）。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。
 要点
 
 关于原型与所谓的原型继承的理解
 几种继承模式
 
 1. 关于原型继承与构造函数
-JavaScript 是基于原型的语言，而非基于类，但 JavaScript 依然引入了类（伪类）的概念（">
+JavaScript 是基于原型的语言，而非基于类，但 JavaScript 依然">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="写自己的JavaScript工具－对象继承">
-<meta name="twitter:description" content="在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。
+<meta name="twitter:description" content="在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承（因此本篇叫做对象继承）。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。
 要点
 
 关于原型与所谓的原型继承的理解
 几种继承模式
 
 1. 关于原型继承与构造函数
-JavaScript 是基于原型的语言，而非基于类，但 JavaScript 依然引入了类（伪类）的概念（">
+JavaScript 是基于原型的语言，而非基于类，但 JavaScript 依然">
 
   
     <link rel="alternative" href="/atom.xml" title="YY" type="application/atom+xml">
@@ -115,7 +115,7 @@ JavaScript 是基于原型的语言，而非基于类，但 JavaScript 依然引
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。</p>
+        <p>在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承（因此本篇叫做对象继承）。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。</p>
 <h2 id="要点">要点</h2>
 <ol>
 <li>关于原型与所谓的原型继承的理解</li>

@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-11-04T05:34:23.482Z</updated>
+  <updated>2014-11-04T05:35:53.889Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -359,8 +359,8 @@
     <link href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E5%AF%B9%E8%B1%A1%E7%BB%A7%E6%89%BF/"/>
     <id>http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/</id>
     <published>2014-09-29T07:25:36.000Z</published>
-    <updated>2014-10-08T07:45:49.000Z</updated>
-    <content type="html"><![CDATA[<p>在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。</p>
+    <updated>2014-11-04T05:35:48.000Z</updated>
+    <content type="html"><![CDATA[<p>在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承（因此本篇叫做对象继承）。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。</p>
 <h2 id="要点">要点</h2>
 <ol>
 <li>关于原型与所谓的原型继承的理解</li>
