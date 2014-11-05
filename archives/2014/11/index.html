@@ -4,17 +4,17 @@
   <meta name="baidu-site-verification" content="r2KA3ATCfI" />
   <meta charset="utf-8">
   
-  <title>写自己的JavaScript工具－注册/取消注册事件 | YY</title>
+  <title>Archives: 2014/11 | YY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="P435">
-<meta property="og:type" content="article">
-<meta property="og:title" content="写自己的JavaScript工具－注册/取消注册事件">
-<meta property="og:url" content="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YY">
+<meta property="og:url" content="http://yyblog.mocoer.com/archives/2014/11/">
 <meta property="og:site_name" content="YY">
-<meta property="og:description" content="P435">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="写自己的JavaScript工具－注册/取消注册事件">
-<meta name="twitter:description" content="P435">
+<meta name="twitter:title" content="YY">
+<meta name="twitter:description">
 
   
     <link rel="alternative" href="/atom.xml" title="YY" type="application/atom+xml">
@@ -68,10 +68,12 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-写自己的JavaScript工具－注册:取消注册事件" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-关于==的误解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+    <a href="/2014/11/05/关于==的误解/" class="article-date">
+  <time datetime="2014-11-05T02:51:12.000Z" itemprop="datePublished">Nov 5 2014</time>
 </a>
     
   <div class="article-category">
@@ -85,8 +87,8 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      写自己的JavaScript工具－注册/取消注册事件
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/05/关于==的误解/">关于 == 的误解</a>
     </h1>
   
 
@@ -94,66 +96,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>P435</p>
+        <h2 id="关于_==_的误解">关于 == 的误解</h2>
+<p>问：今天面试被问到一个问题，true == 3 的结果是？<br>我第一反应是：</p>
+<ol>
+<li>Javascript 是若类型语言，“==”相等的概念很宽泛，这两个值都是真值，准话成 bool 类型后都为 true，应该相等；</li>
+<li>用 if( true ) 和 if( 3 ) ，都会进入 if 代码块，应该相等；</li>
+</ol>
+<p>于是随口回答： true。</p>
+<p><strong> 实际结果是: false。</strong></p>
+<p>查了下犀牛，了解到一下两点，可以分别解释上面两条误解：</p>
+<ol>
+<li>== 运算符从不试图将操作数转化成布尔值，如果两个操作数比较，其中一个是 bool 类型，的会先将 bool 类型值转化成数字（ true 转换为 1，false 转换为 0 ），然后再继续比较。</li>
+<li>只有 if 语句会将假值（undefined, null, NaN, 0, ‘’）转换成false，将其他值（真值）转换为true，然后进行比较。</li>
+</ol>
 
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/11/05/关于==的误解/">http://yyblog.mocoer.com/2014/11/05/关于==的误解/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/" data-id="rizpx96ljn2w6iu6" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/11/05/关于==的误解/" data-id="bubedd46u63xays6" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/11/05/关于==的误解/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
 
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2014/09/27/写自己的JavaScript工具－foreach/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          写自己的 JavaScript 工具－forEach
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2014/09/19/写自己的JavaScript工具－离线应用/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">写自己的JavaScript工具－推送</div>
-    </a>
-  
-</nav>
-
-  
 </article>
 
 
-<section id="comments">
-  <div id="disqus_thread">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'yyblogmocoercom'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-  </div>
-</section>
+  
+  
 </section>
         
           <aside id="sidebar">

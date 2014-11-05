@@ -70,6 +70,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-关于==的误解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/11/05/关于==的误解/" class="article-date">
+  <time datetime="2014-11-05T02:51:12.000Z" itemprop="datePublished">Nov 5 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/05/关于==的误解/">关于 == 的误解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="关于_==_的误解">关于 == 的误解</h2>
+<p>问：今天面试被问到一个问题，true == 3 的结果是？<br>我第一反应是：</p>
+<ol>
+<li>Javascript 是若类型语言，“==”相等的概念很宽泛，这两个值都是真值，准话成 bool 类型后都为 true，应该相等；</li>
+<li>用 if( true ) 和 if( 3 ) ，都会进入 if 代码块，应该相等；</li>
+</ol>
+<p>于是随口回答： true。</p>
+<p><strong> 实际结果是: false。</strong></p>
+<p>查了下犀牛，了解到一下两点，可以分别解释上面两条误解：</p>
+<ol>
+<li>== 运算符从不试图将操作数转化成布尔值，如果两个操作数比较，其中一个是 bool 类型，的会先将 bool 类型值转化成数字（ true 转换为 1，false 转换为 0 ），然后再继续比较。</li>
+<li>只有 if 语句会将假值（undefined, null, NaN, 0, ‘’）转换成false，将其他值（真值）转换为true，然后进行比较。</li>
+</ol>
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/11/05/关于==的误解/">http://yyblog.mocoer.com/2014/11/05/关于==的误解/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/11/05/关于==的误解/" data-id="bubedd46u63xays6" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/11/05/关于==的误解/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Backbone:AngularJS 框架对比（TODO LIST为例）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/10/22/Backbone:AngularJS 框架对比（TODO LIST为例）/" class="article-date">
@@ -780,80 +840,6 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－bind" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/29/写自己的JavaScript工具－bind/" class="article-date">
-  <time datetime="2014-09-28T17:46:13.000Z" itemprop="datePublished">Sep 29 2014</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/29/写自己的JavaScript工具－bind/">写自己的JavaScript工具－bind</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="要点">要点</h2>
-<ol>
-<li>扩展 JavaScript 基本类型的功能</li>
-<li>实现简单的 bind 方法</li>
-<li>实现完整的 bind 方法</li>
-</ol>
-<p>bind 方法，顾名思义是将一个函数绑定到一个对象，同时会生成一个新的函数。执行这个新的函数，就像在被绑定的对象上调用这个方法一些样。</p>
-<h3 id="1-_扩展_JavaScript_基本类型的功能">1. 扩展 JavaScript 基本类型的功能</h3>
-<p>再次用到之前为 Function 定义的 method 方法，该方法可以方便的为 Array、Number、Object、RegExp、Boolean 等（的原型对象）扩展新方法。<br><a href="http://yyblog.mocoer.com/2014/09/27/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dforeach/" target="_blank" rel="external">-&gt; 详见这里</a></p>
-<h3 id="2-_实现简单的_bind_方法">2. 实现简单的 bind 方法</h3>
-<p>ECMAScript 5 中已经引入了函数对象的 bind 方法，而在 ECMAScript 3 中需要自己来实现。</p>
-<p>利用上面的 method 方法，尝试给 Function 添加 bind 方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义简单的 bind 方法</span></div><div class="line"><span class="comment">// 方法接收1个参数：</span></div><div class="line"><span class="comment">// o : 指定当前函数要绑定到的对象</span></div><div class="line"><span class="comment">// 即 o 将替换当前函数中的 this 对象</span></div><div class="line"><span class="comment">// 方法返回一个新的函数</span></div><div class="line"><span class="built_in">Function</span>.method( <span class="string">'bind'</span>, <span class="function"><span class="keyword">function</span><span class="params">( o )</span></span>{</div><div class="line">    <span class="comment">// 记录调用该 bind 方法的对象（一个函数对象）</span></div><div class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="comment">// 将要绑定的对象 o 带入 that</span></div><div class="line">        <span class="comment">// 这里不能使用 this，因为在这个被返回的匿名函数中</span></div><div class="line">        <span class="comment">// this 指向的是全局对象（作为一个函数调用，而不是一个对象的方法时）</span></div><div class="line">        <span class="keyword">return</span> that.apply( o, <span class="built_in">arguments</span> );</div><div class="line">    }</div><div class="line">} );</div></pre></td></tr></table></figure>
-
-<p>然后可以像这样使用 bind 方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">( a, b )</span></span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.factor * ( a + b );</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">var</span> item = {</div><div class="line">    factor : <span class="number">10</span></div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">var</span> g = f.bind( item );</div><div class="line"></div><div class="line">g( <span class="number">1</span>, <span class="number">1</span> ); <span class="comment">// =&gt; 20</span></div><div class="line">g( <span class="number">1</span>, <span class="number">3</span> ); <span class="comment">// =&gt; 40</span></div></pre></td></tr></table></figure>
-
-<h3 id="3-_实现完整的_bind_方法">3. 实现完整的 bind 方法</h3>
-<p>然而，ECMAScript 5 中的 bind 方法不仅实现了上述功能，还实现了另外一个特性：<br>bind 除了接收一个对象为第一个参数以实现上述功能外，还可以接收更多额外参数，这些额外将被直接绑定到原函数的各个对应形参，可能还会剩余一些参数未被绑定，剩余的形参将由返回的新函数提供。</p>
-<p>这种特性称为“柯里化”，即对于一个函数，如果固定某些参数，将得到一个接收余下参数的新函数。所以对于有两个变量的函数f( x, y ) = xy，如果固定了 y = 2，则得到有一个变量的新函数 g( x ) = 2x。</p>
-<p>还是上面的例子，ECMAScript 5 中的 bind 方法可以实现“柯里化”：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> g = f.bind( item, <span class="number">1</span> ); <span class="comment">// 固定 a 为 1</span></div><div class="line"></div><div class="line"><span class="comment">// 新函数只需传入剩余的参数 b</span></div><div class="line">g( <span class="number">1</span> ); <span class="comment">// =&gt; 20 </span></div><div class="line">g( <span class="number">3</span> ); <span class="comment">// =&gt; 40</span></div></pre></td></tr></table></figure>
-
-<p>要实现这个特性，需要对一开始的简单 bind 方法做一些补充:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义完整的 bind 方法</span></div><div class="line"><span class="comment">// 方法接收至少1个参数：</span></div><div class="line"><span class="comment">// 第1个参数o : 指定当前函数要绑定到的对象</span></div><div class="line"><span class="comment">// 即 o 将替换当前函数中的 this 对象</span></div><div class="line"><span class="comment">// 之后的参数: 绑定到原函数的对应形参</span></div><div class="line"><span class="comment">// 方法返回一个新的函数，接收剩余的参数</span></div><div class="line"><span class="built_in">Function</span>.method( <span class="string">'bind'</span>, <span class="function"><span class="keyword">function</span><span class="params">( o <span class="comment">/* , args */</span> )</span></span>{</div><div class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>, </div><div class="line">        slice = <span class="built_in">Array</span>.prototype.slice,</div><div class="line">        args = slice.call( <span class="built_in">arguments</span>, <span class="number">1</span> ); <span class="comment">// bind 方法传入的参数</span></div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="comment">// 连接所有的实参并传入原函数，同时替换元函数中的 this 为 o</span></div><div class="line">        <span class="keyword">return</span> that.apply( o, args.concat( slice.call( <span class="built_in">arguments</span>, <span class="number">0</span> ) ) );</div><div class="line">    }</div><div class="line">} );</div></pre></td></tr></table></figure>
-
-<p>现在这个自定义的 bind 方法表现得与 ECMAScript 5 中的 bind 方法一致。</p>
-
-      
-
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－bind/">http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－bind/</a></p>
-
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－bind/" data-id="vwoj9ugguaezhrsa" class="article-share-link">Share</a>
-      
-        <a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－bind/#comments" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bind/">bind</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/categories/JavaScript/page/2/">2</a><a class="page-number" href="/categories/JavaScript/page/3/">3</a><a class="extend next" rel="next" href="/categories/JavaScript/page/2/">Next &raquo;</a>
@@ -867,7 +853,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">27</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">28</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -876,7 +862,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backbone/">Backbone</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/localStorage/">localStorage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backbone/">Backbone</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/localStorage/">localStorage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -894,7 +880,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -904,6 +890,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/11/05/关于==的误解/">关于 == 的误解</a>
+          </li>
         
           <li>
             <a href="/2014/10/22/Backbone:AngularJS 框架对比（TODO LIST为例）/">Backbone/AngularJS 框架简单对比（TODO LIST为例）</a>
@@ -919,10 +909,6 @@
         
           <li>
             <a href="/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/">写自己的JavaScript工具－跨域请求(JSONP)</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/01/写自己的JavaScript工具－max:min/">写自己的JavaScript工具－max/min</a>
           </li>
         
       </ul>
