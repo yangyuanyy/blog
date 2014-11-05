@@ -13,7 +13,7 @@ Javascript 是弱类型语言，“==”相等的概念很宽泛，这两个值�
 
 于是随口回答： true。
  实际结果是: false。
-查了下犀牛，了解到一下两点，可以分别解释上面两条">
+查了下犀牛，了解到以下两点，可以分别解释上面两条">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于 == 的误解">
 <meta property="og:url" content="http://yyblog.mocoer.com/2014/11/05/关于==的误解/">
@@ -25,7 +25,7 @@ Javascript 是弱类型语言，“==”相等的概念很宽泛，这两个值�
 
 于是随口回答： true。
  实际结果是: false。
-查了下犀牛，了解到一下两点，可以分别解释上面两条">
+查了下犀牛，了解到以下两点，可以分别解释上面两条">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 == 的误解">
 <meta name="twitter:description" content="问：今天面试被问到一个问题，true == 3 的结果是？我第一反应是：
@@ -35,7 +35,7 @@ Javascript 是弱类型语言，“==”相等的概念很宽泛，这两个值�
 
 于是随口回答： true。
  实际结果是: false。
-查了下犀牛，了解到一下两点，可以分别解释上面两条">
+查了下犀牛，了解到以下两点，可以分别解释上面两条">
 
   
     <link rel="alternative" href="/atom.xml" title="YY" type="application/atom+xml">
@@ -122,9 +122,9 @@ Javascript 是弱类型语言，“==”相等的概念很宽泛，这两个值�
 </ol>
 <p>于是随口回答： true。</p>
 <p><strong> 实际结果是: false。</strong></p>
-<p>查了下犀牛，了解到一下两点，可以分别解释上面两条误解：</p>
+<p>查了下犀牛，了解到以下两点，可以分别解释上面两条误解：</p>
 <ol>
-<li>== 运算符从不试图将操作数转化成布尔值，如果两个操作数比较，其中一个是 bool 类型，的会先将 bool 类型值转化成数字（ true 转换为 1，false 转换为 0 ），然后再继续比较。</li>
+<li><strong>== 运算符从不试图将操作数转化成布尔值，</strong>如果两个操作数比较，其中一个是 bool 类型，的会先将 bool 类型值转化成数字（ true 转换为 1，false 转换为 0 ），然后再继续比较。</li>
 <li>只有 if 语句会将假值（undefined, null, NaN, 0, ‘’）转换成false，将其他值（真值）转换为true，然后进行比较。</li>
 </ol>
 
