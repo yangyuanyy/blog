@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-11-05T03:01:46.670Z</updated>
+  <updated>2014-11-05T03:04:30.133Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -112,7 +112,7 @@
     <link href="http://yyblog.mocoer.com/2014/10/09/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/"/>
     <id>http://yyblog.mocoer.com/2014/10/09/写自己的JavaScript工具－本地存储/</id>
     <published>2014-10-09T09:08:07.000Z</published>
-    <updated>2014-10-15T15:42:31.000Z</updated>
+    <updated>2014-11-05T03:04:16.000Z</updated>
     <content type="html"><![CDATA[<h2 id="要点">要点</h2>
 <ol>
 <li>了解 localStorage</li>
@@ -167,7 +167,7 @@
 ]]></content>
     
     
-      <category term="javascript" scheme="http://yyblog.mocoer.com/tags/javascript/"/>
+      <category term="Javascript" scheme="http://yyblog.mocoer.com/tags/Javascript/"/>
     
       <category term="localStorage" scheme="http://yyblog.mocoer.com/tags/localStorage/"/>
     
@@ -574,44 +574,13 @@
   </entry>
   
   <entry>
-    <title><![CDATA[写自己的JavaScript工具－注册/取消注册事件]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%B3%A8%E5%86%8C:%E5%8F%96%E6%B6%88%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/</id>
-    <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-10-20T10:05:30.000Z</updated>
-    <content type="html"><![CDATA[<p>P435</p>
-]]></content>
-    
-    
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
-    
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/categories/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[写自己的JavaScript工具－推送]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E7%A6%BB%E7%BA%BF%E5%BA%94%E7%94%A8/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－离线应用/</id>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%8E%A8%E9%80%81/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－推送/</id>
     <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-10-09T07:54:13.000Z</updated>
-    <content type="html"><![CDATA[<p>P594</p>
+    <updated>2014-10-20T10:05:28.000Z</updated>
+    <content type="html"><![CDATA[<p>P508</p>
 ]]></content>
-    
-    
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
-    
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/categories/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[写自己的JavaScript工具－DOM选择器]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8DDOM%E9%80%89%E6%8B%A9%E5%99%A8/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－DOM选择器/</id>
-    <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-09-19T15:34:51.000Z</updated>
-    <content type="html"><![CDATA[]]></content>
     
     
       <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
@@ -637,28 +606,13 @@
   </entry>
   
   <entry>
-    <title><![CDATA[写自己的JavaScript工具－推送]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%8E%A8%E9%80%81/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－推送/</id>
+    <title><![CDATA[写自己的JavaScript工具－文档遍历]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%96%87%E6%A1%A3%E9%81%8D%E5%8E%86/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/</id>
     <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-10-20T10:05:28.000Z</updated>
-    <content type="html"><![CDATA[<p>P508</p>
+    <updated>2014-09-19T15:33:44.000Z</updated>
+    <content type="html"><![CDATA[<p>parents/child/siblings 等</p>
 ]]></content>
-    
-    
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
-    
-      <category term="JavaScript" scheme="http://yyblog.mocoer.com/categories/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[写自己的JavaScript工具－抽象类]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%8A%BD%E8%B1%A1%E7%B1%BB/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－抽象类/</id>
-    <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-09-19T15:32:46.000Z</updated>
-    <content type="html"><![CDATA[]]></content>
     
     
       <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
@@ -684,12 +638,67 @@
   </entry>
   
   <entry>
-    <title><![CDATA[写自己的JavaScript工具－键盘事件]]></title>
-    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6/"/>
-    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/</id>
+    <title><![CDATA[写自己的JavaScript工具－判断对象的类]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E5%88%A4%E6%96%AD%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－判断对象的类/</id>
     <published>2014-09-19T14:28:00.000Z</published>
-    <updated>2014-09-19T15:33:02.000Z</updated>
+    <updated>2014-10-16T06:00:52.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="要点">要点</h2>
+<ol>
+<li>了解 typeof</li>
+<li>了解 toString()</li>
+<li>实现 classOf()</li>
+</ol>
+<h3 id="1-_了解_typeof">1. 了解 typeof</h3>
+<h3 id="2-_了解_toString()">2. 了解 toString()</h3>
+<h3 id="3-_实现_classOf()">3. 实现 classOf()</h3>
+]]></content>
+    
+    
+      <category term="Javascript" scheme="http://yyblog.mocoer.com/tags/Javascript/"/>
+    
+      <category term="JavaScript" scheme="http://yyblog.mocoer.com/categories/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[写自己的JavaScript工具－元素位置及大小]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E5%85%83%E7%B4%A0%E4%BD%8D%E7%BD%AE%E5%8F%8A%E5%A4%A7%E5%B0%8F/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－元素位置及大小/</id>
+    <published>2014-09-19T14:28:00.000Z</published>
+    <updated>2014-09-19T15:34:09.000Z</updated>
     <content type="html"><![CDATA[]]></content>
+    
+    
+      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
+    
+      <category term="JavaScript" scheme="http://yyblog.mocoer.com/categories/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[写自己的JavaScript工具－一个集合类]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E4%B8%80%E4%B8%AA%E9%9B%86%E5%90%88%E7%B1%BB/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－一个集合类/</id>
+    <published>2014-09-19T14:28:00.000Z</published>
+    <updated>2014-09-19T15:34:01.000Z</updated>
+    <content type="html"><![CDATA[]]></content>
+    
+    
+      <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
+    
+      <category term="JavaScript" scheme="http://yyblog.mocoer.com/categories/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[写自己的JavaScript工具－注册/取消注册事件]]></title>
+    <link href="http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%B3%A8%E5%86%8C:%E5%8F%96%E6%B6%88%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6/"/>
+    <id>http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/</id>
+    <published>2014-09-19T14:28:00.000Z</published>
+    <updated>2014-10-20T10:05:30.000Z</updated>
+    <content type="html"><![CDATA[<p>P435</p>
+]]></content>
     
     
       <category term="JavaScript" scheme="http://yyblog.mocoer.com/tags/JavaScript/"/>
