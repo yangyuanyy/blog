@@ -4,12 +4,12 @@
   <meta name="baidu-site-verification" content="r2KA3ATCfI" />
   <meta charset="utf-8">
   
-  <title>Tag: JavaScript | YY</title>
+  <title>Tag: Javascript | YY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="YY">
-<meta property="og:url" content="http://yyblog.mocoer.com/tags/JavaScript/">
+<meta property="og:url" content="http://yyblog.mocoer.com/tags/Javascript/">
 <meta property="og:site_name" content="YY">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -70,10 +70,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-写自己的JavaScript工具－鼠标滚轮事件" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-关于==的误解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+    <a href="/2014/11/05/关于==的误解/" class="article-date">
+  <time datetime="2014-11-05T02:51:12.000Z" itemprop="datePublished">Nov 5 2014</time>
 </a>
     
   <div class="article-category">
@@ -88,7 +88,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/">写自己的JavaScript工具－鼠标滚轮事件</a>
+      <a class="article-title" href="/2014/11/05/关于==的误解/">关于 == 的误解</a>
     </h1>
   
 
@@ -96,19 +96,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>问：今天面试被问到一个问题，true == 3 的结果是？<br>我第一反应是：</p>
+<ol>
+<li>Javascript 是弱类型语言，“==”相等的概念很宽泛，这两个值都是真值，转换成 bool 类型后都为 true，应该相等；</li>
+<li>用 if( true ) 和 if( 3 ) ，都会进入 if 代码块，应该相等；</li>
+</ol>
+<p>于是随口回答： true。</p>
+<p><strong> 实际结果是: false。</strong></p>
+<p>查了下犀牛，了解到以下两点，可以分别解释上面两条误解：</p>
+<ol>
+<li><strong>== 运算符从不试图将操作数转化成布尔值，</strong>如果两个操作数比较，其中一个是 bool 类型，的会先将 bool 类型值转化成数字（ true 转换为 1，false 转换为 0 ），然后再继续比较。</li>
+<li>只有 if 语句会将假值（undefined, null, NaN, 0, ‘’）转换成false，将其他值（真值）转换为true，然后进行比较。</li>
+</ol>
+
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/11/05/关于==的误解/">http://yyblog.mocoer.com/2014/11/05/关于==的误解/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/" data-id="mjeq6fwn1lplmop6" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/11/05/关于==的误解/" data-id="tqnu6ohqddepxm37" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/11/05/关于==的误解/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
 
     </footer>
   </div>
@@ -117,10 +129,10 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－键盘事件" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Backbone:AngularJS 框架对比（TODO LIST为例）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－键盘事件/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+    <a href="/2014/10/22/Backbone:AngularJS 框架对比（TODO LIST为例）/" class="article-date">
+  <time datetime="2014-10-22T12:49:00.000Z" itemprop="datePublished">Oct 22 2014</time>
 </a>
     
   <div class="article-category">
@@ -135,7 +147,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－键盘事件/">写自己的JavaScript工具－键盘事件</a>
+      <a class="article-title" href="/2014/10/22/Backbone:AngularJS 框架对比（TODO LIST为例）/">Backbone/AngularJS 框架简单对比（TODO LIST为例）</a>
     </h1>
   
 
@@ -143,19 +155,66 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p><a href="http://backbonejs.org/" target="_blank" rel="external">Backbone</a> 和 <a href="http://angularjs.org" target="_blank" rel="external">AngularJS</a> 都是目前非常流行的Web应用开发框架。他们有显著的不同，如果 Backbone 帮你架好了钢筋水泥，那 AngularJS 甚至做完了精装修。但并不说明谁更“好”，选择哪种框架开发，取决于项目的各方面需求和特点。</p>
+<p>因此，这里通过两个实例（同样的应用，不同的框架），来大体了解到二者的特点。</p>
+<p>本文 Demo :<br><a href="http://yyblog.mocoer.com/lives/todolist_backbone/" target="_blank" rel="external">Backbone 版</a></p>
+<h2 id="要点">要点</h2>
+<ol>
+<li>构思 TODO LIST 应用</li>
+<li>基于 Backbone 的 TODO LIST 应用</li>
+<li>基于 AngularJS 的 TODO LIST 应用</li>
+</ol>
+<h3 id="1-_构思_TODO_LIST_应用">1. 构思 TODO LIST 应用</h3>
+<p>TODO LIST 就是一个事项记录薄，基本功能包括：</p>
+<ul>
+<li>a. 添加一条代办事项</li>
+<li>b. 删去一条待办事项</li>
+<li>c. 完成一条代办事项</li>
+<li>d. 查看待办事项统计</li>
+</ul>
+<p>一个典型的 CURD 类应用（ AngularJS 在开发这类应用时占有绝对优势 ）。<br>为了简单快捷，这里在 Bootstrap 框架下进行开发。</p>
+<h3 id="2-_基于_Backbone_的_TODO_LIST_应用">2. 基于 Backbone 的 TODO LIST 应用</h3>
+<p>首先是 Backbone 版 TODO LIST，页面中引入 backbone.js 和所有必要文件：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"/styles/bootstrap.css"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"/styles/todolist.css"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- bootstrap 和 backbone 依赖 jquery --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/scripts/jquery.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/scripts/bootstrap.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- backbone 依赖 underscore --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/scripts/underscore.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/scripts/backbone.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/scripts/backboneStorage.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>在我基本完成了程序时，发现 backbone 官方文档中提供了一个非常类似的例子…于是与之做了比较，对两个版本我认为好的点进行了整合，就有了下面看到的版本。</p>
+<p>再来确认一下基本思路（代码注释中还会再次提示这些思路的具体体现）：</p>
+<ul>
+<li>a. 用户交互事件触发视图方法；</li>
+<li>b. 视图方法改变模型或集合（如果有必要，最好是有两层方法，第一层用来处理用户交互事件，第二层才是真正改变模型或集合，这样就有可能提供接口来脱离用户交互直接操作应用）；</li>
+<li>c. 模型或集合的改变再触发视图的改变。</li>
+</ul>
+<p>下面是具体实现：</p>
+<p>html:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"App"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"header panel-heading"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"itemCounter"</span>&gt;</span><span class="comment">&lt;!-- 统计将在这里 --&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">        TODO LIST</div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"content"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">input</span> <span class="attribute">id</span>=<span class="value">"newTodo"</span> <span class="attribute">class</span>=<span class="value">"form-control"</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">placeholder</span>=<span class="value">"Remind me to do..."</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"list list-group pannel-body"</span>&gt;</span><span class="comment">&lt;!-- 事项视图将 prepend 在这 --&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 事项视图模板 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">id</span>=<span class="value">"item-temp"</span> <span class="attribute">type</span>=<span class="value">"text/html"</span>&gt;</span><span class="javascript"></span></div><div class="line">    &lt;div <span class="keyword">class</span>=<span class="string">"checkbox"</span>&gt;</div><div class="line">        <span class="xml"><span class="tag">&lt;<span class="title">label</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span> &lt;% <span class="attribute">if</span>(<span class="attribute">done</span>){ %&gt;</span> checked <span class="vbscript">&lt;% } %&gt;</span> /&gt;</div><div class="line">            <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"title"</span>&gt;</span><span class="vbscript">&lt;%= title %&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="title">label</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"remove glyphicon glyphicon-remove"</span>&gt;</span> <span class="tag">&lt;/<span class="title">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 事项统计模板 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">id</span>=<span class="value">"itemCounter-temp"</span> <span class="attribute">type</span>=<span class="value">"text/html"</span>&gt;</span><span class="javascript"></span></div><div class="line">    &lt;span&gt;Done : <span class="xml"><span class="vbscript">&lt;%= done %&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="title">span</span>&gt;</span>Undone : <span class="vbscript">&lt;%= undone %&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>javascript : </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// TODO LIST APP</span></div><div class="line"><span class="comment">// =============</span></div><div class="line"><span class="keyword">var</span> App = ( <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line"></div><div class="line"><span class="comment">// A. 需要的 1 个模型：</span></div><div class="line"><span class="comment">//     * Item （ 事项模型 ）</span></div><div class="line"><span class="comment">// 定义 Item 模型 : </span></div><div class="line"><span class="keyword">var</span> Item = Backbone.Model.extend( {</div><div class="line">    <span class="comment">// 事项的默认属性值</span></div><div class="line">    defaults : {</div><div class="line">        title : <span class="string">''</span>, <span class="comment">// 事项名称</span></div><div class="line">        done  : <span class="literal">false</span> <span class="comment">// 是否完成</span></div><div class="line">    },</div><div class="line">    <span class="comment">// 切换事项完成状态</span></div><div class="line">    toggle : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">this</span>.save( { done : ! <span class="keyword">this</span>.get( <span class="string">'done'</span> ) } );</div><div class="line">    }</div><div class="line">} );</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// B. 需要的 1 个集合：</span></div><div class="line"><span class="comment">//     * List （ 事项列表 ）</span></div><div class="line"><span class="comment">// 定义 List : </span></div><div class="line"><span class="keyword">var</span> List = Backbone.Collection.extend( {</div><div class="line">    model : Item,</div><div class="line">    <span class="comment">// 以 TODOLIST 作为本地存储的命名空间</span></div><div class="line">    localStorage: <span class="keyword">new</span> Backbone.LocalStorage( <span class="string">'TODOLIST'</span> ),</div><div class="line">    <span class="comment">// 完成事项列表</span></div><div class="line">    done : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="comment">// 使用 Collection 的 where 接口可以非常方便的获取满足属性条件的模型列表</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.where( { done : <span class="literal">true</span> } );</div><div class="line">    },</div><div class="line">    <span class="comment">// 未完成事项列表</span></div><div class="line">    undone : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.where( { done : <span class="literal">false</span> } );</div><div class="line">    }</div><div class="line">} );</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// C. 需要的 2 个视图：</span></div><div class="line"><span class="comment">//     * ItemView （ 事项视图 ）</span></div><div class="line"><span class="comment">//     * AppView （ 应用视图，其实例将成为应用的对外接口 ）</span></div><div class="line"><span class="comment">// 定义 ItemView : </span></div><div class="line"><span class="keyword">var</span> ItemView = Backbone.View.extend( {</div><div class="line">    tagName : <span class="string">'a'</span>,</div><div class="line">    className : <span class="string">'list-group-item'</span>, <span class="comment">// Bootstrap 样式</span></div><div class="line">    template : _.template( $( <span class="string">'#item-temp'</span> ).html() ),</div><div class="line">    <span class="comment">// 想想基本思路a：用户交互事件触发视图方法</span></div><div class="line">    events : {</div><div class="line">        <span class="string">'click'</span>         : <span class="string">'toggle'</span>,</div><div class="line">        <span class="string">'click .remove'</span> : <span class="string">'removeItem'</span></div><div class="line">    },</div><div class="line">    initialize : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="comment">// 想想基本思路c：模型或集合的改变再触发视图的改变</span></div><div class="line">        <span class="keyword">this</span>.listenTo( <span class="keyword">this</span>.model, <span class="string">'change'</span>, <span class="keyword">this</span>.render );</div><div class="line">        <span class="keyword">this</span>.listenTo( <span class="keyword">this</span>.model, <span class="string">'destroy'</span>, <span class="keyword">this</span>.remove );</div><div class="line">    },</div><div class="line">    render : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">this</span>.$el.html( <span class="keyword">this</span>.template( <span class="keyword">this</span>.model.toJSON() ) );</div><div class="line">        <span class="keyword">this</span>.$el.toggleClass( <span class="string">'done'</span>, <span class="keyword">this</span>.model.get( <span class="string">'done'</span> ) );</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    },</div><div class="line">    <span class="comment">// 想想基本思路b：视图方法改变模型或集合</span></div><div class="line">    toggle : <span class="function"><span class="keyword">function</span><span class="params">( e )</span></span>{</div><div class="line">        <span class="keyword">this</span>.model.toggle();</div><div class="line">    },</div><div class="line">    <span class="comment">// 想想基本思路b：视图方法改变模型或集合</span></div><div class="line">    removeItem : <span class="function"><span class="keyword">function</span><span class="params">( e )</span></span>{</div><div class="line">        <span class="keyword">this</span>.model.destroy();</div><div class="line">        e.stopPropagation();</div><div class="line">    }</div><div class="line">} );</div><div class="line"></div><div class="line"><span class="comment">// 定义 AppView : </span></div><div class="line"><span class="comment">// 该视图承载了主要的业务逻辑</span></div><div class="line"><span class="keyword">var</span> AppView = Backbone.View.extend( {</div><div class="line">    el : $( <span class="string">'#App'</span> ),</div><div class="line">    <span class="comment">// 想想基本思路a：用户交互事件触发视图方法</span></div><div class="line">    events : {</div><div class="line">        <span class="string">'keydown #newTodo'</span> : <span class="string">'addItemByInput'</span></div><div class="line">    },</div><div class="line">    itemCounterTemp : _.template( $( <span class="string">'#itemCounter-temp'</span> ).html() ),</div><div class="line">    initialize : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">this</span>.$input = <span class="keyword">this</span>.$( <span class="string">'#newTodo'</span> );</div><div class="line">        <span class="keyword">this</span>.$list = <span class="keyword">this</span>.$( <span class="string">'.list'</span> );</div><div class="line">        <span class="keyword">this</span>.$itemCounter = <span class="keyword">this</span>.$( <span class="string">'.itemCounter'</span> );</div><div class="line">        <span class="comment">// 想想基本思路c：模型或集合的改变再触发视图的改变</span></div><div class="line">        <span class="keyword">this</span>.listenTo( list, <span class="string">'add'</span>, <span class="keyword">this</span>.addItemView );</div><div class="line">        <span class="keyword">this</span>.listenTo( list, <span class="string">'reset'</span>, <span class="keyword">this</span>.addItemByLocalStorage );</div><div class="line">        <span class="keyword">this</span>.listenTo( list, <span class="string">'all'</span>, <span class="keyword">this</span>.render );</div><div class="line"></div><div class="line">        list.fetch();</div><div class="line">    },</div><div class="line">    render : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">var</span> done = list.done().length,</div><div class="line">            undone = list.undone().length;</div><div class="line">        <span class="keyword">if</span> ( ! list.length ) {</div><div class="line">            <span class="keyword">this</span>.$itemCounter.hide();</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> {</div><div class="line">            <span class="keyword">this</span>.$itemCounter.show();</div><div class="line">            <span class="keyword">this</span>.$itemCounter.html( <span class="keyword">this</span>.itemCounterTemp( { done : done, undone : undone } ) );</div><div class="line">        }</div><div class="line">    },</div><div class="line">    addItemView : <span class="function"><span class="keyword">function</span><span class="params">( model )</span></span>{</div><div class="line">        <span class="keyword">var</span> view = <span class="keyword">new</span> ItemView( { model : model } );</div><div class="line">        <span class="keyword">this</span>.$list.prepend( view.render().el );</div><div class="line">    },</div><div class="line">    addItemByLocalStorage : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        list.each( <span class="keyword">this</span>.addItem, <span class="keyword">this</span> );</div><div class="line">    },</div><div class="line">    <span class="comment">// 想想基本思路b：视图方法改变模型或集合</span></div><div class="line">    addItemByInput : <span class="function"><span class="keyword">function</span><span class="params">( e )</span></span>{</div><div class="line">        <span class="keyword">if</span>( <span class="keyword">this</span>.$input.val() === <span class="string">''</span> || e.keyCode !== <span class="number">13</span> ) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">this</span>.addItem( { title : <span class="keyword">this</span>.$input.val() } );</div><div class="line">        <span class="keyword">this</span>.$input.val( <span class="string">''</span> );</div><div class="line">    },</div><div class="line">    <span class="comment">// 对外提供的接口</span></div><div class="line">    addItem : <span class="function"><span class="keyword">function</span><span class="params">( props )</span></span>{</div><div class="line">        props && props.title && list.create( props );</div><div class="line">    },</div><div class="line">    <span class="comment">// 对外提供的接口</span></div><div class="line">    removeItem : <span class="function"><span class="keyword">function</span><span class="params">( id )</span></span>{</div><div class="line">        list.get( id ) && list.get( id ).destroy();</div><div class="line">    },</div><div class="line">    <span class="comment">// 对外提供接口</span></div><div class="line">    toggleItem : <span class="function"><span class="keyword">function</span><span class="params">( id )</span></span>{</div><div class="line">        list.get( id ) && list.get( id ).toggle();</div><div class="line">    }</div><div class="line">} );</div><div class="line"></div><div class="line"><span class="keyword">var</span> list = <span class="keyword">new</span> List;</div><div class="line"><span class="keyword">var</span> App = <span class="keyword">new</span> AppView();</div><div class="line"></div><div class="line"><span class="comment">// 提供一些接口</span></div><div class="line"><span class="keyword">return</span> {</div><div class="line">    addItem    : App.addItem,</div><div class="line">    removeItem : App.removeItem,</div><div class="line">    toggleItem : App.toggleItem</div><div class="line">}</div><div class="line"></div><div class="line">}() );</div></pre></td></tr></table></figure>
+
+<h3 id="3-_基于_AngularJS_的_TODO_LIST_应用">3. 基于 AngularJS 的 TODO LIST 应用</h3>
+<p>如果打算对 AngularJS 做深入的学习和开发实践，建议配置一个方便开发和测试的整体环境。<a href="http://yyblog.mocoer.com/2014/08/22/%E5%AD%A6%E4%B9%A0%20AngularJS%20%EF%BC%8D%20%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" target="_blank" rel="external">详见这里</a>。</p>
+<p>现在是 AngularJS 版的 TODO LIST，首先引入 AngularJS 和必要的文件，其中用到了之前写过的 cookieStorage.js。<a href="http://yyblog.mocoer.com/2014/10/09/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/" target="_blank" rel="external">详见这里</a>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">href</span>=<span class="value">"bootstrap.css"</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"underscore.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"jquery.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"angular.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 引入了之前写的 cookie API，详见“本地存储”那一篇 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"cookieStorage.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"bootstrap.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>接下来是应用的 HTML 结构，AngularJS 引入的模板引擎和丰富的指令，大大强化了 HTML 的能力：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">ng-app</span>=<span class="value">"todoListModule"</span> <span class="attribute">ng-controller</span>=<span class="value">"TodoListController"</span> <span class="attribute">id</span>=<span class="value">"App"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"header panel-heading"</span> <span class="attribute">style</span>=<span class="value">"padding: 10px 12px;"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">ng-class</span>=<span class="value">'{hide : items.length == 0}'</span> <span class="attribute">class</span>=<span class="value">"itemCounter"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="title">span</span>&gt;</span>完成 : 0<span class="tag">&lt;/<span class="title">span</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="title">span</span>&gt;</span>未完成 : 0<span class="tag">&lt;/<span class="title">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"content"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">input</span> <span class="attribute">ng-keydown</span>=<span class="value">"handleInput"</span> <span class="attribute">ng-model</span>=<span class="value">"newTitle"</span> <span class="attribute">id</span>=<span class="value">"newTodo"</span> <span class="attribute">class</span>=<span class="value">"form-control"</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">placeholder</span>=<span class="value">"新建事项..."</span> <span class="attribute">autofocus</span>=<span class="value">"autofocus"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"list list-group pannel-body"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="title">a</span> <span class="attribute">ng-repeat</span>=<span class="value">"item in items"</span> <span class="attribute">ng-click</span>=<span class="value">"toggle( $index )"</span> <span class="attribute">ng-class</span>=<span class="value">"{done : item.done}"</span> <span class="attribute">class</span>=<span class="value">"list-group-item"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"checkbox"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="title">label</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="title">input</span> <span class="attribute">ng-model</span>=<span class="value">"item.done"</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"title"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="title">label</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="title">span</span> <span class="attribute">ng-click</span>=<span class="value">"remove( $index, $event )"</span> <span class="attribute">class</span>=<span class="value">"remove glyphicon glyphicon-remove"</span>&gt;</span> <span class="tag">&lt;/<span class="title">span</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>最后是 JS 脚本，可以明显感觉到 AngularJS 帮我们做了很多事，如模型和视图的双向绑定，模块化的开发方式，实用的指令控制UI和事件，相比 Backbone，AngularJS 为开发者服务的更加周到：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义 todoList 模块</span></div><div class="line"><span class="keyword">var</span> todoListModule = angular.module( <span class="string">'todoListModule'</span>, [] );</div><div class="line"></div><div class="line"><span class="comment">// 定义一个 Items 服务，用于操作本地数据的 CURD</span></div><div class="line">todoListModule.factory( <span class="string">'Items'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> memory = ( <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> localStorage || cookieStorage;</div><div class="line">    }() );</div><div class="line">    <span class="comment">// 将作为 Items 服务的实例返回</span></div><div class="line">    <span class="keyword">var</span> items = {};</div><div class="line">    <span class="comment">// 查询全部事项</span></div><div class="line">    items.query = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">var</span> d = memory.getItem( <span class="string">'todoList'</span> );</div><div class="line">        <span class="keyword">return</span> ( d && <span class="built_in">JSON</span>.parse( d ) ) || [];</div><div class="line">    }</div><div class="line">    <span class="comment">// 插入新事项</span></div><div class="line">    items.add = <span class="function"><span class="keyword">function</span><span class="params">( data )</span></span>{</div><div class="line">        <span class="keyword">var</span> d = memory.getItem( <span class="string">'todoList'</span> );</div><div class="line">        d = ( d && <span class="built_in">JSON</span>.parse( d ) ) || [];</div><div class="line">        d.unshift( data );</div><div class="line">        memory.setItem( <span class="string">'todoList'</span>, <span class="built_in">JSON</span>.stringify( d ) );</div><div class="line">    }</div><div class="line">    <span class="comment">// 更新事项</span></div><div class="line">    items.update = <span class="function"><span class="keyword">function</span><span class="params">( index, data )</span></span>{</div><div class="line">        <span class="keyword">var</span> d = memory.getItem( <span class="string">'todoList'</span> );</div><div class="line">        <span class="keyword">if</span>( d ){</div><div class="line">            d = <span class="built_in">JSON</span>.parse( d );</div><div class="line">            d[ index ] = data;</div><div class="line">            memory.setItem( <span class="string">'todoList'</span>, <span class="built_in">JSON</span>.stringify( d ) );</div><div class="line">        }</div><div class="line">    }</div><div class="line">    <span class="comment">// 删除事项</span></div><div class="line">    items.remove = <span class="function"><span class="keyword">function</span><span class="params">( index )</span></span>{</div><div class="line">        <span class="keyword">var</span> d = memory.getItem( <span class="string">'todoList'</span> );</div><div class="line">        <span class="keyword">if</span>( d ){</div><div class="line">            d = <span class="built_in">JSON</span>.parse( d );</div><div class="line">            d.splice( index, <span class="number">1</span> );</div><div class="line">            memory.setItem( <span class="string">'todoList'</span>, <span class="built_in">JSON</span>.stringify( d ) );</div><div class="line">        }</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> items;</div><div class="line">} );</div><div class="line"></div><div class="line"><span class="comment">// 定义一个 ngKeydown 指令，用于处理用户的键盘按下事件</span></div><div class="line">todoListModule.directive( <span class="string">'ngKeydown'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">return</span> {</div><div class="line">        link : <span class="function"><span class="keyword">function</span><span class="params">( scope, element, attrs )</span></span>{</div><div class="line">            <span class="keyword">var</span> handler = scope[ attrs.ngKeydown ];</div><div class="line">            element.bind( <span class="string">'keydown'</span>, handler );         </div><div class="line">        }</div><div class="line">    }</div><div class="line">} );</div><div class="line"></div><div class="line"><span class="comment">// TodoList 控制器</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">TodoListController</span><span class="params">( $scope, Items )</span></span>{</div><div class="line">    <span class="comment">// 通过 Items 服务读取本地数据</span></div><div class="line">    $scope.items = Items.query();</div><div class="line"></div><div class="line">    <span class="comment">// 如果是从服务器存取，我们还要借助 Angular 的 $resouece 服务或者 $http 做一些额外的事情. 但是这个例子并没有涉及与服务器的交互。</span></div><div class="line"></div><div class="line">    <span class="comment">// 完成的事项集</span></div><div class="line">    $scope.done = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> _.where( $scope.items, { done : <span class="literal">true</span> } );</div><div class="line">    }</div><div class="line">    <span class="comment">// 未完成的事项集</span></div><div class="line">    $scope.undone = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> _.where( $scope.items, { done : <span class="literal">false</span> } );</div><div class="line">    }</div><div class="line">    <span class="comment">// 切换事项状态</span></div><div class="line">    $scope.toggle = <span class="function"><span class="keyword">function</span><span class="params">( index )</span></span>{</div><div class="line">        $scope.items[ index ].done = ! $scope.items[ index ].done;</div><div class="line">        Items.update( index, $scope.items[ index ] );</div><div class="line">    }</div><div class="line">    <span class="comment">// 删除事项</span></div><div class="line">    $scope.remove = <span class="function"><span class="keyword">function</span><span class="params">( index, event )</span></span>{</div><div class="line">        event.preventDefault();</div><div class="line">        $scope.items.splice( index, <span class="number">1</span> );</div><div class="line">        Items.remove( index );</div><div class="line">    }</div><div class="line">    <span class="comment">// 新事项名称</span></div><div class="line">    $scope.newTitle = <span class="string">''</span>;</div><div class="line">    <span class="comment">// 用户输入事件处理方法</span></div><div class="line">    $scope.handleInput = <span class="function"><span class="keyword">function</span><span class="params">( event )</span></span>{</div><div class="line">        <span class="comment">// 这里需要显式的调用 $scope.$apply 服务，以让 Angular 立即刷新模型和视图</span></div><div class="line">        $scope.$apply( <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">            <span class="keyword">var</span> el = angular.element( event.target );</div><div class="line">            <span class="keyword">if</span>( event.keyCode === <span class="number">13</span> && $scope.newTitle.trim() != <span class="string">''</span> ){</div><div class="line">                <span class="keyword">var</span> newItem = { title : $scope.newTitle , done : <span class="literal">false</span> };</div><div class="line">                $scope.items.unshift( newItem );</div><div class="line">                Items.add( newItem );</div><div class="line">                $scope.newTitle =<span class="string">''</span>;</div><div class="line">            }</div><div class="line">        } );</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/10/22/Backbone:AngularJS 框架对比（TODO LIST为例）/">http://yyblog.mocoer.com/2014/10/22/Backbone:AngularJS 框架对比（TODO LIST为例）/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/" data-id="texx2x5pe7a0pr8k" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/10/22/Backbone:AngularJS 框架对比（TODO LIST为例）/" data-id="i2lzwxin77762fm3" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－键盘事件/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/10/22/Backbone:AngularJS 框架对比（TODO LIST为例）/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AngularJS/">AngularJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Backbone/">Backbone</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
 
     </footer>
   </div>
@@ -164,10 +223,10 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－离线应用" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-写自己的JavaScript工具－本地存储" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－离线应用/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+    <a href="/2014/10/09/写自己的JavaScript工具－本地存储/" class="article-date">
+  <time datetime="2014-10-09T09:08:07.000Z" itemprop="datePublished">Oct 9 2014</time>
 </a>
     
   <div class="article-category">
@@ -182,7 +241,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－离线应用/">写自己的JavaScript工具－推送</a>
+      <a class="article-title" href="/2014/10/09/写自己的JavaScript工具－本地存储/">写自己的JavaScript工具－本地存储</a>
     </h1>
   
 
@@ -190,20 +249,70 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>P594</p>
+        <h2 id="要点">要点</h2>
+<ol>
+<li>了解 localStorage</li>
+<li>了解 cookie</li>
+<li>实现 memory 模块</li>
+</ol>
+<h3 id="1-_了解_localStorage">1. 了解 localStorage</h3>
+<p>HTML5 的关于 Web 存储标准包含了关于 localStorage 对象。（和 sessionStorage 对象，它们的区别主要是在作用域和有效期，但 API 大同小异。）</p>
+<p>localStorage 对象是客户端 Window 对象的属性，作为一种本地存储方案，我们需要关心它的三个方面：有效期，作用域和存取方法。</p>
+<h4 id="a-_localStorage_有效期">a. localStorage 有效期</h4>
+<p>localStorage 的有效期是永久性的，也就是说，除非用户做删除操作，否则通过 localStorage 存储的数据是永久保存在用户电脑上的。</p>
+<h4 id="b-_localStorage_作用域">b. localStorage 作用域</h4>
+<p>localStorage 的作用域是文档源级别的，文档原由协议、主机名、端口共同定义：</p>
+<p><a href="http://www.xxx.com" target="_blank" rel="external">http://www.xxx.com</a><br><a href="https://www.xxx.com" target="_blank" rel="external">https://www.xxx.com</a><br><a href="http://sub.xxx.com" target="_blank" rel="external">http://sub.xxx.com</a><br><a href="http://sub.xxx.com:4000" target="_blank" rel="external">http://sub.xxx.com:4000</a></p>
+<p>上面这些都是不同文档源，相互不能共享 localStorage 的数据，只有同文档源的中的文档可以共享对方的 localStorage 数据。</p>
+<p>localStorage 同时制约于浏览器厂商，不同浏览器之间不能共享。</p>
+<h4 id="c-_localStorage_存取方法">c. localStorage 存取方法</h4>
+<p>localStorage 存取、删除数据的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 保存数据</span></div><div class="line"><span class="comment">// 方式1（直接定义属性值）</span></div><div class="line">localStorage.username = <span class="string">'yy'</span>;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.setItem( <span class="string">'username'</span>, <span class="string">'yy'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 获取数据</span></div><div class="line"><span class="comment">// 方式1（直接读取属性值）</span></div><div class="line">localStorage.username;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.getItem( <span class="string">'username'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 删除指定数据</span></div><div class="line"><span class="comment">// 方式1（通过 delete 操作符）</span></div><div class="line"><span class="keyword">delete</span> localStorage.username;</div><div class="line"><span class="comment">// 方式2（通过 API）</span></div><div class="line">localStorage.removeItem( <span class="string">'username'</span> );</div><div class="line"></div><div class="line"><span class="comment">// 删除全部数据</span></div><div class="line">localStorage.clear();</div></pre></td></tr></table></figure>
+
+<p>但是还是尽量使用 API 的方式，一个原因就是，当我们为了兼容不支持 localStorage 的浏览器时，可能需要通过 cookie 作为替代方案，这时我们只需要再针对 cookie 定义和 localStorage 同样的方法，就可以实现一个统一、兼容的本地存储方案。</p>
+<p>还有需要了解的是 localStorage 目前只能存储字符串类型的数据。如果尝试存储数组或对象，客户端会先调用它们的 toString() 方法，然后再将转换成字符串的数据存储起来:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">localStorage.arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line">localSrorage.arr <span class="comment">// =&gt; "1,2,3"</span></div><div class="line"></div><div class="line">localStorage.obj = { username : <span class="string">'yy'</span> };</div><div class="line">localStorage.obj <span class="comment">// =&gt; "[object Object]"</span></div></pre></td></tr></table></figure>
+
+<p>所以如果要存取对象类型的数据，需要做一些编码、解码工作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = { username : <span class="string">'yy'</span> };</div><div class="line">localStorage.obj = <span class="built_in">JSON</span>.stringify( obj );</div><div class="line">localStorage.obj <span class="comment">// =&gt; "{"username":"yy"}"</span></div><div class="line">obj = <span class="built_in">JSON</span>.parse( localStorage.obj ); <span class="comment">// =&gt; Object {username: "yy"}</span></div></pre></td></tr></table></figure>
+
+<h3 id="2-_了解_cookie">2. 了解 cookie</h3>
+<p>在 localStorage 真正成为标准之前，cookie 作为本地存储的方案依然使用广泛，因为 cookie 的兼容性非常好。对于 cookie，我们依然是关心它的三个方面：有效期、作用域和存取方法。</p>
+<h4 id="a-_cookie_有效期">a. cookie 有效期</h4>
+<p>cookie 的有效期是通过设置 max-age 完成的，以秒为单位。如果没有定义一个 cookie 的 max-age 值，则有效期默认为浏览器关闭时结束。一旦设置了 cookie 的有效期，则浏览器会将 cookie 数据存储在一个本地文件中，直到有效期结束，保存的数据会被删除（或直到用户手动清除了浏览器 cookie ）。</p>
+<h4 id="b-_cookie_作用域">b. cookie 作用域</h4>
+<p>默认情况下，cookie 的作用域是创建它的页面所在目录和子目录。但是可以通过设置 domain 来扩大他的作用域。比如 <a href="http://www.xxx.com/cates/index.html" target="_blank" rel="external">http://www.xxx.com/cates/index.html</a> 页面创建了一个 cookie，那么 <a href="http://www.xxx.com/cates/list.html、http://www.xxx.com/cates/items/item.html" target="_blank" rel="external">http://www.xxx.com/cates/list.html、http://www.xxx.com/cates/items/item.html</a> 都可以访问该 cookie。而 <a href="http://www.xxx.com/index.html" target="_blank" rel="external">http://www.xxx.com/index.html</a> 就无法访问该 cookie。但是可以通过设置 cookie 的 domain 值为 ‘/‘ 来让该主机上的所有文件都可以访问该 cookie。</p>
+<p>cookie 同时制约于浏览器厂商，即不同的浏览器有各自独立的 cookie。</p>
+<h4 id="c-_cookie_的操作">c. cookie 的操作</h4>
+<p>存储 cookie</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 保存（修改）数据（一次只能设置一个值）</span></div><div class="line"><span class="built_in">document</span>.cookie = <span class="string">'username=yy'</span>; </div><div class="line"><span class="comment">// 保存数据同时设定有效期</span></div><div class="line"><span class="built_in">document</span>.cookie = <span class="string">'username=yy; max-age=3600'</span>; <span class="comment">// 有效期为1小时（3600秒）</span></div><div class="line"><span class="comment">// 保存数据同时设定有效期和作用域</span></div><div class="line"><span class="comment">// 有效期为1小时，可被a.xxx.com 和 b.xxx.com 共享</span></div><div class="line"><span class="built_in">document</span>.cookie = <span class="string">'username=yy; max-age=3600; domain=.xxx.com; path=/'</span>;</div></pre></td></tr></table></figure>
+
+<p>读取 cookie</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 读取数据</span></div><div class="line"><span class="built_in">document</span>.cookie; <span class="comment">// 将输出类似 data1=value1; data2=value2 名值对形式的字符串</span></div></pre></td></tr></table></figure>
+
+<p>删除 cookie</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 删除数据</span></div><div class="line"><span class="built_in">document</span>.cookie = <span class="string">'username=value;max-age=0'</span>; <span class="comment">// 将要删除的cookie名指定为任意值，然后设置 max-age 为 0</span></div></pre></td></tr></table></figure>
+
+<h3 id="3-_实现_memory_模块">3. 实现 memory 模块</h3>
+<p>定义 cookieStorage 模块，仿照 localStorage</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 首先需要实现一个 cookieStorage 模块（对象）</span></div><div class="line"><span class="comment">// 该模块有着与 localStorage 相同的方法（这里没有完全相同，只提供了主要的方法）</span></div><div class="line"><span class="comment">// 这样的话，我们就可以在支持 localStorage 和使用 cookieStorage 替代方案的</span></div><div class="line"><span class="comment">// 环境中统一使用我们最后定义的 memory 的模块了</span></div><div class="line"><span class="keyword">var</span> cookieStorage = ( <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="comment">// 在这里可以对 cookie 的有效期和作用域做配置</span></div><div class="line">    <span class="keyword">var</span> config = {</div><div class="line">        maxAge : <span class="number">24</span>*<span class="number">3600</span>, <span class="comment">// 可以是秒数，也可以是 'auto'，当设置为 'auto' 时，有效期直到浏览器关闭</span></div><div class="line">        path : <span class="string">'/'</span></div><div class="line">    }</div><div class="line">    <span class="comment">// 获取现有的cookie</span></div><div class="line">    <span class="comment">// 获取过程细节包装在一个函数中</span></div><div class="line">    <span class="comment">// 避免了污染外层环境</span></div><div class="line">    <span class="comment">// 函数即时执行并返回一个对象</span></div><div class="line">    <span class="comment">// 该对象属性和值就是当前 cookie 的名值对，并将在模块内部被维护</span></div><div class="line">    <span class="keyword">var</span> cookie = ( <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">var</span> cookie = {};</div><div class="line">        <span class="keyword">var</span> all = <span class="built_in">document</span>.cookie;</div><div class="line">        <span class="keyword">if</span>( all === <span class="string">''</span> ){</div><div class="line">            <span class="keyword">return</span> cookie;</div><div class="line">        }</div><div class="line">        <span class="keyword">var</span> pairs = all.split( <span class="string">'; '</span> );</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = pairs.length;i &lt; len; i += <span class="number">1</span> ){</div><div class="line">            <span class="keyword">var</span> pos = pairs[ i ].indexOf( <span class="string">'='</span> );</div><div class="line">            <span class="keyword">var</span> key = pairs[ i ].substring( <span class="number">0</span>, pos );</div><div class="line">            <span class="keyword">var</span> value = pairs[ i ].substring( pos + <span class="number">1</span> );</div><div class="line">            value = <span class="built_in">decodeURIComponent</span>( value );</div><div class="line">            cookie[ key ] = value;</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> cookie;</div><div class="line">    }() );</div><div class="line">    <span class="comment">// 设置cookie</span></div><div class="line">    <span class="keyword">var</span> setItem = <span class="function"><span class="keyword">function</span><span class="params">( key, value )</span></span>{</div><div class="line">        cookie[ key ] = value;</div><div class="line">        <span class="keyword">var</span> _cookie = key + <span class="string">'='</span> + <span class="built_in">encodeURIComponent</span>( value ); <span class="comment">// 对值进行编码，避免出现非法字符</span></div><div class="line">	<span class="comment">// 设置有效期</span></div><div class="line">        <span class="keyword">if</span>( config.maxAge !== <span class="string">'auto'</span> ){</div><div class="line">            _cookie += <span class="string">'; max-age='</span> + config.maxAge;</div><div class="line">        }</div><div class="line">        <span class="comment">// 设置作用域</span></div><div class="line">        <span class="keyword">if</span>( config.path ){</div><div class="line">            _cookie += <span class="string">'; path='</span> + config.path;</div><div class="line">        }</div><div class="line">        <span class="comment">// 建立cookie</span></div><div class="line">        <span class="built_in">document</span>.cookie = _cookie;</div><div class="line">    }</div><div class="line">    <span class="comment">// 获取cookie</span></div><div class="line">    <span class="keyword">var</span> getItem = <span class="function"><span class="keyword">function</span><span class="params">( key )</span></span>{</div><div class="line">        <span class="keyword">return</span> cookie[ key ] || <span class="literal">null</span>;</div><div class="line">    }</div><div class="line">    <span class="comment">// 删除cookie</span></div><div class="line">    <span class="keyword">var</span> removeItem = <span class="function"><span class="keyword">function</span><span class="params">( key )</span></span>{</div><div class="line">        <span class="keyword">if</span>( key <span class="keyword">in</span> cookie ){</div><div class="line">            <span class="keyword">delete</span> cookie[ key ]; <span class="comment">// 从内部维护的cookie对象中删除指定的属性</span></div><div class="line">        }</div><div class="line">        <span class="built_in">document</span>.cookie = key + <span class="string">'=; max-age=0'</span>; <span class="comment">// 将cookie的有效期设置为0就是删除cookie</span></div><div class="line">    }</div><div class="line">    <span class="comment">// 清除所有cookie</span></div><div class="line">    <span class="keyword">var</span> clear = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">var</span> key <span class="keyword">in</span> cookie ){</div><div class="line">            <span class="built_in">document</span>.cookie = key + <span class="string">'=;max-age=0'</span>;</div><div class="line">        }</div><div class="line">        cookie = {};</div><div class="line">    }</div><div class="line">    <span class="comment">// 提供接口</span></div><div class="line">    <span class="keyword">return</span> {</div><div class="line">        setItem : setItem,</div><div class="line">        getItem : getItem,</div><div class="line">        removeItem : removeItem,</div><div class="line">        clear : clear</div><div class="line">    }</div><div class="line">}() );</div></pre></td></tr></table></figure>
+
+<p>定义 memory 模块</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> memory = ( <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">	<span class="keyword">return</span> localStorage || cookieStorage;</div><div class="line">}() );</div><div class="line"></div><div class="line"><span class="comment">// 现在可以在支持或不支持 localStorage 的环境中像这样使用 memory</span></div><div class="line">memory.setItem( <span class="string">'username'</span>, <span class="string">'yy'</span> );</div><div class="line">memory.getItem( <span class="string">'username'</span> ); <span class="comment">// =&gt; yy</span></div></pre></td></tr></table></figure>
+
 
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－离线应用/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－离线应用/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/10/09/写自己的JavaScript工具－本地存储/">http://yyblog.mocoer.com/2014/10/09/写自己的JavaScript工具－本地存储/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－离线应用/" data-id="jsaempm5ffrsbi86" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/10/09/写自己的JavaScript工具－本地存储/" data-id="43xm2fo5ba0bxwz4" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－离线应用/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/10/09/写自己的JavaScript工具－本地存储/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cookie/">cookie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/localStorage/">localStorage</a></li></ul>
 
     </footer>
   </div>
@@ -212,10 +321,10 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－注册:取消注册事件" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-写自己的JavaScript工具－模块" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+    <a href="/2014/10/03/写自己的JavaScript工具－模块/" class="article-date">
+  <time datetime="2014-10-03T05:43:43.000Z" itemprop="datePublished">Oct 3 2014</time>
 </a>
     
   <div class="article-category">
@@ -230,7 +339,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/">写自己的JavaScript工具－注册/取消注册事件</a>
+      <a class="article-title" href="/2014/10/03/写自己的JavaScript工具－模块/">写自己的JavaScript工具－模块</a>
     </h1>
   
 
@@ -238,20 +347,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>P435</p>
+        <h2 id="要点">要点</h2>
+<ol>
+<li>为什么要用模块</li>
+<li>模块的一般写法</li>
+</ol>
+<h3 id="1-_为什么要用模块">1. 为什么要用模块</h3>
+<p>如果用一个词来概括为什么用模块，那就是：独立。</p>
+<p>因为独立，所以它们可以载入到任何需要它们的地方，通过接口发挥它们的作用；因为独立，所以即便程序导入了不需要的模块，模块也不会对整个程序造成任何影响；因为独立，所以模块很多场景中得到重用；因为独立，所以它们都是完成健壮成熟的个体，一个特定功能的体现。</p>
+<p>这些原因都是使用模块的原因，也是在开发任何程序时程序时考虑的。</p>
+<p>模块的概念应该比类的概念更大，类是其中一种模块化的体现。</p>
+<h3 id="2-_模块的一般写法">2. 模块的一般写法</h3>
+<p>一般的模块写法非常简单。为了做到定义最少的全局变量（不污染全局环境），保护私有属性和方法，模块最好以一个有私有命名空间的函数来构造（闭包在这里又起到了至关重要的作用）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="built_in">module</span> = ( <span class="function"><span class="keyword">function</span> <span class="title">namespace</span><span class="params">()</span></span>{</div><div class="line">    <span class="comment">/* </span></div><div class="line">        私有变量和方法 </div><div class="line">    */</div><div class="line">    reutrn {</div><div class="line">        <span class="comment">/*</span></div><div class="line">            提供接口</div><div class="line">        */</div><div class="line">    }</div><div class="line">}() );</div></pre></td></tr></table></figure>
+
+<p>最外面的括号 () 表示这是一个函数表达式，而不是一个函数定义，里面是一个立即执行的函数，因为不是一个函数定义，所以没有真正定义一个叫 namespace 的函数，namespace 完全可以省略而使用一个匿名函数，这里只是为了让代码容易理解，表示这是一个私有命名空间，因此加上了这个前缀。在这个私有命名空间里，我们可以通过 var 定义变量和方法，不用担心它们污染全局环境，不用担心它们被外界访问修改。最后我们让函数返回一个对象，这个对象的属性是我们要暴露给外界的方法，以发挥模块的作用。当然，用户可能会重新定义或破坏这些暴露出来的方法，但是永远也不会影响到模块内部环境：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId = ( <span class="function"><span class="keyword">function</span> <span class="title">namespace</span><span class="params">()</span></span>{</div><div class="line">    <span class="comment">// 私有变量</span></div><div class="line">    <span class="keyword">var</span> privateVariable = <span class="number">0</span>;</div><div class="line">    <span class="comment">// 私有方法</span></div><div class="line">    <span class="keyword">var</span> getPrivateVariable = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">            _autoIncrease();</div><div class="line">            <span class="keyword">return</span> privateVariable;</div><div class="line">        },</div><div class="line">        resetPrivateVariable = <span class="function"><span class="keyword">function</span><span class="params">( value )</span></span>{</div><div class="line">            privateVariable = <span class="number">0</span>;</div><div class="line">        },</div><div class="line">        <span class="comment">// 下划线前缀表示这是一个真正私有的方法，不会暴露给外部</span></div><div class="line">        _autoIncrease = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">            privateVariable += <span class="number">1</span>;</div><div class="line">        };</div><div class="line">     <span class="comment">// 提供一些接口</span></div><div class="line">    <span class="keyword">return</span> {</div><div class="line">        get : getPrivateVariable,</div><div class="line">        reset : resetPrivateVariable</div><div class="line">    };</div><div class="line">}() );</div></pre></td></tr></table></figure>
+
+<p>可以这样使用刚刚定义的模块：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">uniqId.get(); <span class="comment">// =&gt; 1;</span></div><div class="line">uniqId.get(); <span class="comment">// =&gt; 2;</span></div><div class="line">uniqId.reset();</div><div class="line">uniqId.get(); <span class="comment">// =&gt; 1;</span></div></pre></td></tr></table></figure>
+
+<p>你永远没有办法通过重写 reset 方法或者添加其他方法破坏 privateVariable 的值。</p>
+<p>关于上面这个 uniqId 模块，另外一个实现可以<a href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8DID%E7%94%9F%E6%88%90%E5%99%A8/" target="_blank" rel="external">见这里</a>，里面有关于闭包技术的介绍，它是模块化编程中必须要理解和运用的，那个例子也可以理解为一个模块的实现，只不过功能更加单一化。</p>
 
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/10/03/写自己的JavaScript工具－模块/">http://yyblog.mocoer.com/2014/10/03/写自己的JavaScript工具－模块/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/" data-id="prgmvqtksq30n9sk" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/10/03/写自己的JavaScript工具－模块/" data-id="yd7q1rsq5zdkwswd" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/10/03/写自己的JavaScript工具－模块/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模块/">模块</a></li></ul>
 
     </footer>
   </div>
@@ -260,10 +390,10 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－文档遍历" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-写自己的JavaScript工具－跨域请求( JSONP )" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－文档遍历/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+    <a href="/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/" class="article-date">
+  <time datetime="2014-10-02T05:36:47.000Z" itemprop="datePublished">Oct 2 2014</time>
 </a>
     
   <div class="article-category">
@@ -278,7 +408,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－文档遍历/">写自己的JavaScript工具－文档遍历</a>
+      <a class="article-title" href="/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/">写自己的JavaScript工具－跨域请求(JSONP)</a>
     </h1>
   
 
@@ -286,20 +416,50 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>parents/child/siblings 等</p>
+        <h2 id="要点">要点</h2>
+<ol>
+<li>跨域 HTTP 请求</li>
+<li>JSONP（通过 script 标签发送 HTTP 请求）</li>
+</ol>
+<h3 id="1-_跨域_HTTP_请求">1. 跨域 HTTP 请求</h3>
+<p>提到 XMLHttpRequest，我们都知道它可以发起 http 请求，并异步的执行回调，实现无刷新的用户体验。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 封装一个简单的 get 请求，后面会用它来做测试</span></div><div class="line"><span class="keyword">var</span> get = <span class="function"><span class="keyword">function</span><span class="params">( url, callback )</span></span>{</div><div class="line">    <span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">    request.open( <span class="string">'GET'</span>, url );</div><div class="line">    request.onreadystatechange = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">if</span>( request.readyState === <span class="number">4</span> && request.status === <span class="number">200</span> && callback ){</div><div class="line">            callback( request );</div><div class="line">        }</div><div class="line">    }</div><div class="line">    request.send( <span class="literal">null</span> );</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>但为了安全，XMLHttpRequest 对象仅允许发起与文档有相同服务器的 HTTP 请求（所谓同源策略）。</p>
+<p>但有时我们需要这样的合理需求：拿“Apple天猫旗舰店”来举例，在IPhone 5s 的产品页 <a href="http://detail.tmall.com/item.htm?id=36641396665" target="_blank" rel="external">http://detail.tmall.com/item.htm?id=36641396665</a>. 当用户要查看产品评价（点击“累计评价” tab 标签）时，页面需要发送 Ajax 请求来获取当前产品的评价信息，而请求地址是 <a href="http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665" target="_blank" rel="external">http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665</a>. 是一个跨域请求。（发起请求的服务器：detail.tmall.com，被请求的服务器：rate.tmall.com，它们是不同源。）</p>
+<p>我们做这个测试，浏览器打开 IPhone 5s 产品页：<a href="http://detail.tmall.com/item.htm?id=36641396665" target="_blank" rel="external">http://detail.tmall.com/item.htm?id=36641396665</a>. 打开浏览器开发者工具，在控制台中输入以下程序（先定义上面的 get 函数）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get( <span class="string">'http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665'</span> )；</div></pre></td></tr></table></figure>
+
+<p>控制台会返回一个错误提示：<br><em>XMLHttpRequest cannot load <a href="http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665" target="_blank" rel="external">http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="http://detail.tmall.com" target="_blank" rel="external">http://detail.tmall.com</a>‘ is therefore not allowed access.</em></p>
+<p>即当前页面无权载入请求的文档，这就是同源策略导致的，但这种请求本身是完全合理的。</p>
+<p>对于这种合理的跨域请求，我们需要借助 JSONP 技术。</p>
+<h3 id="2-_JSONP（通过_script_标签发送_HTTP_请求）">2. JSONP（通过 script 标签发送 HTTP 请求）</h3>
+<p>script 标签并未受同源策略的限制，我们可以通过设置它的 src 属性，载入任何服务器上的 JavaScript 脚本：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 比如在自己的服务器上通过 CDN 加速点加载 jquery，当然这要建立在对方服务器可信的情况下 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>也就是说我们需要动态的生成 script 标签，并设置 src 属性为要请求的地址，最后将设置好 script 标签添加到页面中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 新建一个 script 标签</span></div><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line"><span class="comment">// 设置 script 标签的 src 属性为要请求的地址，同时加一个 callback 参数</span></div><div class="line"><span class="comment">// 这个参数名 callback 非常关键，这个参数需要后台程序的支持才能够识别，当后台程序看到这个参数时</span></div><div class="line"><span class="comment">// 后台程序需要知道这是一个 JSONP 请求</span></div><div class="line"><span class="comment">// 这时，后台程序需要用这个参数的值（ jsonpCallback ）来包装返回的数据并返回 JSON 字符串</span></div><div class="line"><span class="comment">// 这个包装后的字符串看上去就像是将数据结果带入了函数 jsonpCallback 一样</span></div><div class="line"><span class="comment">// 当客户端获取到包装后的字符串时，script 标签会立即解析执行这个语句</span></div><div class="line"><span class="comment">// 而程序中我们刚好定义了 jsonpCallback 函数</span></div><div class="line"><span class="comment">// 所以我们可以用 jsonpCallback 函数来处理获取的数据（在这里只是将数据 console.log() 出来）</span></div><div class="line">script.src = <span class="string">"http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665&callback=callback"</span>;</div><div class="line"><span class="keyword">var</span> callback = <span class="function"><span class="keyword">function</span><span class="params">( response )</span></span>{</div><div class="line">    <span class="built_in">console</span>.log( response );</div><div class="line">}</div><div class="line"><span class="built_in">document</span>.body.appendChild( script );</div></pre></td></tr></table></figure>
+
+<p>在刚才的页面控制台输入上面的程序，我们得到了想要的结果。关于地址中的 callback 参数，不同服务器可能叫法不同，常见的还有 jsonp，当然也可以根据需要自己在后台程序中定义。</p>
+<p>最后做一些封装工作（用到了 uniqId 函数，<a href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8DID%E7%94%9F%E6%88%90%E5%99%A8/" target="_blank" rel="external">详见这里</a> ）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> getJSONP = <span class="function"><span class="keyword">function</span><span class="params">( url, callbackName, callback )</span></span>{</div><div class="line">    <span class="keyword">var</span> jsonpId = <span class="string">'jsonp'</span> + uniqId(),</div><div class="line">        jsonpName = <span class="string">'getJSONP.'</span> + jsonpId;</div><div class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement( <span class="string">'script'</span> );</div><div class="line">    script.src = url.indexOf( <span class="string">'?'</span> ) === -<span class="number">1</span> ? </div><div class="line">        url + <span class="string">'?'</span> + callbackName + <span class="string">'='</span> + jsonpName : </div><div class="line">        url + <span class="string">'&'</span> + callbackName + <span class="string">'='</span> + jsonpName;</div><div class="line">    getJSONP[ jsonpId ] = <span class="function"><span class="keyword">function</span><span class="params">( response )</span></span>{</div><div class="line">        <span class="keyword">try</span> {</div><div class="line">    	    callback( response );</div><div class="line">        }</div><div class="line">        <span class="keyword">finally</span> {</div><div class="line">            <span class="keyword">delete</span> getJSONP[ jsonpId ];</div><div class="line">            script.parentNode.removeChild( script );</div><div class="line">        }</div><div class="line">    };</div><div class="line">    <span class="built_in">document</span>.body.appendChild( script );</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>现在可以像这样使用 getJSONP：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">getJSONP( </div><div class="line">    <span class="string">'http://rate.tmall.com/list_detail_rate.htm?itemId=36641396665'</span>, </div><div class="line">    <span class="string">'callback'</span>, </div><div class="line">    <span class="function"><span class="keyword">function</span><span class="params">( response )</span></span>{ <span class="built_in">console</span>.log( response ); } </div><div class="line">);</div></pre></td></tr></table></figure>
+
 
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/">http://yyblog.mocoer.com/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/" data-id="j9fk2igwqbdpq3im" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/" data-id="p57eg01h3l01owe4" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jsonp/">jsonp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跨域/">跨域</a></li></ul>
 
     </footer>
   </div>
@@ -308,10 +468,10 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－插入删除节点" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-写自己的JavaScript工具－max:min" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－插入删除节点/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+    <a href="/2014/10/01/写自己的JavaScript工具－max:min/" class="article-date">
+  <time datetime="2014-10-01T04:51:34.000Z" itemprop="datePublished">Oct 1 2014</time>
 </a>
     
   <div class="article-category">
@@ -326,7 +486,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－插入删除节点/">写自己的JavaScript工具－插入删除节点</a>
+      <a class="article-title" href="/2014/10/01/写自己的JavaScript工具－max:min/">写自己的JavaScript工具－max/min</a>
     </h1>
   
 
@@ -334,20 +494,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>parents/child/siblings 等</p>
+        <h2 id="要点">要点</h2>
+<ol>
+<li>关于 arguments 对象</li>
+<li>利用 arguments 实现 max/min 函数 ( 不定实参函数（ varargs function ）)</li>
+</ol>
+<h3 id="1-_关于_arguments_对象">1. 关于 arguments 对象</h3>
+<p>JavaScript 中的每个函数都“附赠”了两个局部变量：this 和 arguments。</p>
+<p>arguments 是函数的实参对象，它是一个类数组，不是真正的数组，没有数组通常都有的方法，但它有 length 属性和以数字为索引的一组元素：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">( x )</span></span>{</div><div class="line">    <span class="built_in">console</span>.log( x, <span class="built_in">arguments</span>[ <span class="number">0</span> ], <span class="built_in">arguments</span>[ <span class="number">1</span> ], <span class="built_in">arguments</span>[ <span class="number">2</span> ] );</div><div class="line">    <span class="built_in">console</span>.log( <span class="built_in">arguments</span>.length );</div><div class="line">    <span class="built_in">console</span>.log( <span class="built_in">arguments</span>.slice );</div><div class="line">    <span class="built_in">arguments</span>[ <span class="number">0</span> ] = -<span class="number">1</span>;</div><div class="line">    <span class="built_in">console</span>.log( x );</div><div class="line">}</div><div class="line">f( <span class="number">1</span>, <span class="number">2</span> ); </div><div class="line"><span class="comment">// =&gt; 1, 1, 2, undefined</span></div><div class="line"><span class="comment">// =&gt; 2</span></div><div class="line"><span class="comment">// =&gt; undefined 说明 arguments 不是真正的数组</span></div><div class="line"><span class="comment">// =&gt; -1 说明 arguments[ 0 ] 和 x 指代同一个值</span></div></pre></td></tr></table></figure>
+
+<p>上面的程序基本展示了 arguments 属性的一些特点。</p>
+<p>除此之外，arguments 对象还有两个属性：caller 和 callee，前者指代调用当前函数的函数，后者指代当前正在执行的函数。callee 在某些递归调用中很有用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">( x )</span></span>{</div><div class="line">    <span class="keyword">if</span>( x &gt; <span class="number">1</span> ){</div><div class="line">        <span class="keyword">return</span> x + <span class="built_in">arguments</span>.callee( x - <span class="number">1</span> );</div><div class="line">    }<span class="keyword">else</span>{</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    }</div><div class="line">}</div><div class="line">f(<span class="number">5</span>); <span class="comment">// =&gt; 15</span></div></pre></td></tr></table></figure>
+
+<h3 id="2-_利用_arguments_实现_max/min_函数_(_不定实参函数（_varargs_function_）)">2. 利用 arguments 实现 max/min 函数 ( 不定实参函数（ varargs function ）)</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> max = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> max = -<span class="literal">Infinity</span>; <span class="comment">// 或 Number.NEGATIVE_INFINITY</span></div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="built_in">arguments</span>.length; i &lt; len; i++ ){</div><div class="line">         max = <span class="built_in">arguments</span>[ i ] &gt; max ? <span class="built_in">arguments</span>[ i ] : max;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> max;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">var</span> min = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> min = <span class="literal">Infinity</span>; <span class="comment">// 或 Number.POSITIVE_INFINITY</span></div><div class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, len = <span class="built_in">arguments</span>.length; i &lt; len; i++ ){</div><div class="line">        min = <span class="built_in">arguments</span>[ i ] &lt; min ? <span class="built_in">arguments</span>[ i ] : min;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> min;</div><div class="line">}</div><div class="line"></div><div class="line">max(<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">1</span>); <span class="comment">// =&gt; 7</span></div><div class="line">min(<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">1</span>); <span class="comment">// =&gt; 1</span></div></pre></td></tr></table></figure>
+
 
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－插入删除节点/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－插入删除节点/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/10/01/写自己的JavaScript工具－max:min/">http://yyblog.mocoer.com/2014/10/01/写自己的JavaScript工具－max:min/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－插入删除节点/" data-id="cqqufma2bbn72wwn" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/10/01/写自己的JavaScript工具－max:min/" data-id="ipaiummjziwlmkw9" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－插入删除节点/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/10/01/写自己的JavaScript工具－max:min/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arguments/">arguments</a></li></ul>
 
     </footer>
   </div>
@@ -356,10 +532,10 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－推送" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-写自己的JavaScript工具－自定义事件" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－推送/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+    <a href="/2014/09/30/写自己的JavaScript工具－自定义事件/" class="article-date">
+  <time datetime="2014-09-30T12:57:11.000Z" itemprop="datePublished">Sep 30 2014</time>
 </a>
     
   <div class="article-category">
@@ -374,7 +550,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－推送/">写自己的JavaScript工具－推送</a>
+      <a class="article-title" href="/2014/09/30/写自己的JavaScript工具－自定义事件/">写自己的JavaScript工具－自定义事件</a>
     </h1>
   
 
@@ -382,20 +558,50 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>P508</p>
+        <h2 id="要点">要点</h2>
+<ol>
+<li>传统事件</li>
+<li>自定义事件</li>
+</ol>
+<h3 id="1-_传统事件">1. 传统事件</h3>
+<p>load、click、resize、readystatechange等等，都是 javaScript 客户端常见的事件。Window 对象、Docuement 对象和所有文档元素等都可以绑定事件处理程序。绑定方式可以是：</p>
+<ol>
+<li>设置事件目标的属性，比如设置 window.onload、document.onclick、request.onreadystatechange 的值为事件处理程序；</li>
+<li>设置 HTML 标签属性为事件处理程序；</li>
+<li>通过 addEventListener 方法注册一个或多个事件处理程序。</li>
+</ol>
+<p>通过事件目标属性和 HTML 标签注册的事件处理程序优先于通过 addEventListener 注册的事件处理程序，addEventListener 中注册的时间处理程序按照注册顺序调用。</p>
+<h3 id="2-_自定义事件">2. 自定义事件</h3>
+<p>传统事件已经可以满足我们在客户端很多技术需求。但能够注册传统事件的事件目标类型是有限的。现在假设有这样的需求，我们想给程序中的某个任意对象添加事件机制，这个对象可能只是程序中定义一个普通 JavaScript 对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = someObject, y = someOtherObject, z = anotherObject;</div><div class="line"><span class="keyword">var</span> o = [];</div><div class="line">o.push( <span class="number">1</span> );</div></pre></td></tr></table></figure>
+
+<p>比如我们关心 o 这中推入了新元素这件事，在推入了新元素的时候，对象 x, y, z 执行一些相关程序以响应这件事。在不基于事件的程序中会在push之后堆叠大量互不相干的处理代码以响应这个 push 事件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">o.push( <span class="number">1</span> );</div><div class="line"><span class="comment">// 后面紧跟一些混乱的代码：</span></div><div class="line"><span class="comment">// data was pushed in, x need to do something.</span></div><div class="line"><span class="comment">// data was pushed in, y need to do something.</span></div><div class="line"><span class="comment">// data was pushed in, z need to do something.</span></div></pre></td></tr></table></figure>
+
+<p>即便将这些混乱的代码封装成一个函数还是会有一些麻烦，比如当需要添加一个 w 对象也需要响应 o.push() 的时候，不得不再扩种这些混乱的代码。</p>
+<p>我们希望在push之后，凡是这件事的对象都能自动去响应。也就是说如果这时有一个函数能够让 x, y, z 拥有响应事件的能力，问题就能得到很好的解决。</p>
+<p>我们需要设计一个函数，让普通的对象拥有这种能力，也就是“事件化对象”，然后像这样给它们绑定和触发事件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = someObject, y = someOtherObject, z = anotherObject;</div><div class="line"></div><div class="line"><span class="comment">// SP for "Something was Pushed into o"</span></div><div class="line">x.on( <span class="string">'SP'</span>, <span class="function"><span class="keyword">function</span><span class="params">( e, data )</span></span>{</div><div class="line">    <span class="comment">// data was pushed in, I need to do something.</span></div><div class="line">} );</div><div class="line">y.on( <span class="string">'SP'</span>, <span class="function"><span class="keyword">function</span><span class="params">( e, data )</span></span>{</div><div class="line">    <span class="comment">// data was pushed in, I need to do something.</span></div><div class="line">} );</div><div class="line">z.on( <span class="string">'SP'</span>, <span class="function"><span class="keyword">function</span><span class="params">( e, data )</span></span>{</div><div class="line">    <span class="comment">// data was pushed in, I need to do something.</span></div><div class="line">} );</div><div class="line"></div><div class="line">o.push( <span class="number">1</span> );</div><div class="line">x.fire( <span class="string">'SP'</span> );</div><div class="line">y.fire( <span class="string">'SP'</span> );</div><div class="line">z.fire( <span class="string">'SP'</span> );</div></pre></td></tr></table></figure>
+
+<p>这样代码优雅多了，最关键的是更加清晰易读。下面我们就实现这种“事件化对象”技术：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> eventuality = <span class="function"><span class="keyword">function</span><span class="params">( that )</span></span>{</div><div class="line">    <span class="comment">// 私有的事件注册对象</span></div><div class="line">    <span class="keyword">var</span> events = {};</div><div class="line">    <span class="comment">// 通过传入的 eventName，在 events 中查找对应的事件列表</span></div><div class="line">    <span class="comment">// 对查找到的列表进行遍历，并调用对应的处理函数</span></div><div class="line">    that.fire = <span class="function"><span class="keyword">function</span><span class="params">( eventName )</span></span>{</div><div class="line">    	<span class="comment">// 调用 fire 时，除了第一个参数必须时事件名称外</span></div><div class="line">    	<span class="comment">// 还可以传入其他参数</span></div><div class="line">    	<span class="comment">// 这些参数将被带回通过 on 注册的事件处理函数中</span></div><div class="line">        <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call( <span class="built_in">arguments</span>, <span class="number">1</span> );</div><div class="line">        <span class="keyword">if</span> ( events.hasOwnProperty( eventName ) ){</div><div class="line">            <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>, len = events[ eventName ].length; i &lt; len; i+=<span class="number">1</span> ){</div><div class="line">                <span class="keyword">var</span> method = events[ eventName ][ i ].method,</div><div class="line">                    <span class="comment">// 可以传入参数替换事件处理程序中的上下文（this）</span></div><div class="line">                    <span class="comment">// 否则默认为当前调用 fire 方法的对象</span></div><div class="line">                    context = events[ eventName ][ i ].context || <span class="keyword">this</span>;</div><div class="line">                <span class="keyword">if</span> ( <span class="keyword">typeof</span> method == <span class="string">'string'</span> ){</div><div class="line">                    method = context[ method ];</div><div class="line">                }</div><div class="line">                <span class="comment">// 规定事件处理函数的第一个参数总为事件名称</span></div><div class="line">                method.apply( context, [ eventName ].concat( args ) ); </div><div class="line">            }</div><div class="line">        }</div><div class="line">    };</div><div class="line">    <span class="comment">// 注册事件方法</span></div><div class="line">    <span class="comment">// 传入事件名称，处理函数和上下文信息</span></div><div class="line">    <span class="comment">// context 将替换 method 中的 this</span></div><div class="line">    that.on = <span class="function"><span class="keyword">function</span><span class="params">( eventName, method, context )</span></span>{</div><div class="line">        <span class="keyword">var</span> event = {</div><div class="line">            method : method,</div><div class="line">            context : context</div><div class="line">        };</div><div class="line">        <span class="keyword">if</span> ( events.hasOwnProperty( eventName ) ){</div><div class="line">            events[ eventName ].push( event );</div><div class="line">        }<span class="keyword">else</span>{</div><div class="line">            events[ eventName ] = [ event ];</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> that;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>现在我们就可以赋予任意一个 JavaScript 对象注册、和触发事件的能力了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = { name : <span class="string">'x'</span> },</div><div class="line">    y = { name : <span class="string">'y'</span> };</div><div class="line">eventuality( x );</div><div class="line">x.on( <span class="string">'lalala'</span>, <span class="function"><span class="keyword">function</span><span class="params">( event, data )</span></span>{ <span class="built_in">console</span>.log( event, data, <span class="keyword">this</span> ) }, y );</div><div class="line">x.fire( <span class="string">'lalala'</span>, <span class="number">1</span> );</div><div class="line"><span class="comment">// =&gt; 'lalala', 1, { name : 'y' }</span></div></pre></td></tr></table></figure>
+
 
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－推送/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－推送/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/30/写自己的JavaScript工具－自定义事件/">http://yyblog.mocoer.com/2014/09/30/写自己的JavaScript工具－自定义事件/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－推送/" data-id="gxr5v0rzacfajp4z" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/09/30/写自己的JavaScript工具－自定义事件/" data-id="257gyqv7xmm5iqs0" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－推送/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/09/30/写自己的JavaScript工具－自定义事件/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事件/">事件</a></li></ul>
 
     </footer>
   </div>
@@ -404,10 +610,10 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－Ajax上传" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-写自己的JavaScript工具－解析浏览器url" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－Ajax上传/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+    <a href="/2014/09/29/写自己的JavaScript工具－解析浏览器url/" class="article-date">
+  <time datetime="2014-09-29T10:03:27.000Z" itemprop="datePublished">Sep 29 2014</time>
 </a>
     
   <div class="article-category">
@@ -422,7 +628,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－Ajax上传/">写自己的JavaScript工具函数－Ajax上传</a>
+      <a class="article-title" href="/2014/09/29/写自己的JavaScript工具－解析浏览器url/">写自己的JavaScript工具－解析浏览器url</a>
     </h1>
   
 
@@ -430,19 +636,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="要点">要点</h2>
+<ol>
+<li>客户端 Location 对象</li>
+<li>获取 get 参数</li>
+</ol>
+<h3 id="客户端_Location_对象">客户端 Location 对象</h3>
+<p>和 String、Number、Date 等一样，Location 是 Location 对象的构造器，只不过它不允许用户调用这个构造器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> l = <span class="keyword">new</span> Location();</div><div class="line"><span class="comment">// =&gt; TypeError: Illegal constructor</span></div></pre></td></tr></table></figure>
+
+<p>但是客户端提供了 Location 对象的引用：window.location。</p>
+<p>打印它可以看到其中有一些很有用的属性：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 浏览器打开这个页面：http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/?testsearch=lalala#comment</span></div><div class="line"><span class="built_in">window</span>.location;</div><div class="line"><span class="comment">// =&gt; Location { </span></div><div class="line"><span class="comment">// =&gt; ..</span></div><div class="line"><span class="comment">// =&gt; hash : '#comment',</span></div><div class="line"><span class="comment">// =&gt; host: "yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// =&gt; hostname: "yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// =&gt; href: "http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/?testsearch=lalala",</span></div><div class="line"><span class="comment">// =&gt; origin: "http://yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// =&gt; pathname: "/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/",</span></div><div class="line"><span class="comment">// =&gt; port: "",</span></div><div class="line"><span class="comment">// =&gt; protocol: "http:"</span></div><div class="line"><span class="comment">// =&gt; search: "?testsearch==lalala"</span></div><div class="line"><span class="comment">// =&gt; ...</span></div><div class="line"><span class="comment">// =&gt; }</span></div></pre></td></tr></table></figure>
+
+<p>容易看出各个属性的含义。这些属性有很多用处，比如 hash 属性可以判断当前页面的锚点位置，也可以用来做 SPA ( Single Page Application 单页应用 ) 的页面导航系统。再比如 search 属性可以用来获取传入的参数，给不同页面之间传的参数提供了一种方式，就像下面的例子。</p>
+<h3 id="2-_获取_url_中的参数">2. 获取 url 中的参数</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> urlArgs = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> result = {}, <span class="comment">// 将被返回的结果</span></div><div class="line">        pairs = [],</div><div class="line">        pos = -<span class="number">1</span>,</div><div class="line">        querys = <span class="built_in">window</span>.location.search.substring(<span class="number">1</span>); <span class="comment">// 获取 url 中的 search 部分并去掉前面的问号</span></div><div class="line">    pairs = querys.split( <span class="string">'&'</span> ); <span class="comment">// 将 key=value 名值对放入数组中</span></div><div class="line">    <span class="comment">// 这里的 forEach 方法是 ECMAScript 5 中新方法，但容易自己来实现，详见相关文章</span></div><div class="line">    pairs.forEach( <span class="function"><span class="keyword">function</span><span class="params">( pair )</span></span>{</div><div class="line">        pos = pair.indexOf( <span class="string">'='</span> );</div><div class="line">        <span class="keyword">var</span> name = pair.substring( <span class="number">0</span>, pos ),</div><div class="line">            <span class="comment">// 客户端全局函数 decodeURIComponent 提供了解析浏览器地址栏内容的方法</span></div><div class="line">            value = <span class="built_in">decodeURIComponent</span>( pair.substring( pos + <span class="number">1</span> ) );</div><div class="line">        result[ name ] = value;</div><div class="line">    } );</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">};</div><div class="line"></div><div class="line">urlArgs(); <span class="comment">// =&gt; { testsearch: '=lalala' }</span></div></pre></td></tr></table></figure>
+
+<p>现在可以使用 urlArgs 函数方便的获取 url 中的参数了。</p>
+
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－Ajax上传/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－Ajax上传/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/">http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－Ajax上传/" data-id="8mh7rv9bqlqrafdh" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/" data-id="2dtw2tbba499987p" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－Ajax上传/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
 
     </footer>
   </div>
@@ -451,10 +675,10 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－常见的字符串匹配" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-写自己的JavaScript工具－对象继承" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+    <a href="/2014/09/29/写自己的JavaScript工具－对象继承/" class="article-date">
+  <time datetime="2014-09-29T07:25:36.000Z" itemprop="datePublished">Sep 29 2014</time>
 </a>
     
   <div class="article-category">
@@ -469,7 +693,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/">写自己的JavaScript工具－常见的字符串匹配</a>
+      <a class="article-title" href="/2014/09/29/写自己的JavaScript工具－对象继承/">写自己的JavaScript工具－对象继承</a>
     </h1>
   
 
@@ -477,20 +701,64 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>可直接通过arguments，实现任意个参数的大小比较 P174</p>
+        <p>在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承（因此本篇叫做对象继承）。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。</p>
+<h2 id="要点">要点</h2>
+<ol>
+<li>关于原型与所谓的原型继承的理解</li>
+<li>几种继承模式</li>
+</ol>
+<h3 id="1-_关于原型继承与构造函数">1. 关于原型继承与构造函数</h3>
+<p>JavaScript 是基于原型的语言，而非基于类，但 JavaScript 依然引入了类（伪类）的概念（通过 new 的方式去创建实例对象）。</p>
+<p>可以这样理解 JavaScript 的原型继承与构造函数：</p>
+<p><em style="color:#999;">我只给你一个{}，你却用它创造了整个世界…</em></p>
+<p>通俗的讲，首先，Object.prototype 是 JavaScript 中最原始的对象，记为 {} 。它的构造器就是 Object 函数。有了 {} 和能创建它的构造器，人们开始想，基于 {} ，我们应该创造一些有用的新的东西出来，比如数组，怎么做呢？那就基于 {} 定义一个名叫数组的对象吧，可以记为 [] 。怎么体现 [] 继承了 {} 呢？毕竟 [] 由 {} 而来，{} 的后代应该继承一些它的特性。于是想到一个办法：引入原型的说法，然后说 [] 的原型就是 {} ，那不就体现了继承关系了吗？最后再让 [] 继承一些它的原型（ {} ）的特性（属性和方法），同时也给 [] 一些自己特有的特性（属性和方法）。</p>
+<p>那要创建不同的具体数组时怎么做呢？提供一个数组构造器吧，就叫 Array，用 Array 创建出来的对象都是数组对象。那怎么体现用 Array 创造出来的数组对象继承了上面定义的 [] 呢？毕竟对于这些数组对象，[] 是它们的直接祖先。有一个办法，就是给 Array 构造器一个叫作 prototype 的属性，凡是通过 Array 构造器创建的对象，其原型都指向这个 prototype 属性值，而这个 prototype 属性值就是 []。最后再让被创建出来的数组继承它的原型（ [] ）的方法，当然，这些数组也可以拥有一些自己的特有的属性和方法。</p>
+<p>这时，人们看到了构造器能帮他们创建某种特定类型的对象，这些对象都有着特殊的意义。于是人们开始想自己来定义满足自身需求的构造器，从而用这些自定义的构造器创建他们想要的各种对象。JavaScript 看到了人们这种需求，于是引入了一个功能：任意一个函数都可以当作构造器来调用，从而创建特定的对象。而且让所有函数都有一个 prototype 属性，其作用就是上面一段所说的：体现继承关系。而所有的函数的 prototype 属性值都是在函数创建之初被赋予的一个新的基本的对象，这个对象的一个特点是它的 contructor 属性值就是这个函数本身。引入这个功能后，人们就可以用自己定义的函数用作构造器使用。后面的事情就和 Array 的情况一样了。这也就是为什么 JavaScript 中的所谓构造函数的一个最重要的特点是：构造函数的 prototype 属性值就被用作由该构造函数 new 出来的对象的原型。</p>
+<p>众所周知的构造器有：Object、Function、Array、String、RegExp等。</p>
+<h3 id="2-_几种继承模式">2. 几种继承模式</h3>
+<p>a. 伪类模式</p>
+<p>为了模仿传统的基于类的继承，JavaScript 引入了一个特性：允许通过构造函数创建新的对象。可以说，它掩盖了 JavaScript 的基于原型的继承特点。</p>
+<p>如果理解了要点1中关于原型继承与构造函数的内容，那么应该容易理解下面代码的含义：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Car = <span class="function"><span class="keyword">function</span><span class="params">( maxSpeed )</span></span>{</div><div class="line">    <span class="keyword">this</span>.maxSpeed = maxSpeed;</div><div class="line">}</div><div class="line"></div><div class="line">Car.prototype.getMaxSpeed = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.maxSpeed || <span class="string">'unKnown'</span>;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">var</span> Ford = <span class="function"><span class="keyword">function</span><span class="params">( maxSpeed )</span></span>{</div><div class="line">    <span class="keyword">this</span>.maxSpeed = maxSpeed;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// 这里一行是理解伪类模式的关键</span></div><div class="line"><span class="comment">// 这里定义了构造器（构造函数） Ford 的 prototype 属性为一个由构造器 Car 创建的一个实例对象</span></div><div class="line"><span class="comment">// 而这个实例对象的原型就是 Car （Car 或者说这个构造函数，是一个基本的 JavaScript 对象）</span></div><div class="line"><span class="comment">// 这时候，让构造器 Ford 的 prototype 属性赋值为这个实例对象</span></div><div class="line"><span class="comment">// 其作用就是，在通过 Ford 来创建新的 Ford 类实例对象的时候</span></div><div class="line"><span class="comment">// 这个 Ford 类实例对象的原型将是当时在定义 Ford 类时的那个 new Car() 对象</span></div><div class="line">Ford.prototype = <span class="keyword">new</span> Car();</div><div class="line"></div><div class="line"><span class="comment">// 之所以要重写 Ford 的 prototype 对象中的 constructor 属性的值为 Ford</span></div><div class="line"><span class="comment">// 是因为在 JavaScript 中，函数的 prototype 属性对象中的 constructor 属性通常指向函数本身 </span></div><div class="line">Ford.prototype.constructor = Ford;</div><div class="line"></div><div class="line"><span class="keyword">var</span> myFord = <span class="keyword">new</span> Ford( <span class="number">280</span> );</div><div class="line">myFord.getMaxSpeed(); <span class="comment">// =&gt; 280</span></div></pre></td></tr></table></figure>
+
+<p>b. 原型模式（摒弃伪类的概念，纯粹基于原型的继承，关注于对象本身）</p>
+<p>ECMAScript 5 提供了一个方法：Object.create()，现在忘记伪类的概念，仅专注于 javascript 对象，关注对象的特性（属性、方法）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> car = {</div><div class="line">    maxSpeed : <span class="number">250</span>,</div><div class="line">    getMaxSpeed : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.maxSpeed;</div><div class="line">    }   </div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">var</span> myFord = <span class="built_in">Object</span>.create( car ); <span class="comment">// Object.create 在说：让 myFord 的原型为 car</span></div><div class="line">myFord.maxSpeed = <span class="number">280</span>;</div><div class="line"></div><div class="line">myFord.getMaxSpeed(); <span class="comment">// =&gt; 280</span></div></pre></td></tr></table></figure>
+
+<p>可以看到，根据一个已有的对象 car ，创建了一个新的对象 myFord，新对象 myFord 只需关注自身与它所继承的对象 car 之间的差异，再没有定义什么 Car、Ford 构造函数，即摒弃了类（伪类）的概念，也同样完成了对象的继承（ JavaScript 就是基于原型的语言，继承就是对象之间的继承 ）。</p>
+<p>对于 ECMAScript 3，我们同样可以实现 Object.create() 方法，它其实做了类似下面的事：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> p, <span class="comment">// 要被继承的对象（父）</span></div><div class="line">    c; <span class="comment">// 新对象，将继承自 p</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{};</div><div class="line">F.prototype = p;</div><div class="line">c = <span class="keyword">new</span> F();</div></pre></td></tr></table></figure>
+
+<p>如果理解了要点1中的原型和原型继承，应该可以理解上面这段代码的含义。</p>
+<p>c. 函数化模式</p>
+<p>上面的两种继承模式都有一些缺点：1. 对象的属性都不是私有的，可以被任意的访问和篡改。2. 如果子类方法覆盖了父类方法，通过子类创建的对象将无法访问那些方法（原型链特点导致）。</p>
+<p>为解决第一个问题，我们容易想到用闭包技术来解决。</p>
+<p>闭包离不开函数，函数创建了私有局部变量。</p>
+<p>现在忘记 Object.create()，忘记原型链，专注于下面这个函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义一个函数 car，调用它时它将返回一个对象</span></div><div class="line"><span class="keyword">var</span> car = <span class="function"><span class="keyword">function</span><span class="params">( props )</span></span>{ <span class="comment">// props 相当于 ford 函数中的一个局部变量</span></div><div class="line">    <span class="keyword">var</span> that = {}; <span class="comment">// 为了清晰，我们显式的声明出这个最后要被返回的对象</span></div><div class="line">    <span class="keyword">var</span> getMaxSpeed = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> props.maxSpeed;</div><div class="line">    };</div><div class="line">    that.getMaxSpeed = getMaxSpeed;</div><div class="line">    <span class="keyword">return</span> that; </div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>实现继承：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 再定义一个函数 ford，调用它时它将返回一个对象，而这个对象将拥有 car 的方法</span></div><div class="line"><span class="keyword">var</span> ford = <span class="function"><span class="keyword">function</span><span class="params">( props )</span></span>{ <span class="comment">// props 相当于 ford 函数中的一个局部变量</span></div><div class="line">    <span class="keyword">var</span> that = car( props );</div><div class="line">    <span class="keyword">var</span> getPrice = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> <span class="string">'Please choose a series.'</span>;</div><div class="line">    };</div><div class="line">    that.getPrice = getPrice;</div><div class="line">    <span class="keyword">return</span> that;</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>这样使用 ford，创建一个我的福特车：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myFord = ford( { maxSpeed : <span class="number">280</span>, price : <span class="number">320000</span> } );</div><div class="line">myFord.getMaxSpeed(); <span class="comment">// =&gt; 280</span></div><div class="line">myFord.getPrice(); <span class="comment">// =&gt; 320000</span></div></pre></td></tr></table></figure>
+
+<p>这种模式保护了对象的私有变量和私有方法。同时为子类访问父类方法提供可能（这里又用到了自定义的 method 方法，<a href="http://yyblog.mocoer.com/2014/09/27/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dforeach/" target="_blank" rel="external">详见这里</a>）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Object</span>.method( <span class="string">'superior'</span>, <span class="function"><span class="keyword">function</span><span class="params">( methodName )</span></span>{</div><div class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>,</div><div class="line">        method = that[ methodName ];</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> method.apply( that, <span class="built_in">arguments</span> );</div><div class="line">    }</div><div class="line">} );</div><div class="line"></div><div class="line"><span class="keyword">var</span> coolFord = <span class="function"><span class="keyword">function</span><span class="params">( props )</span></span>{</div><div class="line">    <span class="keyword">var</span> that = ford( props ),</div><div class="line">        superGetPrice = that.superior( <span class="string">'getPrice'</span> ); <span class="comment">// 得到了父对象方法</span></div><div class="line">    <span class="keyword">var</span> getPrice = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> <span class="string">'Hi, ford fans. '</span> + superGetPrice();</div><div class="line">    }</div><div class="line">    that.getPrice = getPrice;</div><div class="line">    <span class="keyword">return</span> that;</div><div class="line">}</div></pre></td></tr></table></figure>
+
 
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/">http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/" data-id="r3sjgpusnadx14f3" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/" data-id="hskflzhsqgsq0ryp" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原型/">原型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/继承/">继承</a></li></ul>
 
     </footer>
   </div>
@@ -499,10 +767,10 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－元素位置及大小" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-写自己的JavaScript工具－ID生成器" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－元素位置及大小/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+    <a href="/2014/09/29/写自己的JavaScript工具－ID生成器/" class="article-date">
+  <time datetime="2014-09-28T20:02:36.000Z" itemprop="datePublished">Sep 29 2014</time>
 </a>
     
   <div class="article-category">
@@ -517,7 +785,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－元素位置及大小/">写自己的JavaScript工具－元素位置及大小</a>
+      <a class="article-title" href="/2014/09/29/写自己的JavaScript工具－ID生成器/">写自己的JavaScript工具函数－ID生成器</a>
     </h1>
   
 
@@ -525,19 +793,44 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="要点">要点</h2>
+<ol>
+<li>函数也是对象（一种简单实现）</li>
+<li>闭包（一种更好的实现）</li>
+</ol>
+<h3 id="1-_函数也是对象（一种简单实现）">1. 函数也是对象（一种简单实现）</h3>
+<p>设置 ID 计数器为全局变量的方式是最简陋的一种实现，而且容易引发一系列程序问题，因为全局变量会搞乱命名空间，同时也容易被篡改，造成安全隐患。</p>
+<p>为了避免使用全局变量，一种简单的实现是将 ID 计数器设置为生成器函数的一个属性。这个思路源于：函数也是对象，也可以拥有属性和方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// JavaScript 中的函数也是对象，它继承自 Object.prototype</span></div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="comment">/* 一些语句 */</span> };</div><div class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf( f ); <span class="comment">// =&gt; true </span></div><div class="line"><span class="comment">// 这说明：f 原型继承自 Object.prototype，但不一定是直接继承，因为 isPrototypeOf 会识别整个原型链</span></div></pre></td></tr></table></figure>
+
+<p>关于原型和原型继承的理解可以<a href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E5%AF%B9%E8%B1%A1%E7%BB%A7%E6%89%BF/" target="_blank" rel="external">参考这里</a>。</p>
+<p>于是，很容易的我们写出一个简单的 ID 计数器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId;</div><div class="line">uniqId.idCounter = <span class="number">0</span>;</div><div class="line">uniqId = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">return</span> uniqId.idCounter+=<span class="number">1</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>这样，就避免 idCounter 成为一个全局变量。</p>
+<h3 id="2-_闭包（一种更好的实现）">2. 闭包（一种更好的实现）</h3>
+<p>然而上面的实现依然存在问题，因为 idCounter 值可以很容易的被篡改：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 有意或无意的设置了 uniqId.idCounter 的值：</span></div><div class="line">uniqId.idCounter = <span class="string">'lalala'</span>;</div><div class="line"><span class="comment">// 或者甚至删除了这个属性：</span></div><div class="line"><span class="keyword">delete</span> uniqId.idCounter;</div></pre></td></tr></table></figure>
+
+<p>也就是说，idCounter 属性不是私有的，它可以在任何位置被任意代码访问和修改。如何避免这个问题呢？答案是闭包。</p>
+<p>简单来说，JavaScript 函数的执行依赖变量作用域，这个作用域是在函数<strong>定义</strong>时决定的，作用域的特点就是内部函数可以访问包含它的外部函数中的参数和变量（但不包括 this 和 arguments）。其次，函数体内部的变量都可以保存在函数作用域内，即便函数已经结束并返回，这些变量可能依然还在。而这种特性，就称为闭包。</p>
+<p>闭包可以捕捉函数调用的局部变量，利用这种编程技术，我们可以实现一个更好的ID生成器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId = ( <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> idCounter = <span class="number">0</span>; <span class="comment">// 局部变量</span></div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> idCounter+=<span class="number">1</span>;</div><div class="line">    }</div><div class="line">}() );</div></pre></td></tr></table></figure>
+
+<p>里面的函数可以访问外面函数内定义的变量 idCounter ，当外部函数返回后，其他任何代码都无法访问到 idCounter，除了被返回的内部函数。这就保证了 idCounter 不会被任何其他代码所修改。</p>
+
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－元素位置及大小/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－元素位置及大小/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/">http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－元素位置及大小/" data-id="ylu9v17a0m2jsw5y" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/" data-id="txcqie4gukpkiosc" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－元素位置及大小/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/闭包/">闭包</a></li></ul>
 
     </footer>
   </div>
@@ -548,7 +841,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/tags/JavaScript/page/2/">2</a><a class="extend next" rel="next" href="/tags/JavaScript/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/tags/Javascript/page/2/">2</a><a class="extend next" rel="next" href="/tags/Javascript/page/2/">Next &raquo;</a>
     </nav>
   
 </section>
