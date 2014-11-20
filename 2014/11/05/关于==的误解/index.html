@@ -6,36 +6,42 @@
   
   <title>关于 == 的误解 | YY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问：今天面试被问到一个问题，true == 3 的结果是？我第一反应是：
+  <meta name="description" content="今天被人问：true == 3 的结果是？我第一反应是：
 
 Javascript 是弱类型语言，“==”相等的概念很宽泛，这两个值都是真值，转换成 bool 类型后都为 true，应该相等；
 用 if( true ) 和 if( 3 ) ，都会进入 if 代码块，应该相等；
 
 于是随口回答： true。
  实际结果是: false。
-查了下犀牛，了解到以下两点，可以分别解释上面两条">
+查了下犀牛，了解到以下两点，可以分别解释上面两条误解：
+
+==">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于 == 的误解">
 <meta property="og:url" content="http://yyblog.mocoer.com/2014/11/05/关于==的误解/">
 <meta property="og:site_name" content="YY">
-<meta property="og:description" content="问：今天面试被问到一个问题，true == 3 的结果是？我第一反应是：
+<meta property="og:description" content="今天被人问：true == 3 的结果是？我第一反应是：
 
 Javascript 是弱类型语言，“==”相等的概念很宽泛，这两个值都是真值，转换成 bool 类型后都为 true，应该相等；
 用 if( true ) 和 if( 3 ) ，都会进入 if 代码块，应该相等；
 
 于是随口回答： true。
  实际结果是: false。
-查了下犀牛，了解到以下两点，可以分别解释上面两条">
+查了下犀牛，了解到以下两点，可以分别解释上面两条误解：
+
+==">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 == 的误解">
-<meta name="twitter:description" content="问：今天面试被问到一个问题，true == 3 的结果是？我第一反应是：
+<meta name="twitter:description" content="今天被人问：true == 3 的结果是？我第一反应是：
 
 Javascript 是弱类型语言，“==”相等的概念很宽泛，这两个值都是真值，转换成 bool 类型后都为 true，应该相等；
 用 if( true ) 和 if( 3 ) ，都会进入 if 代码块，应该相等；
 
 于是随口回答： true。
  实际结果是: false。
-查了下犀牛，了解到以下两点，可以分别解释上面两条">
+查了下犀牛，了解到以下两点，可以分别解释上面两条误解：
+
+==">
 
   
     <link rel="alternative" href="/atom.xml" title="YY" type="application/atom+xml">
@@ -115,7 +121,7 @@ Javascript 是弱类型语言，“==”相等的概念很宽泛，这两个值�
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>问：今天面试被问到一个问题，true == 3 的结果是？<br>我第一反应是：</p>
+        <p>今天被人问：true == 3 的结果是？<br>我第一反应是：</p>
 <ol>
 <li>Javascript 是弱类型语言，“==”相等的概念很宽泛，这两个值都是真值，转换成 bool 类型后都为 true，应该相等；</li>
 <li>用 if( true ) 和 if( 3 ) ，都会进入 if 代码块，应该相等；</li>
@@ -124,7 +130,7 @@ Javascript 是弱类型语言，“==”相等的概念很宽泛，这两个值�
 <p><strong> 实际结果是: false。</strong></p>
 <p>查了下犀牛，了解到以下两点，可以分别解释上面两条误解：</p>
 <ol>
-<li><strong>== 运算符从不试图将操作数转化成布尔值，</strong>如果两个操作数比较，其中一个是 bool 类型，的会先将 bool 类型值转化成数字（ true 转换为 1，false 转换为 0 ），然后再继续比较。</li>
+<li><strong>== 运算符从不试图将操作数转化成布尔值，</strong>如果两个操作数比较，其中一个是 bool 类型，则会先将 bool 类型值转化成数字（ true 转换为 1，false 转换为 0 ），然后再继续比较。</li>
 <li>只有 if 语句会将假值（undefined, null, NaN, 0, ‘’）转换成false，将其他值（真值）转换为true，然后进行比较。</li>
 </ol>
 

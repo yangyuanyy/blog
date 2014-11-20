@@ -96,7 +96,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>问：今天面试被问到一个问题，true == 3 的结果是？<br>我第一反应是：</p>
+        <p>今天被人问：true == 3 的结果是？<br>我第一反应是：</p>
 <ol>
 <li>Javascript 是弱类型语言，“==”相等的概念很宽泛，这两个值都是真值，转换成 bool 类型后都为 true，应该相等；</li>
 <li>用 if( true ) 和 if( 3 ) ，都会进入 if 代码块，应该相等；</li>
@@ -105,7 +105,7 @@
 <p><strong> 实际结果是: false。</strong></p>
 <p>查了下犀牛，了解到以下两点，可以分别解释上面两条误解：</p>
 <ol>
-<li><strong>== 运算符从不试图将操作数转化成布尔值，</strong>如果两个操作数比较，其中一个是 bool 类型，的会先将 bool 类型值转化成数字（ true 转换为 1，false 转换为 0 ），然后再继续比较。</li>
+<li><strong>== 运算符从不试图将操作数转化成布尔值，</strong>如果两个操作数比较，其中一个是 bool 类型，则会先将 bool 类型值转化成数字（ true 转换为 1，false 转换为 0 ），然后再继续比较。</li>
 <li>只有 if 语句会将假值（undefined, null, NaN, 0, ‘’）转换成false，将其他值（真值）转换为true，然后进行比较。</li>
 </ol>
 
