@@ -70,6 +70,78 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-写自己的JavaScript工具－ID生成器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/29/写自己的JavaScript工具－ID生成器/" class="article-date">
+  <time datetime="2014-09-28T20:02:36.000Z" itemprop="datePublished">Sep 29 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/29/写自己的JavaScript工具－ID生成器/">写自己的JavaScript工具函数－ID生成器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="要点">要点</h2>
+<ol>
+<li>函数也是对象（一种简单实现）</li>
+<li>闭包（一种更好的实现）</li>
+</ol>
+<h3 id="1-_函数也是对象（一种简单实现）">1. 函数也是对象（一种简单实现）</h3>
+<p>设置 ID 计数器为全局变量的方式是最简陋的一种实现，而且容易引发一系列程序问题，因为全局变量会搞乱命名空间，同时也容易被篡改，造成安全隐患。</p>
+<p>为了避免使用全局变量，一种简单的实现是将 ID 计数器设置为生成器函数的一个属性。这个思路源于：函数也是对象，也可以拥有属性和方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// JavaScript 中的函数也是对象，它继承自 Object.prototype</span></div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{ <span class="comment">/* 一些语句 */</span> };</div><div class="line"><span class="built_in">Object</span>.prototype.isPrototypeOf( f ); <span class="comment">// =&gt; true </span></div><div class="line"><span class="comment">// 这说明：f 原型继承自 Object.prototype，但不一定是直接继承，因为 isPrototypeOf 会识别整个原型链</span></div></pre></td></tr></table></figure>
+
+<p>关于原型和原型继承的理解可以<a href="http://yyblog.mocoer.com/2014/09/29/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E5%AF%B9%E8%B1%A1%E7%BB%A7%E6%89%BF/" target="_blank" rel="external">参考这里</a>。</p>
+<p>于是，很容易的我们写出一个简单的 ID 计数器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId;</div><div class="line">uniqId.idCounter = <span class="number">0</span>;</div><div class="line">uniqId = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">return</span> uniqId.idCounter+=<span class="number">1</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>这样，就避免 idCounter 成为一个全局变量。</p>
+<h3 id="2-_闭包（一种更好的实现）">2. 闭包（一种更好的实现）</h3>
+<p>然而上面的实现依然存在问题，因为 idCounter 值可以很容易的被篡改：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 有意或无意的设置了 uniqId.idCounter 的值：</span></div><div class="line">uniqId.idCounter = <span class="string">'lalala'</span>;</div><div class="line"><span class="comment">// 或者甚至删除了这个属性：</span></div><div class="line"><span class="keyword">delete</span> uniqId.idCounter;</div></pre></td></tr></table></figure>
+
+<p>也就是说，idCounter 属性不是私有的，它可以在任何位置被任意代码访问和修改。如何避免这个问题呢？答案是闭包。</p>
+<p>简单来说，JavaScript 函数的执行依赖变量作用域，这个作用域是在函数<strong>定义</strong>时决定的，作用域的特点就是内部函数可以访问包含它的外部函数中的参数和变量（但不包括 this 和 arguments）。其次，函数体内部的变量都可以保存在函数作用域内，即便函数已经结束并返回，这些变量可能依然还在。而这种特性，就称为闭包。</p>
+<p>闭包可以捕捉函数调用的局部变量，利用这种编程技术，我们可以实现一个更好的ID生成器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> uniqId = ( <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> idCounter = <span class="number">0</span>; <span class="comment">// 局部变量</span></div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> idCounter+=<span class="number">1</span>;</div><div class="line">    }</div><div class="line">}() );</div></pre></td></tr></table></figure>
+
+<p>里面的函数可以访问外面函数内定义的变量 idCounter ，当外部函数返回后，其他任何代码都无法访问到 idCounter，除了被返回的内部函数。这就保证了 idCounter 不会被任何其他代码所修改。</p>
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/">http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/" data-id="txcqie4gukpkiosc" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－ID生成器/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/闭包/">闭包</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-写自己的JavaScript工具－bind" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/09/29/写自己的JavaScript工具－bind/" class="article-date">
@@ -206,54 +278,6 @@
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/forEach/">forEach</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/函数式编程/">函数式编程</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-写自己的JavaScript工具－注册:取消注册事件" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/">写自己的JavaScript工具－注册/取消注册事件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>P435</p>
-
-      
-
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/</a></p>
-
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/" data-id="rxoltixdp7oabn7i" class="article-share-link">Share</a>
-      
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/#comments" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
 
     </footer>
   </div>
@@ -500,9 +524,9 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－离线应用" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-写自己的JavaScript工具－注册:取消注册事件" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－离线应用/" class="article-date">
+    <a href="/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/" class="article-date">
   <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
 </a>
     
@@ -518,7 +542,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－离线应用/">写自己的JavaScript工具－推送</a>
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/">写自己的JavaScript工具－注册/取消注册事件</a>
     </h1>
   
 
@@ -526,17 +550,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>P594</p>
+        <p>P435</p>
 
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－离线应用/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－离线应用/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－离线应用/" data-id="7tdcxlm5i963ybo1" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/" data-id="rxoltixdp7oabn7i" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－离线应用/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/#comments" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -644,7 +668,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11">November 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -654,6 +678,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/11/25/写自己的JavaScript工具－addClass:removeClass:hasClass/">写自己的JavaScript工具－addClass/removeClass/hasClass</a>
+          </li>
         
           <li>
             <a href="/2014/11/05/关于==的误解/">关于 == 的误解</a>
@@ -669,10 +697,6 @@
         
           <li>
             <a href="/2014/10/03/写自己的JavaScript工具－模块/">写自己的JavaScript工具－模块</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/02/写自己的JavaScript工具－跨域请求( JSONP )/">写自己的JavaScript工具－跨域请求(JSONP)</a>
           </li>
         
       </ul>
