@@ -70,6 +70,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-写自己的JavaScript工具－判断对象的类" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/19/写自己的JavaScript工具－判断对象的类/" class="article-date">
+  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－判断对象的类/">写自己的JavaScript工具－判断对象的类</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="要点">要点</h2>
+<ol>
+<li>了解 typeof</li>
+<li>了解 toString()</li>
+<li>实现 classOf()</li>
+</ol>
+<h3 id="1-_了解_typeof">1. 了解 typeof</h3>
+<h3 id="2-_了解_toString()">2. 了解 toString()</h3>
+<h3 id="3-_实现_classOf()">3. 实现 classOf()</h3>
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－判断对象的类/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－判断对象的类/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－判断对象的类/" data-id="hgtaqpexf22ehs94" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－判断对象的类/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-写自己的JavaScript工具－元素位置及大小" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/09/19/写自己的JavaScript工具－元素位置及大小/" class="article-date">
@@ -542,93 +598,9 @@
 
 
   
-    <article id="post-学习 AngularJS － 搭建开发环境" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/08/22/学习 AngularJS － 搭建开发环境/" class="article-date">
-  <time datetime="2014-08-22T13:33:12.000Z" itemprop="datePublished">Aug 22 2014</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/08/22/学习 AngularJS － 搭建开发环境/">学习 AngularJS － 搭建开发环境</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="目录">目录</h2>
-<ol>
-<li>安装 Node.js</li>
-<li>安装 Node 开发框架 Express</li>
-<li>安装自动化单元测试 Karma</li>
-<li>创建 Express 项目</li>
-<li>创建单元测试</li>
-<li>给 Chrome 安装 AngularJS Batarang 扩展</li>
-</ol>
-<h3 id="1-_安装_Node-js">1. 安装 Node.js</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ apt-get install node.js</div><div class="line">$ node --version</div><div class="line">v0.<span class="number">10.30</span></div></pre></td></tr></table></figure>
-
-<p>了解 <a href="http://nodejs.org/" target="_blank" rel="external"> Node.js </a></p>
-<h3 id="2-_安装Node开发框架_Express">2. 安装Node开发框架 Express</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ npm install -g express</div><div class="line">$ npm install -g express-generator</div><div class="line">$ express --version</div><div class="line"><span class="number">4.2</span>.<span class="number">0</span></div></pre></td></tr></table></figure>
-
-<p>了解 <a href="http://express.jsbin.cn/" target="_blank" rel="external"> Express </a></p>
-<h3 id="3-_安装自动化单元测试_Karma">3. 安装自动化单元测试 Karma</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ npm install -g karma</div><div class="line">$ /usr/local/lib/node_modules/karma/bin/karma --version</div><div class="line">Karma version: <span class="number">0.12</span>.<span class="number">21</span></div></pre></td></tr></table></figure>
-
-<p>了解 <a href="https://github.com/karma-runner/karma" target="_blank" rel="external"> Karma </a></p>
-<h3 id="4-_创建_Express_项目">4. 创建 Express 项目</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ express demo</div><div class="line">$ <span class="built_in">cd</span> demo</div><div class="line">$ mkdir test // 存放测试用例</div></pre></td></tr></table></figure>
-
-<h3 id="5-_创建单元测试">5. 创建单元测试</h3>
-<p>编写业务脚本。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> test</div><div class="line">$ vi testee.js</div><div class="line">function <span class="function"><span class="title">sayHi</span></span>(){</div><div class="line">	<span class="keyword">return</span> <span class="string">'Hi'</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>编写测试脚本。这里选择使用 <a href="https://github.com/pivotal/jasmine" target="_blank" rel="external"> Jasmine </a> 风格来编写测试代码。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ vi tester.js</div><div class="line">describe( <span class="string">"testee"</span>, <span class="function"><span class="title">function</span></span>(){</div><div class="line">	it(<span class="string">"to work correctly"</span>, <span class="function"><span class="title">function</span></span>(){</div><div class="line">		expect(sayHi()).toEqual(<span class="string">'Hi'</span>);</div><div class="line">	})</div><div class="line">} );</div></pre></td></tr></table></figure>
-
-<p>配置 karma.conf.js 文件并执行测试。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> .. // 回到 demo 根目录</div><div class="line">$ karma init</div><div class="line">$ karma start</div></pre></td></tr></table></figure>
-
-<p>测试通过。</p>
-<h3 id="6-_给_Chrome_安装_AngularJS_Batarang_扩展">6. 给 Chrome 安装 <a href="https://github.com/angular/angularjs-batarang" target="_blank" rel="external"> AngularJS Batarang </a> 扩展</h3>
-<p>安装成功后，会在 Chrome 的 F12 面板中增加一个新标签：AngularJS，通过该插件可以当前运行的应用中每个模型、作用域以及变量值、运行效率、服务依赖关系等信息。<br><img src="http://img01.taobaocdn.com/imgextra/i1/1643172296/TB2LmwkaXXXXXcJXXXXXXXXXXXX-1643172296.png" height="206" style="padding:30px 0;"></p>
-
-      
-
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/08/22/学习 AngularJS － 搭建开发环境/">http://yyblog.mocoer.com/2014/08/22/学习 AngularJS － 搭建开发环境/</a></p>
-
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/08/22/学习 AngularJS － 搭建开发环境/" data-id="qq01cn5kq67uppzk" class="article-share-link">Share</a>
-      
-        <a href="http://yyblog.mocoer.com/2014/08/22/学习 AngularJS － 搭建开发环境/#comments" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AngularJS/">AngularJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/4/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -639,7 +611,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">28</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JUGGjs/">JUGG.js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">28</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -648,7 +620,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backbone/">Backbone</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/localStorage/">localStorage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backbone/">Backbone</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUGGjs/">JUGG.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/localStorage/">localStorage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端/">移动端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -657,7 +629,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AngularJS/" style="font-size: 13.33px;">AngularJS</a><a href="/tags/Backbone/" style="font-size: 10.00px;">Backbone</a><a href="/tags/JavaScript/" style="font-size: 20.00px;">JavaScript</a><a href="/tags/Javascript/" style="font-size: 16.67px;">Javascript</a><a href="/tags/arguments/" style="font-size: 10.00px;">arguments</a><a href="/tags/bind/" style="font-size: 10.00px;">bind</a><a href="/tags/cookie/" style="font-size: 10.00px;">cookie</a><a href="/tags/forEach/" style="font-size: 10.00px;">forEach</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/jsonp/" style="font-size: 10.00px;">jsonp</a><a href="/tags/localStorage/" style="font-size: 10.00px;">localStorage</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/原型/" style="font-size: 10.00px;">原型</a><a href="/tags/模块/" style="font-size: 10.00px;">模块</a><a href="/tags/继承/" style="font-size: 10.00px;">继承</a><a href="/tags/跨域/" style="font-size: 10.00px;">跨域</a><a href="/tags/闭包/" style="font-size: 10.00px;">闭包</a>
+      <a href="/tags/AngularJS/" style="font-size: 13.33px;">AngularJS</a><a href="/tags/Backbone/" style="font-size: 10.00px;">Backbone</a><a href="/tags/H5/" style="font-size: 10.00px;">H5</a><a href="/tags/JUGGjs/" style="font-size: 10.00px;">JUGG.js</a><a href="/tags/JavaScript/" style="font-size: 20.00px;">JavaScript</a><a href="/tags/Javascript/" style="font-size: 16.67px;">Javascript</a><a href="/tags/arguments/" style="font-size: 10.00px;">arguments</a><a href="/tags/bind/" style="font-size: 10.00px;">bind</a><a href="/tags/cookie/" style="font-size: 10.00px;">cookie</a><a href="/tags/forEach/" style="font-size: 10.00px;">forEach</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/jsonp/" style="font-size: 10.00px;">jsonp</a><a href="/tags/localStorage/" style="font-size: 10.00px;">localStorage</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/原型/" style="font-size: 10.00px;">原型</a><a href="/tags/模块/" style="font-size: 10.00px;">模块</a><a href="/tags/移动端/" style="font-size: 10.00px;">移动端</a><a href="/tags/继承/" style="font-size: 10.00px;">继承</a><a href="/tags/跨域/" style="font-size: 10.00px;">跨域</a><a href="/tags/闭包/" style="font-size: 10.00px;">闭包</a>
     </div>
   </div>
 
@@ -666,7 +638,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -676,6 +648,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 1 )/">移动端开发JS库 -- JUGG.js ( PART 1 )</a>
+          </li>
         
           <li>
             <a href="/2014/11/25/写自己的JavaScript工具－addClass:removeClass:hasClass/">写自己的JavaScript工具－addClass/removeClass/hasClass</a>
@@ -691,10 +667,6 @@
         
           <li>
             <a href="/2014/10/09/写自己的JavaScript工具－本地存储/">写自己的JavaScript工具－本地存储</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/03/写自己的JavaScript工具－模块/">写自己的JavaScript工具－模块</a>
           </li>
         
       </ul>

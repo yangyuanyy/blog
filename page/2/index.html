@@ -70,6 +70,98 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-写自己的JavaScript工具－对象继承" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/29/写自己的JavaScript工具－对象继承/" class="article-date">
+  <time datetime="2014-09-29T07:25:36.000Z" itemprop="datePublished">Sep 29 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/29/写自己的JavaScript工具－对象继承/">写自己的JavaScript工具－对象继承</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在基于类的语言中，对象是类的实例，类可以从另一个类继承。但 JavaScript 是基于原型的语言，这意味着对象直接从其他对象继承（因此本篇叫做对象继承）。在 JavaScript 中实现继承的模式有很多。这里将对它们做一些研究。</p>
+<h2 id="要点">要点</h2>
+<ol>
+<li>关于原型与所谓的原型继承的理解</li>
+<li>几种继承模式</li>
+</ol>
+<h3 id="1-_关于原型继承与构造函数">1. 关于原型继承与构造函数</h3>
+<p>JavaScript 是基于原型的语言，而非基于类，但 JavaScript 依然引入了类（伪类）的概念（通过 new 的方式去创建实例对象）。</p>
+<p>可以这样理解 JavaScript 的原型继承与构造函数：</p>
+<p><em style="color:#999;">我只给你一个{}，你却用它创造了整个世界…</em></p>
+<p>通俗的讲，首先，Object.prototype 是 JavaScript 中最原始的对象，记为 {} 。它的构造器就是 Object 函数。有了 {} 和能创建它的构造器，人们开始想，基于 {} ，我们应该创造一些有用的新的东西出来，比如数组，怎么做呢？那就基于 {} 定义一个名叫数组的对象吧，可以记为 [] 。怎么体现 [] 继承了 {} 呢？毕竟 [] 由 {} 而来，{} 的后代应该继承一些它的特性。于是想到一个办法：引入原型的说法，然后说 [] 的原型就是 {} ，那不就体现了继承关系了吗？最后再让 [] 继承一些它的原型（ {} ）的特性（属性和方法），同时也给 [] 一些自己特有的特性（属性和方法）。</p>
+<p>那要创建不同的具体数组时怎么做呢？提供一个数组构造器吧，就叫 Array，用 Array 创建出来的对象都是数组对象。那怎么体现用 Array 创造出来的数组对象继承了上面定义的 [] 呢？毕竟对于这些数组对象，[] 是它们的直接祖先。有一个办法，就是给 Array 构造器一个叫作 prototype 的属性，凡是通过 Array 构造器创建的对象，其原型都指向这个 prototype 属性值，而这个 prototype 属性值就是 []。最后再让被创建出来的数组继承它的原型（ [] ）的方法，当然，这些数组也可以拥有一些自己的特有的属性和方法。</p>
+<p>这时，人们看到了构造器能帮他们创建某种特定类型的对象，这些对象都有着特殊的意义。于是人们开始想自己来定义满足自身需求的构造器，从而用这些自定义的构造器创建他们想要的各种对象。JavaScript 看到了人们这种需求，于是引入了一个功能：任意一个函数都可以当作构造器来调用，从而创建特定的对象。而且让所有函数都有一个 prototype 属性，其作用就是上面一段所说的：体现继承关系。而所有的函数的 prototype 属性值都是在函数创建之初被赋予的一个新的基本的对象，这个对象的一个特点是它的 contructor 属性值就是这个函数本身。引入这个功能后，人们就可以用自己定义的函数用作构造器使用。后面的事情就和 Array 的情况一样了。这也就是为什么 JavaScript 中的所谓构造函数的一个最重要的特点是：构造函数的 prototype 属性值就被用作由该构造函数 new 出来的对象的原型。</p>
+<p>众所周知的构造器有：Object、Function、Array、String、RegExp等。</p>
+<h3 id="2-_几种继承模式">2. 几种继承模式</h3>
+<p>a. 伪类模式</p>
+<p>为了模仿传统的基于类的继承，JavaScript 引入了一个特性：允许通过构造函数创建新的对象。可以说，它掩盖了 JavaScript 的基于原型的继承特点。</p>
+<p>如果理解了要点1中关于原型继承与构造函数的内容，那么应该容易理解下面代码的含义：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Car = <span class="function"><span class="keyword">function</span><span class="params">( maxSpeed )</span></span>{</div><div class="line">    <span class="keyword">this</span>.maxSpeed = maxSpeed;</div><div class="line">}</div><div class="line"></div><div class="line">Car.prototype.getMaxSpeed = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.maxSpeed || <span class="string">'unKnown'</span>;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">var</span> Ford = <span class="function"><span class="keyword">function</span><span class="params">( maxSpeed )</span></span>{</div><div class="line">    <span class="keyword">this</span>.maxSpeed = maxSpeed;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// 这里一行是理解伪类模式的关键</span></div><div class="line"><span class="comment">// 这里定义了构造器（构造函数） Ford 的 prototype 属性为一个由构造器 Car 创建的一个实例对象</span></div><div class="line"><span class="comment">// 而这个实例对象的原型就是 Car （Car 或者说这个构造函数，是一个基本的 JavaScript 对象）</span></div><div class="line"><span class="comment">// 这时候，让构造器 Ford 的 prototype 属性赋值为这个实例对象</span></div><div class="line"><span class="comment">// 其作用就是，在通过 Ford 来创建新的 Ford 类实例对象的时候</span></div><div class="line"><span class="comment">// 这个 Ford 类实例对象的原型将是当时在定义 Ford 类时的那个 new Car() 对象</span></div><div class="line">Ford.prototype = <span class="keyword">new</span> Car();</div><div class="line"></div><div class="line"><span class="comment">// 之所以要重写 Ford 的 prototype 对象中的 constructor 属性的值为 Ford</span></div><div class="line"><span class="comment">// 是因为在 JavaScript 中，函数的 prototype 属性对象中的 constructor 属性通常指向函数本身 </span></div><div class="line">Ford.prototype.constructor = Ford;</div><div class="line"></div><div class="line"><span class="keyword">var</span> myFord = <span class="keyword">new</span> Ford( <span class="number">280</span> );</div><div class="line">myFord.getMaxSpeed(); <span class="comment">// =&gt; 280</span></div></pre></td></tr></table></figure>
+
+<p>b. 原型模式（摒弃伪类的概念，纯粹基于原型的继承，关注于对象本身）</p>
+<p>ECMAScript 5 提供了一个方法：Object.create()，现在忘记伪类的概念，仅专注于 javascript 对象，关注对象的特性（属性、方法）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> car = {</div><div class="line">    maxSpeed : <span class="number">250</span>,</div><div class="line">    getMaxSpeed : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.maxSpeed;</div><div class="line">    }   </div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">var</span> myFord = <span class="built_in">Object</span>.create( car ); <span class="comment">// Object.create 在说：让 myFord 的原型为 car</span></div><div class="line">myFord.maxSpeed = <span class="number">280</span>;</div><div class="line"></div><div class="line">myFord.getMaxSpeed(); <span class="comment">// =&gt; 280</span></div></pre></td></tr></table></figure>
+
+<p>可以看到，根据一个已有的对象 car ，创建了一个新的对象 myFord，新对象 myFord 只需关注自身与它所继承的对象 car 之间的差异，再没有定义什么 Car、Ford 构造函数，即摒弃了类（伪类）的概念，也同样完成了对象的继承（ JavaScript 就是基于原型的语言，继承就是对象之间的继承 ）。</p>
+<p>对于 ECMAScript 3，我们同样可以实现 Object.create() 方法，它其实做了类似下面的事：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> p, <span class="comment">// 要被继承的对象（父）</span></div><div class="line">    c; <span class="comment">// 新对象，将继承自 p</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{};</div><div class="line">F.prototype = p;</div><div class="line">c = <span class="keyword">new</span> F();</div></pre></td></tr></table></figure>
+
+<p>如果理解了要点1中的原型和原型继承，应该可以理解上面这段代码的含义。</p>
+<p>c. 函数化模式</p>
+<p>上面的两种继承模式都有一些缺点：1. 对象的属性都不是私有的，可以被任意的访问和篡改。2. 如果子类方法覆盖了父类方法，通过子类创建的对象将无法访问那些方法（原型链特点导致）。</p>
+<p>为解决第一个问题，我们容易想到用闭包技术来解决。</p>
+<p>闭包离不开函数，函数创建了私有局部变量。</p>
+<p>现在忘记 Object.create()，忘记原型链，专注于下面这个函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义一个函数 car，调用它时它将返回一个对象</span></div><div class="line"><span class="keyword">var</span> car = <span class="function"><span class="keyword">function</span><span class="params">( props )</span></span>{ <span class="comment">// props 相当于 ford 函数中的一个局部变量</span></div><div class="line">    <span class="keyword">var</span> that = {}; <span class="comment">// 为了清晰，我们显式的声明出这个最后要被返回的对象</span></div><div class="line">    <span class="keyword">var</span> getMaxSpeed = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> props.maxSpeed;</div><div class="line">    };</div><div class="line">    that.getMaxSpeed = getMaxSpeed;</div><div class="line">    <span class="keyword">return</span> that; </div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>实现继承：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 再定义一个函数 ford，调用它时它将返回一个对象，而这个对象将拥有 car 的方法</span></div><div class="line"><span class="keyword">var</span> ford = <span class="function"><span class="keyword">function</span><span class="params">( props )</span></span>{ <span class="comment">// props 相当于 ford 函数中的一个局部变量</span></div><div class="line">    <span class="keyword">var</span> that = car( props );</div><div class="line">    <span class="keyword">var</span> getPrice = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> <span class="string">'Please choose a series.'</span>;</div><div class="line">    };</div><div class="line">    that.getPrice = getPrice;</div><div class="line">    <span class="keyword">return</span> that;</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>这样使用 ford，创建一个我的福特车：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myFord = ford( { maxSpeed : <span class="number">280</span>, price : <span class="number">320000</span> } );</div><div class="line">myFord.getMaxSpeed(); <span class="comment">// =&gt; 280</span></div><div class="line">myFord.getPrice(); <span class="comment">// =&gt; 320000</span></div></pre></td></tr></table></figure>
+
+<p>这种模式保护了对象的私有变量和私有方法。同时为子类访问父类方法提供可能（这里又用到了自定义的 method 方法，<a href="http://yyblog.mocoer.com/2014/09/27/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8Dforeach/" target="_blank" rel="external">详见这里</a>）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Object</span>.method( <span class="string">'superior'</span>, <span class="function"><span class="keyword">function</span><span class="params">( methodName )</span></span>{</div><div class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>,</div><div class="line">        method = that[ methodName ];</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> method.apply( that, <span class="built_in">arguments</span> );</div><div class="line">    }</div><div class="line">} );</div><div class="line"></div><div class="line"><span class="keyword">var</span> coolFord = <span class="function"><span class="keyword">function</span><span class="params">( props )</span></span>{</div><div class="line">    <span class="keyword">var</span> that = ford( props ),</div><div class="line">        superGetPrice = that.superior( <span class="string">'getPrice'</span> ); <span class="comment">// 得到了父对象方法</span></div><div class="line">    <span class="keyword">var</span> getPrice = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> <span class="string">'Hi, ford fans. '</span> + superGetPrice();</div><div class="line">    }</div><div class="line">    that.getPrice = getPrice;</div><div class="line">    <span class="keyword">return</span> that;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/">http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/" data-id="hskflzhsqgsq0ryp" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－对象继承/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原型/">原型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/继承/">继承</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-写自己的JavaScript工具－ID生成器" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/09/29/写自己的JavaScript工具－ID生成器/" class="article-date">
@@ -572,65 +664,9 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－判断对象的类" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－判断对象的类/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－判断对象的类/">写自己的JavaScript工具－判断对象的类</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="要点">要点</h2>
-<ol>
-<li>了解 typeof</li>
-<li>了解 toString()</li>
-<li>实现 classOf()</li>
-</ol>
-<h3 id="1-_了解_typeof">1. 了解 typeof</h3>
-<h3 id="2-_了解_toString()">2. 了解 toString()</h3>
-<h3 id="3-_实现_classOf()">3. 实现 classOf()</h3>
-
-      
-
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－判断对象的类/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－判断对象的类/</a></p>
-
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－判断对象的类/" data-id="hgtaqpexf22ehs94" class="article-share-link">Share</a>
-      
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－判断对象的类/#comments" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -641,7 +677,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">28</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JUGGjs/">JUGG.js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">28</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -650,7 +686,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backbone/">Backbone</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/localStorage/">localStorage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backbone/">Backbone</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUGGjs/">JUGG.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/localStorage/">localStorage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端/">移动端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -659,7 +695,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AngularJS/" style="font-size: 13.33px;">AngularJS</a><a href="/tags/Backbone/" style="font-size: 10.00px;">Backbone</a><a href="/tags/JavaScript/" style="font-size: 20.00px;">JavaScript</a><a href="/tags/Javascript/" style="font-size: 16.67px;">Javascript</a><a href="/tags/arguments/" style="font-size: 10.00px;">arguments</a><a href="/tags/bind/" style="font-size: 10.00px;">bind</a><a href="/tags/cookie/" style="font-size: 10.00px;">cookie</a><a href="/tags/forEach/" style="font-size: 10.00px;">forEach</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/jsonp/" style="font-size: 10.00px;">jsonp</a><a href="/tags/localStorage/" style="font-size: 10.00px;">localStorage</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/原型/" style="font-size: 10.00px;">原型</a><a href="/tags/模块/" style="font-size: 10.00px;">模块</a><a href="/tags/继承/" style="font-size: 10.00px;">继承</a><a href="/tags/跨域/" style="font-size: 10.00px;">跨域</a><a href="/tags/闭包/" style="font-size: 10.00px;">闭包</a>
+      <a href="/tags/AngularJS/" style="font-size: 13.33px;">AngularJS</a><a href="/tags/Backbone/" style="font-size: 10.00px;">Backbone</a><a href="/tags/H5/" style="font-size: 10.00px;">H5</a><a href="/tags/JUGGjs/" style="font-size: 10.00px;">JUGG.js</a><a href="/tags/JavaScript/" style="font-size: 20.00px;">JavaScript</a><a href="/tags/Javascript/" style="font-size: 16.67px;">Javascript</a><a href="/tags/arguments/" style="font-size: 10.00px;">arguments</a><a href="/tags/bind/" style="font-size: 10.00px;">bind</a><a href="/tags/cookie/" style="font-size: 10.00px;">cookie</a><a href="/tags/forEach/" style="font-size: 10.00px;">forEach</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/jsonp/" style="font-size: 10.00px;">jsonp</a><a href="/tags/localStorage/" style="font-size: 10.00px;">localStorage</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/原型/" style="font-size: 10.00px;">原型</a><a href="/tags/模块/" style="font-size: 10.00px;">模块</a><a href="/tags/移动端/" style="font-size: 10.00px;">移动端</a><a href="/tags/继承/" style="font-size: 10.00px;">继承</a><a href="/tags/跨域/" style="font-size: 10.00px;">跨域</a><a href="/tags/闭包/" style="font-size: 10.00px;">闭包</a>
     </div>
   </div>
 
@@ -668,7 +704,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -678,6 +714,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 1 )/">移动端开发JS库 -- JUGG.js ( PART 1 )</a>
+          </li>
         
           <li>
             <a href="/2014/11/25/写自己的JavaScript工具－addClass:removeClass:hasClass/">写自己的JavaScript工具－addClass/removeClass/hasClass</a>
@@ -693,10 +733,6 @@
         
           <li>
             <a href="/2014/10/09/写自己的JavaScript工具－本地存储/">写自己的JavaScript工具－本地存储</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/03/写自己的JavaScript工具－模块/">写自己的JavaScript工具－模块</a>
           </li>
         
       </ul>
