@@ -4,7 +4,7 @@
   <subtitle><![CDATA[javascripter]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yyblog.mocoer.com/"/>
-  <updated>2014-12-16T15:05:00.661Z</updated>
+  <updated>2014-12-16T15:13:29.319Z</updated>
   <id>http://yyblog.mocoer.com/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[移动端开发JS库 -- JUGG.js ( PART 3 )]]></title>
-    <link href="http://yyblog.mocoer.com/2014/12/12/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91JS%E5%BA%93%20--%20JUGG.js%20(%20PART%203%20)/"/>
-    <id>http://yyblog.mocoer.com/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 3 )/</id>
-    <published>2014-12-12T15:20:01.000Z</published>
-    <updated>2014-12-16T15:04:47.000Z</updated>
+    <title><![CDATA[编写一个H5开发JS库 -- JUGG.js ( PART 3 )]]></title>
+    <link href="http://yyblog.mocoer.com/2014/12/16/%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAH5%E5%BC%80%E5%8F%91JS%E5%BA%93%20--%20JUGG.js%20(%20PART%203%20)/"/>
+    <id>http://yyblog.mocoer.com/2014/12/16/编写一个H5开发JS库 -- JUGG.js ( PART 3 )/</id>
+    <published>2014-12-16T15:10:26.000Z</published>
+    <updated>2014-12-16T15:13:00.000Z</updated>
     <content type="html"><![CDATA[<p>PART 2 中实现的时 attr 操作，即 HTML 元素的属性操作方法。</p>
 <p>PART 3 将要实现为 DOM 绑定事件。目前仅考虑处理简单的 DOM 事件。</p>
 <p>扩展一个 $.fn.on 方法如下：</p>
@@ -50,11 +50,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[移动端开发JS库 -- JUGG.js ( PART 2 )]]></title>
-    <link href="http://yyblog.mocoer.com/2014/12/12/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91JS%E5%BA%93%20--%20JUGG.js%20(%20PART%202%20)/"/>
-    <id>http://yyblog.mocoer.com/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 2 )/</id>
-    <published>2014-12-12T15:20:01.000Z</published>
-    <updated>2014-12-16T15:03:04.000Z</updated>
+    <title><![CDATA[编写一个H5开发JS库 -- JUGG.js ( PART 2 )]]></title>
+    <link href="http://yyblog.mocoer.com/2014/12/15/%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAH5%E5%BC%80%E5%8F%91JS%E5%BA%93%20--%20JUGG.js%20(%20PART%202%20)/"/>
+    <id>http://yyblog.mocoer.com/2014/12/15/编写一个H5开发JS库 -- JUGG.js ( PART 2 )/</id>
+    <published>2014-12-15T12:41:50.000Z</published>
+    <updated>2014-12-16T15:12:53.000Z</updated>
     <content type="html"><![CDATA[<p>PART 1 中主要说明了 $ 函数的实现思路，并实现了 class 的操作。</p>
 <p>PART 2 将要实现 DOM 的属性操作，即 attr 方法。</p>
 <p>扩展一个 $.fn.attr 方法如下：</p>
@@ -81,11 +81,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[移动端开发JS库 -- JUGG.js ( PART 1 )]]></title>
-    <link href="http://yyblog.mocoer.com/2014/12/12/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%BC%80%E5%8F%91JS%E5%BA%93%20--%20JUGG.js%20(%20PART%201%20)/"/>
-    <id>http://yyblog.mocoer.com/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 1 )/</id>
+    <title><![CDATA[编写一个H5开发JS库 -- JUGG.js ( PART 1 )]]></title>
+    <link href="http://yyblog.mocoer.com/2014/12/12/%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAH5%E5%BC%80%E5%8F%91JS%E5%BA%93%20--%20JUGG.js%20(%20PART%201%20)/"/>
+    <id>http://yyblog.mocoer.com/2014/12/12/编写一个H5开发JS库 -- JUGG.js ( PART 1 )/</id>
     <published>2014-12-12T15:20:01.000Z</published>
-    <updated>2014-12-13T11:08:50.000Z</updated>
+    <updated>2014-12-16T15:12:48.000Z</updated>
     <content type="html"><![CDATA[<p>在 H5 开发方面，目前流行的 js 库已经有很多，例如：类似 jquery.js 的 zepto.js；专注 guesture 事件的 hammer.js/quo.js 等。<br>它们简化了 H5 应用或网页的前端开发工作。当然，学习这些库的使用是有必要的，而我更希望能通过“重复造轮子”来深入理解它们，同时编写更适合自己工作需要的 js 库！<br>库中可能会用到一些之前写过的工具函数，同时借鉴了 zepto.js 和 hammer.js 中的一些的实践。<br>JUGG.js 的重点将放在用户与移动设备交互事件的处理。</p>
 <h2 id="要点">要点</h2>
 <ol>
