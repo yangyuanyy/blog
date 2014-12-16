@@ -4,17 +4,26 @@
   <meta name="baidu-site-verification" content="r2KA3ATCfI" />
   <meta charset="utf-8">
   
-  <title>写自己的JavaScript工具－DOM选择器 | YY</title>
+  <title>移动端开发JS库 -- JUGG.js ( PART 2 ) | YY</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="PART 1 中主要说明了 $ 函数的实现思路，并实现了 class 的操作。
+PART 2 将要实现 DOM 的属性操作，即 attr 方法。
+扩展一个 $.fn.attr 方法如下：
+12345678910111213141516171819202122232425262728293031323334353637383940414243$.fn = {  // ...    attr : fu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="写自己的JavaScript工具－DOM选择器">
-<meta property="og:url" content="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－DOM选择器/">
+<meta property="og:title" content="移动端开发JS库 -- JUGG.js ( PART 2 )">
+<meta property="og:url" content="http://yyblog.mocoer.com/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 2 )/">
 <meta property="og:site_name" content="YY">
-<meta property="og:description">
+<meta property="og:description" content="PART 1 中主要说明了 $ 函数的实现思路，并实现了 class 的操作。
+PART 2 将要实现 DOM 的属性操作，即 attr 方法。
+扩展一个 $.fn.attr 方法如下：
+12345678910111213141516171819202122232425262728293031323334353637383940414243$.fn = {  // ...    attr : fu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="写自己的JavaScript工具－DOM选择器">
-<meta name="twitter:description">
+<meta name="twitter:title" content="移动端开发JS库 -- JUGG.js ( PART 2 )">
+<meta name="twitter:description" content="PART 1 中主要说明了 $ 函数的实现思路，并实现了 class 的操作。
+PART 2 将要实现 DOM 的属性操作，即 attr 方法。
+扩展一个 $.fn.attr 方法如下：
+12345678910111213141516171819202122232425262728293031323334353637383940414243$.fn = {  // ...    attr : fu">
 
   
     <link rel="alternative" href="/atom.xml" title="YY" type="application/atom+xml">
@@ -68,14 +77,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-写自己的JavaScript工具－DOM选择器" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-移动端开发JS库 -- JUGG.js ( PART 2 )" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－DOM选择器/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+    <a href="/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 2 )/" class="article-date">
+  <time datetime="2014-12-12T15:20:01.000Z" itemprop="datePublished">Dec 12 2014</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+    <a class="article-category-link" href="/categories/JUGGjs/">JUGG.js</a>
   </div>
 
   </div>
@@ -86,7 +95,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      写自己的JavaScript工具－DOM选择器
+      移动端开发JS库 -- JUGG.js ( PART 2 )
     </h1>
   
 
@@ -94,19 +103,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>PART 1 中主要说明了 $ 函数的实现思路，并实现了 class 的操作。</p>
+<p>PART 2 将要实现 DOM 的属性操作，即 attr 方法。</p>
+<p>扩展一个 $.fn.attr 方法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">$.fn = {</div><div class="line">  <span class="comment">// ...  </span></div><div class="line">  attr : <span class="function"><span class="keyword">function</span><span class="params">( name, value )</span></span>{</div><div class="line">    <span class="keyword">var</span> key;</div><div class="line">    <span class="comment">// 通过检测 arguments 对象的 length 值</span></div><div class="line">    <span class="comment">// 做不同的处理( get, set, remove )</span></div><div class="line">    <span class="keyword">switch</span> ( <span class="built_in">arguments</span>.length ){</div><div class="line">      <span class="keyword">case</span> <span class="number">1</span> : </div><div class="line">      <span class="comment">// 只有一个参数且为对象类型，则认为是设置元素属性或删除元素属性</span></div><div class="line">      <span class="keyword">if</span> ( <span class="keyword">typeof</span> name === <span class="string">'object'</span> ){</div><div class="line">        <span class="keyword">for</span>( key <span class="keyword">in</span> name ){</div><div class="line">          _utils.forEach.call( <span class="keyword">this</span>, </div><div class="line">            <span class="function"><span class="keyword">function</span><span class="params">( el )</span></span>{</div><div class="line">              name[ key ] === <span class="string">''</span> ? </div><div class="line">                el.removeAttribute( key ) : </div><div class="line">                el.setAttribute( key, name[ key ] );</div><div class="line">            } );</div><div class="line">        }</div><div class="line">      }</div><div class="line">      <span class="comment">// 只有一个参数且为字符串类型，则认为是获取元素属性</span></div><div class="line">      <span class="keyword">else</span> <span class="keyword">if</span>( <span class="keyword">typeof</span> name === <span class="string">'string'</span> ){</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>[ <span class="number">0</span> ].getAttribute( name );</div><div class="line">      }</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">case</span> <span class="number">2</span> :</div><div class="line">        <span class="comment">// 如果有两个参数，则只可能是设置单个元素属性值或删除单个元素属性值</span></div><div class="line">        <span class="comment">// 第一个参数必须为字符串类型</span></div><div class="line">        <span class="keyword">if</span> ( <span class="keyword">typeof</span> name != <span class="string">'string'</span> ) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        _utils.forEach.call( <span class="keyword">this</span>, </div><div class="line">          <span class="function"><span class="keyword">function</span><span class="params">( el )</span></span>{</div><div class="line">            value === <span class="string">''</span> ? </div><div class="line">              el.removeAttribute( name ) : </div><div class="line">              el.setAttribute( name, value );</div><div class="line">          } );</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">// 为实现链式调用，方法最后均需要返回 this</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">  },</div><div class="line"></div><div class="line">  <span class="comment">// ...</span></div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>现在可以这样使用 $：<br>html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">a</span>&gt;</span>test<span class="tag">&lt;/<span class="title">a</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'a'</span>).attr(<span class="string">'data-test'</span>); <span class="comment">// =&gt; null</span></div><div class="line">$(<span class="string">'a'</span>).attr(<span class="string">'data-test'</span>, <span class="number">1</span>); <span class="comment">// 添加属性 data-test 并设置其值为 1</span></div><div class="line">$(<span class="string">'a'</span>).attr(<span class="string">'data-test'</span>, <span class="string">''</span>); <span class="comment">// 删除属性 data-test</span></div><div class="line">$(<span class="string">'a'</span>).attr({ <span class="string">'data-test'</span> : <span class="number">1</span>, dataTest : <span class="number">2</span> }); <span class="comment">// 设置多个属性</span></div><div class="line">$(<span class="string">'a'</span>).attr({ <span class="string">'data-test'</span> : <span class="string">''</span>, dataTest : <span class="string">''</span> }); <span class="comment">// 删除多个属性</span></div></pre></td></tr></table></figure>
+
+<p>后面，我们会尝试添加 on/off/trigger 方法，即事件的简单处理。<br>Part 2 end, To be continue…</p>
+
       
 
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－DOM选择器/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－DOM选择器/</a></p>
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 2 )/">http://yyblog.mocoer.com/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 2 )/</a></p>
 
     </div>
     <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－DOM选择器/" data-id="vndx74milv26quc8" class="article-share-link">Share</a>
+      <a data-url="http://yyblog.mocoer.com/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 2 )/" data-id="1snxpk38yu5mbkpf" class="article-share-link">Share</a>
       
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－DOM选择器/#comments" class="article-comment-link">Comments</a>
+        <a href="http://yyblog.mocoer.com/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 2 )/#comments" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/H5/">H5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JUGGjs/">JUGG.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动端/">移动端</a></li></ul>
 
     </footer>
   </div>
@@ -114,19 +135,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2014/09/19/写自己的JavaScript工具－鼠标滚轮事件/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 3 )/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          写自己的JavaScript工具－鼠标滚轮事件
+          移动端开发JS库 -- JUGG.js ( PART 3 )
         
       </div>
     </a>
   
   
-    <a href="/2014/09/19/写自己的JavaScript工具－Ajax/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 1 )/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">写自己的JavaScript工具－Ajax</div>
+      <div class="article-nav-title">移动端开发JS库 -- JUGG.js ( PART 1 )</div>
     </a>
   
 </nav>

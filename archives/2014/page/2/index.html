@@ -70,6 +70,149 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-写自己的JavaScript工具－自定义事件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/30/写自己的JavaScript工具－自定义事件/" class="article-date">
+  <time datetime="2014-09-30T12:57:11.000Z" itemprop="datePublished">Sep 30 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/30/写自己的JavaScript工具－自定义事件/">写自己的JavaScript工具－自定义事件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="要点">要点</h2>
+<ol>
+<li>传统事件</li>
+<li>自定义事件</li>
+</ol>
+<h3 id="1-_传统事件">1. 传统事件</h3>
+<p>load、click、resize、readystatechange等等，都是 javaScript 客户端常见的事件。Window 对象、Docuement 对象和所有文档元素等都可以绑定事件处理程序。绑定方式可以是：</p>
+<ol>
+<li>设置事件目标的属性，比如设置 window.onload、document.onclick、request.onreadystatechange 的值为事件处理程序；</li>
+<li>设置 HTML 标签属性为事件处理程序；</li>
+<li>通过 addEventListener 方法注册一个或多个事件处理程序。</li>
+</ol>
+<p>通过事件目标属性和 HTML 标签注册的事件处理程序优先于通过 addEventListener 注册的事件处理程序，addEventListener 中注册的时间处理程序按照注册顺序调用。</p>
+<h3 id="2-_自定义事件">2. 自定义事件</h3>
+<p>传统事件已经可以满足我们在客户端很多技术需求。但能够注册传统事件的事件目标类型是有限的。现在假设有这样的需求，我们想给程序中的某个任意对象添加事件机制，这个对象可能只是程序中定义一个普通 JavaScript 对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = someObject, y = someOtherObject, z = anotherObject;</div><div class="line"><span class="keyword">var</span> o = [];</div><div class="line">o.push( <span class="number">1</span> );</div></pre></td></tr></table></figure>
+
+<p>比如我们关心 o 这中推入了新元素这件事，在推入了新元素的时候，对象 x, y, z 执行一些相关程序以响应这件事。在不基于事件的程序中会在push之后堆叠大量互不相干的处理代码以响应这个 push 事件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">o.push( <span class="number">1</span> );</div><div class="line"><span class="comment">// 后面紧跟一些混乱的代码：</span></div><div class="line"><span class="comment">// data was pushed in, x need to do something.</span></div><div class="line"><span class="comment">// data was pushed in, y need to do something.</span></div><div class="line"><span class="comment">// data was pushed in, z need to do something.</span></div></pre></td></tr></table></figure>
+
+<p>即便将这些混乱的代码封装成一个函数还是会有一些麻烦，比如当需要添加一个 w 对象也需要响应 o.push() 的时候，不得不再扩种这些混乱的代码。</p>
+<p>我们希望在push之后，凡是这件事的对象都能自动去响应。也就是说如果这时有一个函数能够让 x, y, z 拥有响应事件的能力，问题就能得到很好的解决。</p>
+<p>我们需要设计一个函数，让普通的对象拥有这种能力，也就是“事件化对象”，然后像这样给它们绑定和触发事件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = someObject, y = someOtherObject, z = anotherObject;</div><div class="line"></div><div class="line"><span class="comment">// SP for "Something was Pushed into o"</span></div><div class="line">x.on( <span class="string">'SP'</span>, <span class="function"><span class="keyword">function</span><span class="params">( e, data )</span></span>{</div><div class="line">    <span class="comment">// data was pushed in, I need to do something.</span></div><div class="line">} );</div><div class="line">y.on( <span class="string">'SP'</span>, <span class="function"><span class="keyword">function</span><span class="params">( e, data )</span></span>{</div><div class="line">    <span class="comment">// data was pushed in, I need to do something.</span></div><div class="line">} );</div><div class="line">z.on( <span class="string">'SP'</span>, <span class="function"><span class="keyword">function</span><span class="params">( e, data )</span></span>{</div><div class="line">    <span class="comment">// data was pushed in, I need to do something.</span></div><div class="line">} );</div><div class="line"></div><div class="line">o.push( <span class="number">1</span> );</div><div class="line">x.fire( <span class="string">'SP'</span> );</div><div class="line">y.fire( <span class="string">'SP'</span> );</div><div class="line">z.fire( <span class="string">'SP'</span> );</div></pre></td></tr></table></figure>
+
+<p>这样代码优雅多了，最关键的是更加清晰易读。下面我们就实现这种“事件化对象”技术：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> eventuality = <span class="function"><span class="keyword">function</span><span class="params">( that )</span></span>{</div><div class="line">    <span class="comment">// 私有的事件注册对象</span></div><div class="line">    <span class="keyword">var</span> events = {};</div><div class="line">    <span class="comment">// 通过传入的 eventName，在 events 中查找对应的事件列表</span></div><div class="line">    <span class="comment">// 对查找到的列表进行遍历，并调用对应的处理函数</span></div><div class="line">    that.fire = <span class="function"><span class="keyword">function</span><span class="params">( eventName )</span></span>{</div><div class="line">    	<span class="comment">// 调用 fire 时，除了第一个参数必须时事件名称外</span></div><div class="line">    	<span class="comment">// 还可以传入其他参数</span></div><div class="line">    	<span class="comment">// 这些参数将被带回通过 on 注册的事件处理函数中</span></div><div class="line">        <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call( <span class="built_in">arguments</span>, <span class="number">1</span> );</div><div class="line">        <span class="keyword">if</span> ( events.hasOwnProperty( eventName ) ){</div><div class="line">            <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>, len = events[ eventName ].length; i &lt; len; i+=<span class="number">1</span> ){</div><div class="line">                <span class="keyword">var</span> method = events[ eventName ][ i ].method,</div><div class="line">                    <span class="comment">// 可以传入参数替换事件处理程序中的上下文（this）</span></div><div class="line">                    <span class="comment">// 否则默认为当前调用 fire 方法的对象</span></div><div class="line">                    context = events[ eventName ][ i ].context || <span class="keyword">this</span>;</div><div class="line">                <span class="keyword">if</span> ( <span class="keyword">typeof</span> method == <span class="string">'string'</span> ){</div><div class="line">                    method = context[ method ];</div><div class="line">                }</div><div class="line">                <span class="comment">// 规定事件处理函数的第一个参数总为事件名称</span></div><div class="line">                method.apply( context, [ eventName ].concat( args ) ); </div><div class="line">            }</div><div class="line">        }</div><div class="line">    };</div><div class="line">    <span class="comment">// 注册事件方法</span></div><div class="line">    <span class="comment">// 传入事件名称，处理函数和上下文信息</span></div><div class="line">    <span class="comment">// context 将替换 method 中的 this</span></div><div class="line">    that.on = <span class="function"><span class="keyword">function</span><span class="params">( eventName, method, context )</span></span>{</div><div class="line">        <span class="keyword">var</span> event = {</div><div class="line">            method : method,</div><div class="line">            context : context</div><div class="line">        };</div><div class="line">        <span class="keyword">if</span> ( events.hasOwnProperty( eventName ) ){</div><div class="line">            events[ eventName ].push( event );</div><div class="line">        }<span class="keyword">else</span>{</div><div class="line">            events[ eventName ] = [ event ];</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> that;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>现在我们就可以赋予任意一个 JavaScript 对象注册、和触发事件的能力了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = { name : <span class="string">'x'</span> },</div><div class="line">    y = { name : <span class="string">'y'</span> };</div><div class="line">eventuality( x );</div><div class="line">x.on( <span class="string">'lalala'</span>, <span class="function"><span class="keyword">function</span><span class="params">( event, data )</span></span>{ <span class="built_in">console</span>.log( event, data, <span class="keyword">this</span> ) }, y );</div><div class="line">x.fire( <span class="string">'lalala'</span>, <span class="number">1</span> );</div><div class="line"><span class="comment">// =&gt; 'lalala', 1, { name : 'y' }</span></div></pre></td></tr></table></figure>
+
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/30/写自己的JavaScript工具－自定义事件/">http://yyblog.mocoer.com/2014/09/30/写自己的JavaScript工具－自定义事件/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/30/写自己的JavaScript工具－自定义事件/" data-id="257gyqv7xmm5iqs0" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/30/写自己的JavaScript工具－自定义事件/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/事件/">事件</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-写自己的JavaScript工具－解析浏览器url" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/29/写自己的JavaScript工具－解析浏览器url/" class="article-date">
+  <time datetime="2014-09-29T10:03:27.000Z" itemprop="datePublished">Sep 29 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/29/写自己的JavaScript工具－解析浏览器url/">写自己的JavaScript工具－解析浏览器url</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="要点">要点</h2>
+<ol>
+<li>客户端 Location 对象</li>
+<li>获取 get 参数</li>
+</ol>
+<h3 id="客户端_Location_对象">客户端 Location 对象</h3>
+<p>和 String、Number、Date 等一样，Location 是 Location 对象的构造器，只不过它不允许用户调用这个构造器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> l = <span class="keyword">new</span> Location();</div><div class="line"><span class="comment">// =&gt; TypeError: Illegal constructor</span></div></pre></td></tr></table></figure>
+
+<p>但是客户端提供了 Location 对象的引用：window.location。</p>
+<p>打印它可以看到其中有一些很有用的属性：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 浏览器打开这个页面：http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/?testsearch=lalala#comment</span></div><div class="line"><span class="built_in">window</span>.location;</div><div class="line"><span class="comment">// =&gt; Location { </span></div><div class="line"><span class="comment">// =&gt; ..</span></div><div class="line"><span class="comment">// =&gt; hash : '#comment',</span></div><div class="line"><span class="comment">// =&gt; host: "yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// =&gt; hostname: "yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// =&gt; href: "http://yyblog.mocoer.com/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/?testsearch=lalala",</span></div><div class="line"><span class="comment">// =&gt; origin: "http://yyblog.mocoer.com",</span></div><div class="line"><span class="comment">// =&gt; pathname: "/2014/09/19/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84JavaScript%E5%B7%A5%E5%85%B7%EF%BC%8D%E8%A7%A3%E6%9E%90%E6%B5%8F%E8%A7%88%E5%99%A8url/",</span></div><div class="line"><span class="comment">// =&gt; port: "",</span></div><div class="line"><span class="comment">// =&gt; protocol: "http:"</span></div><div class="line"><span class="comment">// =&gt; search: "?testsearch==lalala"</span></div><div class="line"><span class="comment">// =&gt; ...</span></div><div class="line"><span class="comment">// =&gt; }</span></div></pre></td></tr></table></figure>
+
+<p>容易看出各个属性的含义。这些属性有很多用处，比如 hash 属性可以判断当前页面的锚点位置，也可以用来做 SPA ( Single Page Application 单页应用 ) 的页面导航系统。再比如 search 属性可以用来获取传入的参数，给不同页面之间传的参数提供了一种方式，就像下面的例子。</p>
+<h3 id="2-_获取_url_中的参数">2. 获取 url 中的参数</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> urlArgs = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="keyword">var</span> result = {}, <span class="comment">// 将被返回的结果</span></div><div class="line">        pairs = [],</div><div class="line">        pos = -<span class="number">1</span>,</div><div class="line">        querys = <span class="built_in">window</span>.location.search.substring(<span class="number">1</span>); <span class="comment">// 获取 url 中的 search 部分并去掉前面的问号</span></div><div class="line">    pairs = querys.split( <span class="string">'&'</span> ); <span class="comment">// 将 key=value 名值对放入数组中</span></div><div class="line">    <span class="comment">// 这里的 forEach 方法是 ECMAScript 5 中新方法，但容易自己来实现，详见相关文章</span></div><div class="line">    pairs.forEach( <span class="function"><span class="keyword">function</span><span class="params">( pair )</span></span>{</div><div class="line">        pos = pair.indexOf( <span class="string">'='</span> );</div><div class="line">        <span class="keyword">var</span> name = pair.substring( <span class="number">0</span>, pos ),</div><div class="line">            <span class="comment">// 客户端全局函数 decodeURIComponent 提供了解析浏览器地址栏内容的方法</span></div><div class="line">            value = <span class="built_in">decodeURIComponent</span>( pair.substring( pos + <span class="number">1</span> ) );</div><div class="line">        result[ name ] = value;</div><div class="line">    } );</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">};</div><div class="line"></div><div class="line">urlArgs(); <span class="comment">// =&gt; { testsearch: '=lalala' }</span></div></pre></td></tr></table></figure>
+
+<p>现在可以使用 urlArgs 函数方便的获取 url 中的参数了。</p>
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/">http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/" data-id="2dtw2tbba499987p" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/29/写自己的JavaScript工具－解析浏览器url/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-写自己的JavaScript工具－对象继承" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/09/29/写自己的JavaScript工具－对象继承/" class="article-date">
@@ -378,54 +521,6 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－文档遍历" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－文档遍历/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－文档遍历/">写自己的JavaScript工具－文档遍历</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>parents/child/siblings 等</p>
-
-      
-
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/</a></p>
-
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/" data-id="cotp5ls2dbt1cwxx" class="article-share-link">Share</a>
-      
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－文档遍历/#comments" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-写自己的JavaScript工具－Ajax上传" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/09/19/写自己的JavaScript工具－Ajax上传/" class="article-date">
@@ -462,6 +557,54 @@
       <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－Ajax上传/" data-id="g9oe4lfxn7vj6v03" class="article-share-link">Share</a>
       
         <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－Ajax上传/#comments" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-写自己的JavaScript工具－插入删除节点" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/19/写自己的JavaScript工具－插入删除节点/" class="article-date">
+  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－插入删除节点/">写自己的JavaScript工具－插入删除节点</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>parents/child/siblings 等</p>
+
+      
+
+      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－插入删除节点/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－插入删除节点/</a></p>
+
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－插入删除节点/" data-id="vfuauxr54cfn0cgf" class="article-share-link">Share</a>
+      
+        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－插入删除节点/#comments" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -568,102 +711,6 @@
 
 
   
-    <article id="post-写自己的JavaScript工具－常见的字符串匹配" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/">写自己的JavaScript工具－常见的字符串匹配</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>可直接通过arguments，实现任意个参数的大小比较 P174</p>
-
-      
-
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/</a></p>
-
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/" data-id="t20iz31hp9woonrs" class="article-share-link">Share</a>
-      
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－常见的字符串匹配/#comments" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-写自己的JavaScript工具－注册:取消注册事件" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/" class="article-date">
-  <time datetime="2014-09-19T14:28:00.000Z" itemprop="datePublished">Sep 19 2014</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/">写自己的JavaScript工具－注册/取消注册事件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>P435</p>
-
-      
-
-      <p><strong>转载请注明出处：</strong><a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/">http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/</a></p>
-
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/" data-id="rxoltixdp7oabn7i" class="article-share-link">Share</a>
-      
-        <a href="http://yyblog.mocoer.com/2014/09/19/写自己的JavaScript工具－注册:取消注册事件/#comments" class="article-comment-link">Comments</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/archives/2014/">&laquo; Prev</a><a class="page-number" href="/archives/2014/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2014/page/3/">3</a><a class="page-number" href="/archives/2014/page/4/">4</a><a class="extend next" rel="next" href="/archives/2014/page/3/">Next &raquo;</a>
@@ -677,7 +724,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JUGGjs/">JUGG.js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">28</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JUGGjs/">JUGG.js</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">28</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -686,7 +733,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backbone/">Backbone</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUGGjs/">JUGG.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/localStorage/">localStorage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端/">移动端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backbone/">Backbone</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUGGjs/">JUGG.js</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arguments/">arguments</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bind/">bind</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsonp/">jsonp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/localStorage/">localStorage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/事件/">事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数式编程/">函数式编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型/">原型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/移动端/">移动端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/继承/">继承</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跨域/">跨域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -695,7 +742,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AngularJS/" style="font-size: 13.33px;">AngularJS</a><a href="/tags/Backbone/" style="font-size: 10.00px;">Backbone</a><a href="/tags/H5/" style="font-size: 10.00px;">H5</a><a href="/tags/JUGGjs/" style="font-size: 10.00px;">JUGG.js</a><a href="/tags/JavaScript/" style="font-size: 20.00px;">JavaScript</a><a href="/tags/Javascript/" style="font-size: 16.67px;">Javascript</a><a href="/tags/arguments/" style="font-size: 10.00px;">arguments</a><a href="/tags/bind/" style="font-size: 10.00px;">bind</a><a href="/tags/cookie/" style="font-size: 10.00px;">cookie</a><a href="/tags/forEach/" style="font-size: 10.00px;">forEach</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/jsonp/" style="font-size: 10.00px;">jsonp</a><a href="/tags/localStorage/" style="font-size: 10.00px;">localStorage</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/原型/" style="font-size: 10.00px;">原型</a><a href="/tags/模块/" style="font-size: 10.00px;">模块</a><a href="/tags/移动端/" style="font-size: 10.00px;">移动端</a><a href="/tags/继承/" style="font-size: 10.00px;">继承</a><a href="/tags/跨域/" style="font-size: 10.00px;">跨域</a><a href="/tags/闭包/" style="font-size: 10.00px;">闭包</a>
+      <a href="/tags/AngularJS/" style="font-size: 12.50px;">AngularJS</a><a href="/tags/Backbone/" style="font-size: 10.00px;">Backbone</a><a href="/tags/H5/" style="font-size: 15.00px;">H5</a><a href="/tags/JUGGjs/" style="font-size: 15.00px;">JUGG.js</a><a href="/tags/JavaScript/" style="font-size: 20.00px;">JavaScript</a><a href="/tags/Javascript/" style="font-size: 17.50px;">Javascript</a><a href="/tags/arguments/" style="font-size: 10.00px;">arguments</a><a href="/tags/bind/" style="font-size: 10.00px;">bind</a><a href="/tags/cookie/" style="font-size: 10.00px;">cookie</a><a href="/tags/forEach/" style="font-size: 10.00px;">forEach</a><a href="/tags/github/" style="font-size: 10.00px;">github</a><a href="/tags/jsonp/" style="font-size: 10.00px;">jsonp</a><a href="/tags/localStorage/" style="font-size: 10.00px;">localStorage</a><a href="/tags/事件/" style="font-size: 10.00px;">事件</a><a href="/tags/函数式编程/" style="font-size: 10.00px;">函数式编程</a><a href="/tags/原型/" style="font-size: 10.00px;">原型</a><a href="/tags/模块/" style="font-size: 10.00px;">模块</a><a href="/tags/移动端/" style="font-size: 15.00px;">移动端</a><a href="/tags/继承/" style="font-size: 10.00px;">继承</a><a href="/tags/跨域/" style="font-size: 10.00px;">跨域</a><a href="/tags/闭包/" style="font-size: 10.00px;">闭包</a>
     </div>
   </div>
 
@@ -704,7 +751,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12">December 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12">December 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10">October 2014</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09">September 2014</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08">August 2014</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -716,6 +763,14 @@
       <ul>
         
           <li>
+            <a href="/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 3 )/">移动端开发JS库 -- JUGG.js ( PART 3 )</a>
+          </li>
+        
+          <li>
+            <a href="/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 2 )/">移动端开发JS库 -- JUGG.js ( PART 2 )</a>
+          </li>
+        
+          <li>
             <a href="/2014/12/12/移动端开发JS库 -- JUGG.js ( PART 1 )/">移动端开发JS库 -- JUGG.js ( PART 1 )</a>
           </li>
         
@@ -725,14 +780,6 @@
         
           <li>
             <a href="/2014/11/05/关于==的误解/">关于 == 的误解</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/22/Backbone:AngularJS 框架对比（TODO LIST为例）/">Backbone/AngularJS 框架简单对比（TODO LIST为例）</a>
-          </li>
-        
-          <li>
-            <a href="/2014/10/09/写自己的JavaScript工具－本地存储/">写自己的JavaScript工具－本地存储</a>
           </li>
         
       </ul>
